@@ -11,7 +11,15 @@ bundle lock --add-platform x86_64-linux
 
 Make sure public folder is in .gitignore
 
+Create a package.json at root
+npm init -y
 
+In database.yml, remove most lines and pass in url: erb code to DATABASE_URL
+
+Production builds should not have the following
+- byebug/debugger breakpoints
+- console logs
+- logger
 
 
 */
