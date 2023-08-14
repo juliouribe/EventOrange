@@ -36,7 +36,6 @@ const state = {
     },
     currentUser: {
       id: 3,
-      username: "juliofoolio",
       email: "juliofoolio@gmail.com",
     },
     rsvps: {
@@ -76,7 +75,7 @@ const state = {
     modal: true / false
   },
   errors: {
-    login: ["Incorrect username/password combination"],
+    login: ["Incorrect email/password combination"],
     eventOver: ["This event already happened"],
     eventForm: ["Event requires a start time and location"]
   },

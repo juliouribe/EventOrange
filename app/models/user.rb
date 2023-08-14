@@ -4,18 +4,14 @@
 #
 #  id              :bigint           not null, primary key
 #  email           :string           not null
-#  username        :string           not null
 #  password_digest :string           not null
 #  session_token   :string           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
 class User < ApplicationRecord
-  validates :email, :username, :session_token, presence: true
-  validates :email, :username, :session_token, uniqueness: true
-  validates :username,
-    length: { in: 3..30 },
-    format: { without: URI::MailTo::EMAIL_REGEXP, message: "Cant be an email" }
+  validates :email, :session_token, presence: true
+  validates :email, :session_token, uniqueness: true
   validates :email,
     length: { in: 3..255},
     format: { with: URI::MailTo::EMAIL_REGEXP }
@@ -27,8 +23,8 @@ class User < ApplicationRecord
   before_validation :ensure_session_token
 
   # SRE
-  def self.find_by_credentials(username, password)
-    user = User.find_by(username: username)
+  def self.find_by_credentials(email, password)
+    user = User.find_by(email: email)
     if user && user.authenticate(password)
       user
     else
