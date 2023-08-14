@@ -32,3 +32,5 @@
 .byebug_history
 .DS_Store
 
+# Ignore files in the public folder where the static pages live
+/public/

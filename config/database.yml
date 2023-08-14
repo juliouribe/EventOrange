@@ -81,6 +81,5 @@ test:
 #
 production:
   <<: *default
-  database: EventOrange_production
-  username: EventOrange
-  password: <%= ENV["EVENTORANGE_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
+
