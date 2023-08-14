@@ -1,5 +1,6 @@
 class Api::SessionsController < ApplicationController
-  wrap_parameters include: User.attribute_names + ['password']
+  before_action :require_logged_in, only: [:destroy]
+  before_action :require_logged_out, only: [:create]
 
   def show
     @user = current_user
