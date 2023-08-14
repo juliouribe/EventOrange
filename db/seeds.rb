@@ -5,3 +5,20 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+# Destroy Tables
+User.destroy_all
+puts "Table instances destroyed"
+
+# Reset pk sequence
+ActiveRecord::Base.connection.reset_pk_sequence!('users')
+puts "Primary key sequence reset"
+
+# Sample data
+puts "Creating Users"
+ike = User.create!(
+  email: "ike@ike.com",
+  username: "ilikeike",
+  password: "ilikeike"
+)
+puts "Finished creating Users"
