@@ -21,5 +21,16 @@ Production builds should not have the following
 - console logs
 - logger
 
-
+Hosting on Heroku
+1. Create new app
+2. Consider installing heroku CLI tools: https://devcenter.heroku.com/articles/heroku-cli
+3. When you enter an app name, it will check and enforce a unique app name
+4. In Settings,
+  In config vars, do the usual keys
+    RAILS_MASTER_KEY: 'master.key'
+  Buildpacks
+    Add ruby and nodejs. The order matters.
+5. Back to deploy, use either Github or Heroku CLI
+  Github: just pass in the name of your repo
+  
 */
