@@ -21,10 +21,10 @@ ike = User.create!(
   password: "ilikeike"
 )
 
-10.times do
-  User.create!({
-    email: Faker::Internet.unique.email,
-    password: 'password'
-  })
-end
+# 10.times do
+#   User.create!({
+#     email: Faker::Internet.unique.email,
+#     password: 'password'
+#   })
+# end
 puts "Finished creating Users"
