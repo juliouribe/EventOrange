@@ -26,8 +26,6 @@ export default function LoginFormPage() {
           // We'll hit this case if the server is down.
           data = await res.text();
         }
-        console.log(data);
-        console.log("hey look here")
         // We hit the first case if we have an invalid form.
         if (data?.errors) {
           setFormErrors([data.errors]);
