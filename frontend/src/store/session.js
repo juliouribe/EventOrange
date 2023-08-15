@@ -1,4 +1,4 @@
-import csrfFetch, { storeCSRFToken, restoreCSRF } from './csrf.js';
+import csrfFetch from './csrf.js';
 
 export const LOGIN_USER = 'session/LOGIN_USER';
 export const LOGOUT_USER = 'session/LOGOUT_USER';
@@ -29,20 +29,20 @@ export const signup = (user) => async dispatch => {
       password
     })
   });
-  const data = await res.json();
-  storeCurrentUser(data.user);
-  dispatch(loginUser(data.user));
+  const newUser = await res.json();
+  storeCurrentUser(newUser);
+  dispatch(loginUser(newUser));
   return res;
 }
 
-export const login = ({ email, password }) = async dispatch => {
+export const login = ({ email, password }) => async dispatch => {
   const res = await csrfFetch('/api/session', {
     method: 'POST',
     body: JSON.stringify({ email, password })
   });
-  const data = await res.json();
-  storeCurrentUser(data.user);
-  dispatch(loginUser(data.user));
+  const user = await res.json();
+  storeCurrentUser(user);
+  dispatch(loginUser(user));
 }
 
 export const logout = () => async dispatch => {
@@ -54,17 +54,12 @@ export const logout = () => async dispatch => {
   return response;
 };
 
-const initialState = {
-  user: JSON.parse(sessionStorage.getItem('currentUser'))
-}
-
-
-const sessionReducer = (state = initialState, action) => {
+const sessionReducer = (state = { currentUser: null }, action) => {
   switch (action.type) {
     case LOGIN_USER:
-      return { ...state, currentUser: action.payload.user.id }
+      return { currentUser: action.payload }
     case LOGOUT_USER:
-      return { ...state, currentUser: null }
+      return { currentUser: null }
     default:
       return state
   }
