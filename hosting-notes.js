@@ -37,5 +37,36 @@ Hosting on Heroku
 web: rails server -p $PORT -e $RAILS_ENV
 console: rails console
 release: rails db:migrate && rails db:seed
+*/
 
+
+/*
+Feature Branching Mini lecture
+
+Main branch should always be functional. New code should be worked on on a separate
+branch. Once that is good you can merge to main.
+
+1. Create a new branch and switch
+git checkout -b add-signup-form
+
+2. Commit changes to new branch.
+
+3. Push your new branch to remote
+The first time you push the branch. Every other time git push is good.
+git push --set-upstream origin add-signup-form
+
+4. In the github UI, click on the Pull Request tab and create a new pull request.
+You get to choose which branch and compare against main.
+
+5. You can assign reviewers and describe your PR.
+
+6. Then you get an option to merge the pull request. You can delete the branch if you want
+
+If your branch gets behind main, it gets sticky. Maybe a git rebase -i main might
+fix it.
+
+Protect main
+
+settings > branches > main (name pattern)
+click on Lock Branch. This will prevent users from pushing to main.
 */
