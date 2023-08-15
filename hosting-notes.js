@@ -29,8 +29,13 @@ Hosting on Heroku
   In config vars, do the usual keys
     RAILS_MASTER_KEY: 'master.key'
   Buildpacks
-    Add ruby and nodejs. The order matters.
+    Add nodejs then ruby. The order matters.
 5. Back to deploy, use either Github or Heroku CLI
   Github: just pass in the name of your repo
-  
+6. get rid of dev dependencies
+7. Create a proc file at root, 'Procfile'
+web: rails server -p $PORT -e $RAILS_ENV
+console: rails console
+release: rails db:migrate && rails db:seed
+
 */
