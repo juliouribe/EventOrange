@@ -1,9 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import './Navigation.css';
 import * as sessionActions from '../../store/session';
 import logo from '../../assets/eventOrange.svg';
+import ProfileButton from "./ProfileButton";
 
 export default function Navigation() {
   const currentUser = useSelector(state => state.session.currentUser);
@@ -17,20 +18,24 @@ export default function Navigation() {
 
   let sessionLinks;
   if (currentUser) {
+    // sessionLinks = (<ProfileButton user={currentUser} />)
     sessionLinks = <button onClick={logout}>Log Out</button>
   } else {
     sessionLinks = <>
-      <NavLink to='/login'>Log In</NavLink>
-      <NavLink to='/signup'>Sign Up</NavLink>
+      <li><NavLink to='/login'>Log In</NavLink></li>
+      <li><NavLink to='/signup'>Sign Up</NavLink></li>
     </>
   }
   return (
-    <ul>
-      <li>
-        <img src={logo} />
-        <NavLink exact to='/'>Home</NavLink>
+    <div className="nav-container">
+      <ul className="nav-left">
+        <li>
+          <NavLink exact to='/'><img src={logo} /></NavLink>
+        </li>
+      </ul>
+      <ul className="nav-right">
         {sessionLinks}
-      </li>
-    </ul>
+      </ul>
+    </div>
   )
 }

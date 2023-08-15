@@ -1,0 +1,37 @@
+.profile-dropdown {
+  position: absolute;
+}
+
+li {
+  list-style: none;
+  text-align: center;
+  margin: 5px;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px;
+}
+
+.nav-left {
+  margin: 0px;
+}
+
+.nav-right {
+  display: flex;
+}
+
+img {
+  width: 110px;
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+  color: #39364f;
+  font-family: Neue Plak Text, Neue Plak;
+  font-weight: 400;
+  font-size: 14px;
+}
