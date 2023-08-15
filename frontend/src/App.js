@@ -3,28 +3,24 @@ import { useDispatch } from "react-redux";
 import * as sessionActions from './store/session'
 import { Route, Switch } from 'react-router-dom';
 import SignupFormPage from "./components/SignupFormPage";
+import Navigation from "./components/Navigation";
 
 
 
 function App() {
   const dispatch = useDispatch();
 
-  const logout = (e) => {
-    e.preventDefault();
-    dispatch(sessionActions.logout());
-  };
+
 
   return (
     <>
+      <Navigation />
       <Switch>
         <Route path='/login'>
           <LoginFormPage />
         </Route>
         <Route path='/signup'>
           <SignupFormPage />
-        </Route>
-        <Route path='/'>
-          <button onClick={logout}>Log Out</button>
         </Route>
       </Switch>
       <h1>Lasagna for dinner tonight!!!!</h1>
