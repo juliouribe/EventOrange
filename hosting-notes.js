@@ -70,3 +70,8 @@ Protect main
 settings > branches > main (name pattern)
 click on Lock Branch. This will prevent users from pushing to main.
 */
+
+/*
+AWS Mini Lecture
+
+*/

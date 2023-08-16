@@ -14,7 +14,7 @@
 }
 
 .form-title {
-  min-width: 360px;
+  min-width: 340px;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -24,7 +24,7 @@
 form {
   display: flex;
   flex-direction: column;
-  min-width: 360px;
+  min-width: 340px;
 }
 
 .input-container {
@@ -45,7 +45,7 @@ form {
 .name-input {
   display: flex;
   flex-direction: column;
-  min-width: 160px;
+  min-width: 80px;
 }
 
 .input-container,

@@ -67,7 +67,7 @@ export default function SignupFormPage() {
               </label> */}
               <input
                 type='email'
-                placeholder='Enter Email'
+                placeholder='Email'
                 id='email'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -80,7 +80,7 @@ export default function SignupFormPage() {
                 </label> */}
                 <input
                   type='text'
-                  placeholder='Enter First Name'
+                  placeholder='First Name'
                   id='first-name'
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
@@ -92,7 +92,7 @@ export default function SignupFormPage() {
                 </label> */}
                 <input
                   type='text'
-                  placeholder='Enter Surname'
+                  placeholder='Surname'
                   id='surname'
                   value={surname}
                   onChange={(e) => setSurname(e.target.value)}
@@ -105,7 +105,7 @@ export default function SignupFormPage() {
               </label> */}
               <input
                 type='password'
-                placeholder='Enter Password'
+                placeholder='Password'
                 id='password'
                 onChange={(e) => setPassword(e.target.value)}
                 required
