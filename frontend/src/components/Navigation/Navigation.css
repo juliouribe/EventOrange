@@ -60,12 +60,13 @@ i {
 
 .dropdown {
   position: relative;
+  width: 200px;
 }
 
 .dropdown-content {
   position: absolute;
-  top: 100%;
-  left: 0;
+  top: 120%;
+  left: 7%;
   width: 200px;
   background: #fff;
   border: 1px solid #ddd;
