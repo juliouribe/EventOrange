@@ -1,23 +1,31 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import * as sessionActions from '../../store/session';
 
 export default function ProfileDropdown({ email }) {
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
+
+  const logout = (e) => {
+    e.preventDefault();
+    dispatch(sessionActions.logout());
+  };
 
   return (
     <div
-      className="dropdown"
+      className="dropdown nav-item"
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
-      <button>
+      <li>
         <i className="fa-solid fa-user-circle" />
         {email}
-      </button>
+      </li>
       {isOpen && (
         <div className="dropdown-content">
           <li>Browse Events</li>
           <li>RSVPs</li>
-          <li>Log Out</li>
+          <li onClick={logout}>Log Out</li>
         </div>
       )}
     </div>

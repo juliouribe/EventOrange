@@ -18,8 +18,6 @@ export default function Navigation() {
 
   let sessionLinks;
   if (currentUser) {
-    // sessionLinks = (<ProfileButton user={currentUser} />)
-    // sessionLinks = <button onClick={logout}>Log Out</button>
     sessionLinks = (
       <ProfileDropdown email={currentUser.email} />
     )
@@ -37,6 +35,18 @@ export default function Navigation() {
         </li>
       </ul>
       <ul className="nav-right">
+        <div className="nav-item">
+          <i className="fa-solid fa-plus"></i>
+          <li>Create an event</li>
+        </div>
+        <div className="nav-item">
+          <i className="fa-regular fa-heart"></i>
+          <li>Likes</li>
+        </div>
+        <div className="nav-item">
+          <i class="fa-solid fa-ticket"></i>
+          <li>Tickets</li>
+        </div>
         {sessionLinks}
       </ul>
     </div>
