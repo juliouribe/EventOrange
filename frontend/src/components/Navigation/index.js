@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import './Navigation.css';
 import * as sessionActions from '../../store/session';
 import logo from '../../assets/eventOrange.svg';
-import ProfileButton from "./ProfileButton";
+import ProfileDropdown from "./ProfileDropdown";
 
 export default function Navigation() {
   const currentUser = useSelector(state => state.session.currentUser);
@@ -19,7 +19,10 @@ export default function Navigation() {
   let sessionLinks;
   if (currentUser) {
     // sessionLinks = (<ProfileButton user={currentUser} />)
-    sessionLinks = <button onClick={logout}>Log Out</button>
+    // sessionLinks = <button onClick={logout}>Log Out</button>
+    sessionLinks = (
+      <ProfileDropdown email={currentUser.email} />
+    )
   } else {
     sessionLinks = <>
       <li><NavLink to='/login'>Log In</NavLink></li>
