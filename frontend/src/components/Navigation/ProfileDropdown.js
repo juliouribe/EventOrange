@@ -13,7 +13,7 @@ export default function ProfileDropdown({ email }) {
 
   return (
     <div
-      className="dropdown nav-item"
+      className="dropdown"
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >

@@ -23,8 +23,12 @@ export default function Navigation() {
     )
   } else {
     sessionLinks = <>
-      <li><NavLink to='/login'>Log In</NavLink></li>
-      <li><NavLink to='/signup'>Sign Up</NavLink></li>
+      <div className="nav-item">
+        <li><NavLink to='/login'>Log In</NavLink></li>
+      </div>
+      <div className="nav-item">
+        <li><NavLink to='/signup'>Sign Up</NavLink></li>
+      </div>
     </>
   }
   return (
