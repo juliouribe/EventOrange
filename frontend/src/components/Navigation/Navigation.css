@@ -38,7 +38,7 @@ li {
 .nav-item li {
   font-size: 13px;
   color: #39364f;
-  font-family: Neue Plak Text, Neue Plak;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 img {
@@ -49,7 +49,7 @@ img {
 a {
   text-decoration: none;
   color: #39364f;
-  font-family: Neue Plak Text, Neue Plak;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 400;
   font-size: 13px;
 }
