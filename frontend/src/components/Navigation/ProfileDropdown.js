@@ -17,14 +17,14 @@ export default function ProfileDropdown({ email }) {
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
-      <li>
-        <i className="fa-solid fa-user-circle" />
+      <li className="avatar-container">
+        <i className="fa-solid fa-user-circle avatar" />
         {email}
       </li>
       {isOpen && (
         <div className="dropdown-content">
           <li>Browse Events</li>
-          <li>RSVPs</li>
+          <li className="dropdown-underline">Tickets</li>
           <li onClick={logout}>Log Out</li>
         </div>
       )}
