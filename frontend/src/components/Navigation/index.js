@@ -5,6 +5,7 @@ import './Navigation.css';
 import * as sessionActions from '../../store/session';
 import logo from '../../assets/eventOrange.svg';
 import ProfileDropdown from "./ProfileDropdown";
+import juice from '../../assets/juiceItUpTonight.svg';
 
 export default function Navigation() {
   const currentUser = useSelector(state => state.session.currentUser);
@@ -32,27 +33,33 @@ export default function Navigation() {
     </>
   }
   return (
-    <div className="nav-container">
-      <ul className="nav-left">
-        <li>
-          <NavLink exact to='/'><img src={logo} /></NavLink>
-        </li>
-      </ul>
-      <ul className="nav-right">
-        <div className="nav-item">
-          <i className="fa-solid fa-plus"></i>
-          <li>Create an event</li>
-        </div>
-        <div className="nav-item">
-          <i className="fa-regular fa-heart"></i>
-          <li>Likes</li>
-        </div>
-        <div className="nav-item">
-          <i class="fa-solid fa-ticket"></i>
-          <li>Tickets</li>
-        </div>
-        {sessionLinks}
-      </ul>
-    </div>
+    <>
+      <div className="nav-container">
+        <ul className="nav-left">
+          <li>
+            <NavLink exact to='/'><img src={logo} /></NavLink>
+          </li>
+        </ul>
+        <ul className="nav-right">
+          <div className="nav-item">
+            <i className="fa-solid fa-plus"></i>
+            <li>Create an event</li>
+          </div>
+          <div className="nav-item">
+            <i className="fa-regular fa-heart"></i>
+            <li>Likes</li>
+          </div>
+          <div className="nav-item">
+            <i class="fa-solid fa-ticket"></i>
+            <li>Tickets</li>
+          </div>
+          {sessionLinks}
+        </ul>
+      </div>
+
+      <div className="splash">
+        <img src={juice} />
+      </div>
+    </>
   )
 }
