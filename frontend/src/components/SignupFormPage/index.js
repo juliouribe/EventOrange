@@ -15,7 +15,6 @@ export default function SignupFormPage() {
   const [surname, setSurname] = useState('');
   const [password, setPassword] = useState('');
   const [formErrors, setFormErrors] = useState([]);
-  const [useDemo, setUseDemo] = useState(false);
 
 
   if (sessionUser) return <Redirect to='/' />;
@@ -23,30 +22,31 @@ export default function SignupFormPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormErrors([]);
-    if (useDemo) {
-      // Sign in as Eisenhower.
-      return dispatch(sessionActions.login({
-        email: 'eisenhower@ike.com',
-        password: 'ilikeike'
-      }))
-    } else {
-      dispatch(sessionActions.signup({ email, password }))
-        .catch(async (res) => {
-          let data;
-          try {
-            data = await res.clone().json();
-          } catch {
-            data = await res.text();
-          }
-          if (data?.errors) {
-            setFormErrors([data.errors]);
-          } else if (data) {
-            setFormErrors([data]);
-          } else {
-            setFormErrors([res.statusText]);
-          }
-        });
-    }
+    dispatch(sessionActions.signup({ email, password }))
+      .catch(async (res) => {
+        let data;
+        try {
+          data = await res.clone().json();
+        } catch {
+          data = await res.text();
+        }
+        if (data?.errors) {
+          setFormErrors([data.errors]);
+        } else if (data) {
+          setFormErrors([data]);
+        } else {
+          setFormErrors([res.statusText]);
+        }
+      });
+  }
+
+  const useDemo = (e) => {
+    e.preventDefault();
+    // Sign in as Eisenhower.
+    dispatch(sessionActions.login({
+      email: 'eisenhower@ike.com',
+      password: 'ilikeike'
+    }))
   }
 
 
@@ -116,12 +116,13 @@ export default function SignupFormPage() {
             <div className='input-container'>
               <button>Create account</button>
             </div>
+          </form>
+          <form onSubmit={useDemo}>
             <div className='input-container'>
-              <button onClick={(e) => setUseDemo(true)}>Demo User</button>
+              <button>Demo User</button>
             </div>
           </form>
         </div>
-
       </div>
     </>
   );

@@ -12,21 +12,12 @@ export default function LoginFormPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [formErrors, setFormErrors] = useState([]);
-  const [useDemo, setUseDemo] = useState(false);
 
   if (sessionUser) return <Redirect to='/' />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormErrors([]);
-    if (useDemo) {
-      console.log("changing settings to demo")
-      // Sign in as Eisenhower.
-      return dispatch(sessionActions.login({
-        email: 'eisenhower@ike.com',
-        password: 'ilikeike'
-      }))
-    }
     dispatch(sessionActions.login({ email, password }))
       .catch(async (res) => {
         let data;
@@ -44,6 +35,15 @@ export default function LoginFormPage() {
         }
       })
   };
+
+  const useDemo = (e) => {
+    e.preventDefault();
+    // Sign in as Eisenhower.
+    dispatch(sessionActions.login({
+      email: 'eisenhower@ike.com',
+      password: 'ilikeike'
+    }))
+  }
 
   return (
     <>
@@ -86,8 +86,10 @@ export default function LoginFormPage() {
             <div className='input-container'>
               <button>Log in</button>
             </div>
+          </form>
+          <form onSubmit={useDemo}>
             <div className='input-container'>
-              <button onClick={(e) => setUseDemo(true)}>Demo User</button>
+              <button>Demo User</button>
             </div>
           </form>
         </div>
