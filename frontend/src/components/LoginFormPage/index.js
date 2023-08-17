@@ -3,6 +3,8 @@ import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import './LoginForm.css';
+import logo from '../../assets/eventOrange.svg';
+import { NavLink } from 'react-router-dom';
 
 export default function LoginFormPage() {
   const dispatch = useDispatch();
@@ -11,7 +13,7 @@ export default function LoginFormPage() {
   const [password, setPassword] = useState('');
   const [formErrors, setFormErrors] = useState([]);
 
-  if (sessionUser) return <Redirect to="/" />;
+  if (sessionUser) return <Redirect to='/' />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,35 +37,58 @@ export default function LoginFormPage() {
           setFormErrors([res.statusText]);
         }
       });
+    // Error stuff
+    // <ul>
+    //     {formErrors.map(error => <li key={error}>{error}</li>)}
+    //   </ul>
   };
 
 
 
   return (
     <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <ul>
-          {formErrors.map(error => <li key={error}>{error}</li>)}
-        </ul>
-        <label>Email:
-          <input
-            type='email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        <label>Password:
-          <input
-            type='password'
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        <button>Log In</button>
-      </form>
+      <div className='form-container'>
+        <div className='container-wrapper'>
+          <div className='form-title'>
+            <div className='title-left'>
+              <NavLink exact to='/'><img src={logo} /></NavLink>
+              <h1>Log in</h1>
+            </div>
+            <div className='title-right'>
+              <NavLink exact to='/signup'>Sign up</NavLink>
+            </div>
+          </div>
+          <form onSubmit={handleSubmit}>
+            <div className='input-container'>
+              {/* <label htmlFor='email'>Email
+              </label> */}
+              <input
+                type='email'
+                placeholder='Email'
+                id='email'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className='input-container'>
+              {/* <label htmlFor='password'>Password
+              </label> */}
+              <input
+                type='password'
+                placeholder='Password'
+                id='password'
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <div className='input-container'>
+              <button>Log in</button>
+            </div>
+          </form>
+        </div>
 
+      </div>
     </>
-  )
+  );
 }

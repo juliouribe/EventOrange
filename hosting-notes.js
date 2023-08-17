@@ -70,3 +70,98 @@ Protect main
 settings > branches > main (name pattern)
 click on Lock Branch. This will prevent users from pushing to main.
 */
+
+
+
+/*
+AWS Mini Lecture
+
+1. You need to create an account
+
+2. Run the command
+rails active_storage:install
+rails db:migrate
+
+3. Goal is to attach a photo to an instance of a table
+You don't need anything in your table schema
+Instead go to model.rb
+
+has_one_attached :photo
+
+4. Create buckets
+
+5. Create IAM user
+
+6. Add new secrets to credentials.yml.enc
+rails credentials:edit
+
+7. Update enviroments in config folder
+
+8. Add AWS info to storage.yml
+
+9. Rails console stuff
+tea.photo -> active storage object
+tea.photo.attached? bool for photo or not present
+
+file = File.open('app/assets/images/tea1.jpg')
+
+tea.photo.attach(io: file, filename: "tea1.jpeg")
+
+calling that appears to hang but you can command c after a bit. Photo should be
+in the respective bucket if successful
+
+10. In jbuilder, you can pass in the url.
+
+json.photo_url tea.photo.attached ? url_for(tea.photo) : nil
+
+in the front end, when you have an entry, you can now use the tea.photoUrl attribute
+to display the photo in an <img src={tea.photoUrl}/>
+
+11. To let users upload things
+<input
+  type="file"
+  onChange={handleFile}
+>
+
+We can't just pass an object into the dispatch thunk action. We can't JSONify an
+object with binary data. The file will be saved as binary data.
+
+
+const [photoFile, setPhotoFile] = useState(null);
+
+const handleFile = (e) => {
+  const file = e.target.files[0];
+  setPhotoFile(file);
+}
+
+const handleSubmit = (e) => {
+  const teaData = new FormData();
+  teaData.append('tea[flavor]', flavor);
+  teaData.append('tea[price]', price);
+  teaData.append('tea[amount]', amount);
+  teaData.append('tea[description]', description);
+  if (photo) {
+    teaData.append('tea[photo]', photo);
+  }
+  dispatch(createTea(teaData))
+}
+
+export const createTea = async tea => {
+  ...
+  // no more json stringify
+  body: tea
+}
+
+in csrfFetch
+if (!(options.body instanceof FormData)) {
+  options.headers['Content-Type'] = 'application/json'
+}
+
+in teas_controller, add the photo field
+
+.tea-photo {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+}
+*/
