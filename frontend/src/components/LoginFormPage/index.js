@@ -20,9 +20,12 @@ export default function LoginFormPage() {
     e.preventDefault();
     setFormErrors([]);
     if (useDemo) {
+      console.log("changing settings to demo")
       // Sign in as Eisenhower.
-      setEmail('eisenhower@ike.com');
-      setPassword('ilikeike');
+      return dispatch(sessionActions.login({
+        email: 'eisenhower@ike.com',
+        password: 'ilikeike'
+      }))
     }
     dispatch(sessionActions.login({ email, password }))
       .catch(async (res) => {
@@ -57,8 +60,7 @@ export default function LoginFormPage() {
           </div>
           <form onSubmit={handleSubmit}>
             <div className='input-container'>
-              {/* <label htmlFor='email'>Email
-              </label> */}
+              <label htmlFor='email'></label>
               <input
                 type='email'
                 placeholder='Email'
@@ -69,8 +71,7 @@ export default function LoginFormPage() {
               />
             </div>
             <div className='input-container'>
-              {/* <label htmlFor='password'>Password
-              </label> */}
+              <label htmlFor='password'></label>
               <input
                 type='password'
                 placeholder='Password'

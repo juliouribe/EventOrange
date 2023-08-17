@@ -50,7 +50,7 @@ export default function Navigation() {
             <li>Likes</li>
           </div>
           <div className="nav-item">
-            <i class="fa-solid fa-ticket icon"></i>
+            <i className="fa-solid fa-ticket icon"></i>
             <li>Tickets</li>
           </div>
           {sessionLinks}

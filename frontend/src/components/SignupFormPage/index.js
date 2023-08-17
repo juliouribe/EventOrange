@@ -25,9 +25,10 @@ export default function SignupFormPage() {
     setFormErrors([]);
     if (useDemo) {
       // Sign in as Eisenhower.
-      setEmail('eisenhower@ike.com');
-      setPassword('ilikeike');
-      return dispatch(sessionActions.login({ email, password }))
+      return dispatch(sessionActions.login({
+        email: 'eisenhower@ike.com',
+        password: 'ilikeike'
+      }))
     } else {
       dispatch(sessionActions.signup({ email, password }))
         .catch(async (res) => {
@@ -65,8 +66,7 @@ export default function SignupFormPage() {
           </div>
           <form onSubmit={handleSubmit}>
             <div className='input-container'>
-              {/* <label htmlFor='email'>Email
-              </label> */}
+              <label htmlFor='email'></label>
               <input
                 type='email'
                 placeholder='Email'
@@ -78,8 +78,7 @@ export default function SignupFormPage() {
             </div>
             <div className='name-container'>
               <div className='name-input firstname'>
-                {/* <label htmlFor='first-name'>First Name
-                </label> */}
+                <label htmlFor='first-name'></label>
                 <input
                   type='text'
                   placeholder='First Name'
@@ -90,8 +89,7 @@ export default function SignupFormPage() {
                 />
               </div>
               <div className='name-input'>
-                {/* <label htmlFor='surname'>Surname
-                </label> */}
+                <label htmlFor='surname'></label>
                 <input
                   type='text'
                   placeholder='Surname'
@@ -103,8 +101,7 @@ export default function SignupFormPage() {
               </div>
             </div>
             <div className='input-container'>
-              {/* <label htmlFor='password'>Password
-              </label> */}
+              <label htmlFor='password'></label>
               <input
                 type='password'
                 placeholder='Password'
@@ -112,6 +109,9 @@ export default function SignupFormPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
+            </div>
+            <div className='error-container'>
+              {formErrors.map(error => <p key={error}>{error}</p>)}
             </div>
             <div className='input-container'>
               <button>Create account</button>
