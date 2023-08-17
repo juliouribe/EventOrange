@@ -6,6 +6,7 @@
 #  title      :string           not null
 #  body       :text             not null
 #  host_id    :bigint           not null
+#  location   :string           not null
 #  capacity   :integer          not null
 #  start_time :datetime         not null
 #  end_time   :datetime
@@ -13,7 +14,7 @@
 #  updated_at :datetime         not null
 #
 class Event < ApplicationRecord
-  validates :title, :body, :capacity, :start_time, presence: true
+  validates :title, :body, :location, :capacity, :start_time, presence: true
   validates :title, uniqueness: true
   validates :title,
     length: { in: 3..255}
@@ -21,5 +22,6 @@ class Event < ApplicationRecord
   belongs_to :host,
     class_name: :User
 
-  has_one_attached :photo
+  has_one_attached :photo,
+    dependent: :destroy
 end
