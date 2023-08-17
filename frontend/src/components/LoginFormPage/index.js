@@ -10,8 +10,6 @@ export default function LoginFormPage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.currentUser)
   const [email, setEmail] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [surname, setSurname] = useState('');
   const [password, setPassword] = useState('');
   const [formErrors, setFormErrors] = useState([]);
 
@@ -20,7 +18,7 @@ export default function LoginFormPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormErrors([]);
-    return dispatch(sessionActions.signup({ email, password }))
+    return dispatch(sessionActions.login({ email, password }))
       .catch(async (res) => {
         let data;
         try {
