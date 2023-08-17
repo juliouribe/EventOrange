@@ -12,23 +12,26 @@ export default function LoginFormPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [formErrors, setFormErrors] = useState([]);
+  const [useDemo, setUseDemo] = useState(false);
 
   if (sessionUser) return <Redirect to='/' />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormErrors([]);
-    return dispatch(sessionActions.login({ email, password }))
+    if (useDemo) {
+      // Sign in as Eisenhower.
+      setEmail('eisenhower@ike.com');
+      setPassword('ilikeike');
+    }
+    dispatch(sessionActions.login({ email, password }))
       .catch(async (res) => {
         let data;
         try {
-          // .clone() lets you read the response twice.
           data = await res.clone().json();
         } catch {
-          // We'll hit this case if the server is down.
           data = await res.text();
         }
-        // We hit the first case if we have an invalid form.
         if (data?.errors) {
           setFormErrors([data.errors]);
         } else if (data) {
@@ -36,14 +39,8 @@ export default function LoginFormPage() {
         } else {
           setFormErrors([res.statusText]);
         }
-      });
-    // Error stuff
-    // <ul>
-    //     {formErrors.map(error => <li key={error}>{error}</li>)}
-    //   </ul>
+      })
   };
-
-
 
   return (
     <>
@@ -82,12 +79,17 @@ export default function LoginFormPage() {
                 required
               />
             </div>
+            <div className='error-container'>
+              {formErrors.map(error => <p key={error}>{error}</p>)}
+            </div>
             <div className='input-container'>
               <button>Log in</button>
             </div>
+            <div className='input-container'>
+              <button onClick={(e) => setUseDemo(true)}>Demo User</button>
+            </div>
           </form>
         </div>
-
       </div>
     </>
   );

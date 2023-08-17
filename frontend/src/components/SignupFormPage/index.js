@@ -15,36 +15,38 @@ export default function SignupFormPage() {
   const [surname, setSurname] = useState('');
   const [password, setPassword] = useState('');
   const [formErrors, setFormErrors] = useState([]);
+  const [useDemo, setUseDemo] = useState(false);
+
 
   if (sessionUser) return <Redirect to='/' />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormErrors([]);
-    return dispatch(sessionActions.signup({ email, password }))
-      .catch(async (res) => {
-        let data;
-        try {
-          // .clone() lets you read the response twice.
-          data = await res.clone().json();
-        } catch {
-          // We'll hit this case if the server is down.
-          data = await res.text();
-        }
-        // We hit the first case if we have an invalid form.
-        if (data?.errors) {
-          setFormErrors([data.errors]);
-        } else if (data) {
-          setFormErrors([data]);
-        } else {
-          setFormErrors([res.statusText]);
-        }
-      });
-    // Error stuff
-    // <ul>
-    //     {formErrors.map(error => <li key={error}>{error}</li>)}
-    //   </ul>
-  };
+    if (useDemo) {
+      // Sign in as Eisenhower.
+      setEmail('eisenhower@ike.com');
+      setPassword('ilikeike');
+      return dispatch(sessionActions.login({ email, password }))
+    } else {
+      dispatch(sessionActions.signup({ email, password }))
+        .catch(async (res) => {
+          let data;
+          try {
+            data = await res.clone().json();
+          } catch {
+            data = await res.text();
+          }
+          if (data?.errors) {
+            setFormErrors([data.errors]);
+          } else if (data) {
+            setFormErrors([data]);
+          } else {
+            setFormErrors([res.statusText]);
+          }
+        });
+    }
+  }
 
 
 
@@ -113,6 +115,9 @@ export default function SignupFormPage() {
             </div>
             <div className='input-container'>
               <button>Create account</button>
+            </div>
+            <div className='input-container'>
+              <button onClick={(e) => setUseDemo(true)}>Demo User</button>
             </div>
           </form>
         </div>
