@@ -8,8 +8,8 @@
 #  session_token   :string           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  first_name      :string
-#  last_name       :string
+#  first_name      :string           not null
+#  last_name       :string           not null
 #
 class User < ApplicationRecord
   validates :email, :session_token, :first_name, :last_name, presence: true
@@ -19,6 +19,10 @@ class User < ApplicationRecord
     format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password,
     length: { in: 6..255}, allow_nil: true
+
+  has_many :events,
+    foreign_key: :host_id,
+    dependent: :destroy
 
   has_secure_password
 
