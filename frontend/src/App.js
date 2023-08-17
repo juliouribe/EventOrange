@@ -1,7 +1,7 @@
-import LoginFormPage from "./components/LoginFormPage";
-import { Route, Switch } from 'react-router-dom';
-import SignupFormPage from "./components/SignupFormPage";
-import Navigation from "./components/Navigation";
+import LoginFormPage from './components/LoginFormPage';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import SignupFormPage from './components/SignupFormPage';
+import Navigation from './components/Navigation';
 
 
 
@@ -16,10 +16,14 @@ function App() {
         <Route path='/signup'>
           <SignupFormPage />
         </Route>
-        <Route path='/'>
+        <Route exact path='/'>
           <Navigation />
         </Route>
+        <Route path='*'>
+          <Redirect to='/' />
+        </Route>
       </Switch>
+
     </>
   );
 }

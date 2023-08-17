@@ -15,7 +15,7 @@ li {
 }
 
 .nav-left {
-  margin: 0px;
+  margin: 0px 20px;
 }
 
 .nav-right {
@@ -42,7 +42,7 @@ li {
 }
 
 .nav-left img {
-  width: 120px;
+  width: 150px;
   height: auto;
 }
 
