@@ -57,7 +57,7 @@ h1 {
   font-weight: 600;
 }
 
-button {
+.input-container button {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   background-color: #d1410c;
   border-color: #d1410c;
@@ -68,7 +68,8 @@ button {
   font-weight: 400;
   color: white;
   border-radius: 4px;
-  margin-top: 20px;
+  margin-top: 5px;
+
 }
 
 button:hover {
@@ -77,4 +78,15 @@ button:hover {
 
 .title-right a {
   color: #3659e3;
+}
+
+.error-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.error-container p {
+  color: red;
+  display: block;
 }

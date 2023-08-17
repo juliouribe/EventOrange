@@ -42,15 +42,15 @@ export default function Navigation() {
         </ul>
         <ul className="nav-right">
           <div className="nav-item">
-            <i className="fa-solid fa-plus"></i>
+            <i className="fa-solid fa-plus icon"></i>
             <li>Create an event</li>
           </div>
           <div className="nav-item">
-            <i className="fa-regular fa-heart"></i>
+            <i className="fa-regular fa-heart icon"></i>
             <li>Likes</li>
           </div>
           <div className="nav-item">
-            <i class="fa-solid fa-ticket"></i>
+            <i className="fa-solid fa-ticket icon"></i>
             <li>Tickets</li>
           </div>
           {sessionLinks}

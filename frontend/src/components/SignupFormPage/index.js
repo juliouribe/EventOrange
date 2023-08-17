@@ -16,22 +16,20 @@ export default function SignupFormPage() {
   const [password, setPassword] = useState('');
   const [formErrors, setFormErrors] = useState([]);
 
+
   if (sessionUser) return <Redirect to='/' />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormErrors([]);
-    return dispatch(sessionActions.signup({ email, password }))
+    dispatch(sessionActions.signup({ email, password }))
       .catch(async (res) => {
         let data;
         try {
-          // .clone() lets you read the response twice.
           data = await res.clone().json();
         } catch {
-          // We'll hit this case if the server is down.
           data = await res.text();
         }
-        // We hit the first case if we have an invalid form.
         if (data?.errors) {
           setFormErrors([data.errors]);
         } else if (data) {
@@ -40,11 +38,16 @@ export default function SignupFormPage() {
           setFormErrors([res.statusText]);
         }
       });
-    // Error stuff
-    // <ul>
-    //     {formErrors.map(error => <li key={error}>{error}</li>)}
-    //   </ul>
-  };
+  }
+
+  const useDemo = (e) => {
+    e.preventDefault();
+    // Sign in as Eisenhower.
+    dispatch(sessionActions.login({
+      email: 'eisenhower@ike.com',
+      password: 'ilikeike'
+    }))
+  }
 
 
 
@@ -63,8 +66,7 @@ export default function SignupFormPage() {
           </div>
           <form onSubmit={handleSubmit}>
             <div className='input-container'>
-              {/* <label htmlFor='email'>Email
-              </label> */}
+              <label htmlFor='email'></label>
               <input
                 type='email'
                 placeholder='Email'
@@ -76,8 +78,7 @@ export default function SignupFormPage() {
             </div>
             <div className='name-container'>
               <div className='name-input firstname'>
-                {/* <label htmlFor='first-name'>First Name
-                </label> */}
+                <label htmlFor='first-name'></label>
                 <input
                   type='text'
                   placeholder='First Name'
@@ -88,8 +89,7 @@ export default function SignupFormPage() {
                 />
               </div>
               <div className='name-input'>
-                {/* <label htmlFor='surname'>Surname
-                </label> */}
+                <label htmlFor='surname'></label>
                 <input
                   type='text'
                   placeholder='Surname'
@@ -101,8 +101,7 @@ export default function SignupFormPage() {
               </div>
             </div>
             <div className='input-container'>
-              {/* <label htmlFor='password'>Password
-              </label> */}
+              <label htmlFor='password'></label>
               <input
                 type='password'
                 placeholder='Password'
@@ -111,12 +110,19 @@ export default function SignupFormPage() {
                 required
               />
             </div>
+            <div className='error-container'>
+              {formErrors.map(error => <p key={error}>{error}</p>)}
+            </div>
             <div className='input-container'>
               <button>Create account</button>
             </div>
           </form>
+          <form onSubmit={useDemo}>
+            <div className='input-container'>
+              <button>Demo User</button>
+            </div>
+          </form>
         </div>
-
       </div>
     </>
   );

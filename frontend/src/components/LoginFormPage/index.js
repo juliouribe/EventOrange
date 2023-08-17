@@ -18,17 +18,14 @@ export default function LoginFormPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormErrors([]);
-    return dispatch(sessionActions.login({ email, password }))
+    dispatch(sessionActions.login({ email, password }))
       .catch(async (res) => {
         let data;
         try {
-          // .clone() lets you read the response twice.
           data = await res.clone().json();
         } catch {
-          // We'll hit this case if the server is down.
           data = await res.text();
         }
-        // We hit the first case if we have an invalid form.
         if (data?.errors) {
           setFormErrors([data.errors]);
         } else if (data) {
@@ -36,14 +33,17 @@ export default function LoginFormPage() {
         } else {
           setFormErrors([res.statusText]);
         }
-      });
-    // Error stuff
-    // <ul>
-    //     {formErrors.map(error => <li key={error}>{error}</li>)}
-    //   </ul>
+      })
   };
 
-
+  const useDemo = (e) => {
+    e.preventDefault();
+    // Sign in as Eisenhower.
+    dispatch(sessionActions.login({
+      email: 'eisenhower@ike.com',
+      password: 'ilikeike'
+    }))
+  }
 
   return (
     <>
@@ -60,8 +60,7 @@ export default function LoginFormPage() {
           </div>
           <form onSubmit={handleSubmit}>
             <div className='input-container'>
-              {/* <label htmlFor='email'>Email
-              </label> */}
+              <label htmlFor='email'></label>
               <input
                 type='email'
                 placeholder='Email'
@@ -72,8 +71,7 @@ export default function LoginFormPage() {
               />
             </div>
             <div className='input-container'>
-              {/* <label htmlFor='password'>Password
-              </label> */}
+              <label htmlFor='password'></label>
               <input
                 type='password'
                 placeholder='Password'
@@ -82,12 +80,19 @@ export default function LoginFormPage() {
                 required
               />
             </div>
+            <div className='error-container'>
+              {formErrors.map(error => <p key={error}>{error}</p>)}
+            </div>
             <div className='input-container'>
               <button>Log in</button>
             </div>
           </form>
+          <form onSubmit={useDemo}>
+            <div className='input-container'>
+              <button>Demo User</button>
+            </div>
+          </form>
         </div>
-
       </div>
     </>
   );
