@@ -16,6 +16,7 @@ puts "Primary key sequence reset"
 
 # Sample data
 puts "Creating Users"
+# This is the demo user.
 ike = User.create!(
   email: "eisenhower@ike.com",
   password: "ilikeike",

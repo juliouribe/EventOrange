@@ -22,7 +22,7 @@ export default function SignupFormPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormErrors([]);
-    dispatch(sessionActions.signup({ email, password }))
+    dispatch(sessionActions.signup({ email, password, firstName, surname }))
       .catch(async (res) => {
         let data;
         try {
