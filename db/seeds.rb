@@ -34,7 +34,7 @@ julio = User.create!(
   last_name: "Uribe"
 )
 keren = User.create!(
-  email: "kere@aol.com",
+  email: "keren@aol.com",
   password: "keren123",
   first_name: "Keren",
   last_name: "Zendejas"
