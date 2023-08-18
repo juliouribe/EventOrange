@@ -10,6 +10,7 @@ class Api::EventsController < ApplicationController
   end
 
   def create
+    # Look up logged in user id when creating events.
 
   end
 
@@ -23,6 +24,6 @@ class Api::EventsController < ApplicationController
 
   private
   def events_params
-    params.require(:event).permit(:title, :body, )
+    params.require(:event).permit(:title, :body, :location, :capacity, :start_time, :end_time)
   end
 end
