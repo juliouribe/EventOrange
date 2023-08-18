@@ -132,8 +132,8 @@ lmp_party = Event.create!(
   host_id: independent.id,
   location: "The Independent",
   capacity: 400,
-  start_time: "2023-09-25T09:00:00",
-  end_time: "2023-09-25T13:00:00",
+  start_time: "2023-09-25T18:00:00",
+  end_time: "2023-09-25T23:00:00",
 )
 lmp_party_image = URI.parse("https://event-orange-seeds.s3.us-west-1.amazonaws.com/lmp_party.webp").open
 lmp_party.photo.attach(
