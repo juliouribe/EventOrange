@@ -1,0 +1,10 @@
+.index-item {
+  flex-basis: 30;
+  margin: 40px;
+}
+
+.index-item .event-banner {
+  width: 24vw;
+  height: 12vw;
+  object-fit: cover;
+}
