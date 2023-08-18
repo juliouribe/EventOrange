@@ -20,6 +20,7 @@ export default function ProfileDropdown({ email }) {
       <li className="avatar-container">
         <i className="fa-solid fa-user-circle avatar" />
         {email}
+        <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
       </li>
       {isOpen && (
         <div className="dropdown-content">

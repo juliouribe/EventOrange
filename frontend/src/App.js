@@ -2,6 +2,7 @@ import LoginFormPage from './components/LoginFormPage';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import SignupFormPage from './components/SignupFormPage';
 import Navigation from './components/Navigation';
+import EventIndex from './components/EventIndex';
 
 
 
@@ -18,6 +19,7 @@ function App() {
         </Route>
         <Route exact path='/'>
           <Navigation />
+          <EventIndex />
         </Route>
         <Route path='*'>
           <Redirect to='/' />
