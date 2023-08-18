@@ -23,7 +23,7 @@ export default function EventIndexItem({ event, idx }) {
         {/* TODO: Replace this with a datetime util function */}
         <h4 className="text-start">{formatDateTime(event.startTime)}</h4>
         <h4 className="text-location">{event.location}</h4>
-        <h4 className="text-host">Presented By: {event.hostId}</h4>
+        <h4 className="text-host">Presented By: {event.hostName}</h4>
       </div>
     </div>
   )

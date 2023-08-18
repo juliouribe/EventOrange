@@ -6,6 +6,7 @@ import * as sessionActions from "../../store/session";
 import logo from "../../assets/eventOrange.svg";
 import ProfileDropdown from "./ProfileDropdown";
 import juice from "../../assets/juiceItUpTonight.svg";
+import old from "../../assets/juiceItUpTonightOld.svg"
 
 export default function Navigation() {
   const currentUser = useSelector(state => state.session.currentUser);
