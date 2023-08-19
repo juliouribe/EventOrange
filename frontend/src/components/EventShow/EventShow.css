@@ -1,0 +1,15 @@
+.event-show {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.show-image {
+  /* 10:4 width:height */
+  width: 100vw;
+  max-width: 1200px;
+  height: 50vw;
+  max-height: 470px;
+  object-fit: cover;
+  border-radius: 20px;
+}
