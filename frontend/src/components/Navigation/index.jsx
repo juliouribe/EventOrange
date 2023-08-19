@@ -1,22 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import "./Navigation.css";
-import * as sessionActions from "../../store/session";
 import logo from "../../assets/eventOrange.svg";
 import ProfileDropdown from "./ProfileDropdown";
-import juice from "../../assets/juiceItUpTonight.svg";
-import old from "../../assets/juiceItUpTonightOld.svg"
 
 export default function Navigation() {
   const currentUser = useSelector(state => state.session.currentUser);
-  const dispatch = useDispatch();
-
-
-  const logout = (e) => {
-    e.preventDefault();
-    dispatch(sessionActions.logout());
-  };
 
   let sessionLinks;
   if (currentUser) {
@@ -56,10 +46,6 @@ export default function Navigation() {
           </div>
           {sessionLinks}
         </ul>
-      </div>
-
-      <div className="splash">
-        <img src={juice} />
       </div>
     </>
   )

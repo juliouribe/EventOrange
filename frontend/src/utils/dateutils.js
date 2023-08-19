@@ -12,5 +12,5 @@ export function formatDateTime(isoDateTime) {
   // Pad minutes if needed
   minutes = minutes < 10 ? '0' + minutes : minutes;
 
-  return `${dayOfWeek}, ${month} ${day}, ${hours}:${minutes}0${amPm}`;
+  return `${dayOfWeek}, ${month} ${day}, ${hours}:${minutes}${amPm}`;
 }
