@@ -1,15 +1,118 @@
 .event-show {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  margin: 0 auto;
+}
+
+.event-banner {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px
 }
 
 .show-image {
   /* 10:4 width:height */
-  width: 100vw;
+  /* width: 100vw; */
+  width: 80vw;
   max-width: 1200px;
-  height: 50vw;
+  /* height: 50vw; */
+  height: 40vw;
   max-height: 470px;
   object-fit: cover;
   border-radius: 20px;
+}
+
+.event-text-container {
+  display: flex;
+  justify-content: center;
+
+}
+
+.event-text {
+  display: flex;
+  flex-direction: row;
+  width: 80vw;
+  max-width: 1200px;
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+h2,
+h3,
+h4,
+p {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.event-left {
+  width: 50vw;
+  max-width: 800px;
+}
+
+.event-left h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.event-left h2 {
+  font-size: 23px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.event-left h3 {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.event-left p {
+  font-size: 16px;
+}
+
+.event-ws {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 40px;
+  gap: 20px;
+}
+
+.event-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 40px;
+  width: 30vw;
+  max-width: 400px;
+  margin-left: 5vw;
+}
+
+.right-box {
+  border: 1px solid lightgray;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  max-width: 300px;
+}
+
+.tickets {
+  font-size: 16px;
+  font-weight: 700;
+  width: 20vw;
+  text-align: center;
+  max-width: 250px;
+}
+
+.details {
+  font-size: 14px;
+  border-radius: 5px;
+  width: 20vw;
+  text-align: center;
+  max-width: 250px;
+}
+
+strong {
+  font-weight: 700;
 }

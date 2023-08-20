@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./EventShow.css"
-import { formatDateTime } from "../../utils/dateutils";
+import { formatDateTimeDateOnly, formatDateTimeHoursOnly } from "../../utils/dateutils";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEvent, getEvent } from "../../store/events";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
@@ -24,10 +24,39 @@ export default function EventShow() {
   }, [eventId])
 
   return (
-    <div className="event-show">
-      <img src={IMAGES[eventId - 1]} className="show-image" />
-      <h1>{event?.title}</h1>
-      <h2>heloo this is something </h2>
-    </div>
+    <>
+      <div className="event-banner">
+        <img src={IMAGES[eventId - 1]} className="show-image" />
+      </div>
+      <div className="event-text-container">
+        <div className="event-text">
+          <div className="event-left">
+            <h3 className="event-date">{formatDateTimeDateOnly(event?.startTime)}</h3>
+            <h1>{event?.title}</h1>
+            <h2>When and where</h2>
+            <div className="event-ws">
+              <div className="event-when">
+                <h3><strong>Date and time</strong></h3>
+                <h4 className="event-start">Starts on {formatDateTimeDateOnly(event?.startTime)} - {formatDateTimeHoursOnly(event?.startTime)}</h4>
+              </div>
+              <div className="event-where">
+                <h3><strong>Location</strong></h3>
+                <h4 className="event-location">{event?.location}</h4>
+              </div>
+            </div>
+            <div className="event-info">
+              <h2>About this event</h2>
+              <p className="event-description">{event?.body}</p>
+            </div>
+          </div>
+          <div className="event-right">
+            <div className="right-box">
+              <h3 className="details">$0</h3>
+              <button className="tickets">Tickets</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   )
 }
