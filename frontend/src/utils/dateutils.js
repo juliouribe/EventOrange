@@ -14,3 +14,23 @@ export function formatDateTime(isoDateTime) {
 
   return `${dayOfWeek}, ${month} ${day}, ${hours}:${minutes}${amPm}`;
 }
+
+export function formatDateTimeDateOnly(isoDateTime) {
+  const date = new Date(isoDateTime);
+
+  const dayOfWeek = date.toLocaleString('en-US', { weekday: 'long' });
+  const month = date.toLocaleString('en-US', { month: 'long' });
+  const day = date.getUTCDate();
+
+  return `${dayOfWeek}, ${month} ${day}`;
+}
+
+export function formatDateTimeHoursOnly(isoDateTime) {
+  const date = new Date(isoDateTime);
+
+  let hours = date.getUTCHours();
+  const amPm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12 || 12;
+
+  return `${hours} ${amPm}`;
+}
