@@ -25,7 +25,7 @@ export default function EventShow() {
 
   return (
     <>
-      <div className="event-banner">
+      <div className="event-image">
         <img src={IMAGES[eventId - 1]} className="show-image" />
       </div>
       <div className="event-text-container">

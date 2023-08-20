@@ -4,10 +4,10 @@
   margin: 0 auto;
 }
 
-.event-banner {
+.event-image {
   display: flex;
   justify-content: center;
-  margin-top: 32px
+  margin-top: 32px;
 }
 
 .show-image {
