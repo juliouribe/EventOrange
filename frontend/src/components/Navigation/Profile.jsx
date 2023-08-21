@@ -5,9 +5,6 @@ import * as sessionActions from '../../store/session';
 export default function ProfileDropdown({ email, ticketCount, likesCount }) {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
-  console.log(ticketCount);
-  console.log("tickets dropdown");
-  console.log(likesCount);
 
   const logout = (e) => {
     e.preventDefault();
@@ -23,7 +20,7 @@ export default function ProfileDropdown({ email, ticketCount, likesCount }) {
       <li className="avatar-container">
         <i className="fa-solid fa-user-circle avatar" />
         {email}
-        <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+        <i className="fa-solid fa-chevron-down dropdown-arrow"></i>
       </li>
       {isOpen && (
         <div className="dropdown-content">

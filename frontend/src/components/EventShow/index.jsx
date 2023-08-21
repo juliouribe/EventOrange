@@ -18,10 +18,10 @@ export default function EventShow() {
   const dispatch = useDispatch();
   const { eventId } = useParams();
   const event = useSelector(getEvent(eventId));
-  console.log(eventId)
+
   useEffect(() => {
     dispatch(fetchEvent(eventId))
-  }, [eventId])
+  }, [dispatch, eventId])
 
   return (
     <>
@@ -41,7 +41,7 @@ export default function EventShow() {
               </div>
               <div className="event-where">
                 <h3><strong>Location</strong></h3>
-                <h4 className="event-location">{event?.location}</h4>
+                <h4 className="event-location"><strong>{event?.location}</strong> | {event?.address}</h4>
               </div>
             </div>
             <div className="event-info">

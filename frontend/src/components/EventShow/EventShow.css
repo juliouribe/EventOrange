@@ -62,8 +62,12 @@ p {
 }
 
 .event-left h3 {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
+}
+.event-left h4 {
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .event-left p {

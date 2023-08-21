@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import SignupFormPage from './components/SignupFormPage';
 import Navigation from './components/Navigation/';
 import EventIndex from './components/EventIndex';
-import EventShow from './components/EventShow';
+import EventShow from './components/EventShow/';
 import SplashPage from './components/SplashPage';
 
 function App() {
