@@ -24,4 +24,18 @@ class Event < ApplicationRecord
 
   has_one_attached :photo,
     dependent: :destroy
+
+  has_many :tickets,
+    dependent: :destroy
+
+  has_many :attendees,
+    through: :tickets,
+    source: :user
+
+  has_many :likes,
+    dependent: :destroy
+
+  has_many :fans,
+    through: :likes,
+    source: :user
 end

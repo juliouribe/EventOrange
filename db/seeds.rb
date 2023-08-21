@@ -11,11 +11,16 @@ require "open-uri"
 # Destroy Tables
 User.destroy_all
 # Event.destroy_all
+Ticket.destroy_all
+Like.destroy_all
 puts "Table instances destroyed"
 
 # Reset pk sequence
 ActiveRecord::Base.connection.reset_pk_sequence!("users")
-ActiveRecord::Base.connection.reset_pk_sequence!("events")
+# ActiveRecord::Base.connection.reset_pk_sequence!("events")
+ActiveRecord::Base.connection.reset_pk_sequence!("tickets")
+ActiveRecord::Base.connection.reset_pk_sequence!("likes")
+
 puts "Primary key sequence reset"
 
 # Sample data
@@ -159,3 +164,26 @@ puts "Finished creating Users"
 
 # puts "Finished creating Events"
 
+puts "Creating tickets and likes"
+
+# Ike tickets and likes
+Ticket.create!(user_id: ike.id, event_id: 4, price: 0)
+Ticket.create!(user_id: ike.id, event_id: 5, price: 0)
+Ticket.create!(user_id: ike.id, event_id: 6, price: 0)
+
+Like.create!(user_id: ike.id, event_id: 1)
+
+
+# Julio tickets and likes
+Ticket.create!(user_id: julio.id, event_id: 1, price: 0)
+Ticket.create!(user_id: julio.id, event_id: 2, price: 0)
+Ticket.create!(user_id: julio.id, event_id: 3, price: 20)
+Like.create!(user_id: julio.id, event_id: 4)
+Like.create!(user_id: julio.id, event_id: 5)
+
+# Keren tickets and likes
+Ticket.create!(user_id: keren.id, event_id: 1, price: 0)
+Ticket.create!(user_id: keren.id, event_id: 2, price: 0)
+Like.create!(user_id: keren.id, event_id: 5)
+
+puts "Finished creating tickets and likes"

@@ -2,9 +2,12 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as sessionActions from '../../store/session';
 
-export default function ProfileDropdown({ email }) {
+export default function ProfileDropdown({ email, ticketCount, likesCount }) {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
+  console.log(ticketCount);
+  console.log("tickets dropdown");
+  console.log(likesCount);
 
   const logout = (e) => {
     e.preventDefault();
@@ -26,9 +29,9 @@ export default function ProfileDropdown({ email }) {
         <div className="dropdown-content">
           <li className="dropdown-underline">Browse Events</li>
           <li>View Profile</li>
-          <li>Tickets</li>
+          <li>Tickets ({ticketCount})</li>
+          <li className="dropdown-underline">Likes ({likesCount})</li>
           <li>Hosted Events</li>
-          <li className="dropdown-underline">Bookmarked</li>
           <li onClick={logout}>Log Out</li>
         </div>
       )}

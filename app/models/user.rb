@@ -24,6 +24,20 @@ class User < ApplicationRecord
     foreign_key: :host_id,
     dependent: :destroy
 
+  has_many :tickets,
+    dependent: :destroy
+
+  has_many :purchased_events,
+    through: :tickets,
+    source: :event
+
+  has_many :likes,
+    dependent: :destroy
+
+  has_many :liked_events,
+    through: :likes,
+    source: :event
+
   has_secure_password
 
   before_validation :ensure_session_token

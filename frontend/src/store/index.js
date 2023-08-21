@@ -2,9 +2,13 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from 'redux-thunk';
 import sessionReducer from "./session";
 import eventReducer from "./events";
+import ticketReducer from "./tickets";
+import likeReducer from "./likes";
 
 const entitiesReducer = combineReducers({
-  events: eventReducer
+  events: eventReducer,
+  tickets: ticketReducer,
+  likes: likeReducer
 })
 
 const rootReducer = combineReducers({

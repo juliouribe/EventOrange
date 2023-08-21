@@ -5,14 +5,18 @@ import "./EventIndex.css";
 import { fetchEvents, getEvents } from "../../store/events";
 import EventIndexItem from "../EventIndexItem";
 
+
 export default function EventIndex() {
   const dispatch = useDispatch();
   const eventsObj = useSelector(getEvents());
   const events = useMemo(() => Object.values(eventsObj));
 
+
   useEffect(() => {
     dispatch(fetchEvents());
-  }, [])
+  }, []);
+
+
 
   return (
     <>
