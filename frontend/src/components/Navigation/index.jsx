@@ -52,7 +52,7 @@ export default function Navigation() {
         <ul className="nav-right">
           <div className="nav-item">
             <i className="fa-solid fa-plus icon"></i>
-            <li>Create an event</li>
+            <li><NavLink to="/events/create">Create an event</NavLink></li>
           </div>
           <div className="nav-item">
             <i className="fa-regular fa-heart icon"></i>

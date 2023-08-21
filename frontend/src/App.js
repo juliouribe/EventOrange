@@ -5,6 +5,7 @@ import Navigation from './components/Navigation/';
 import EventIndex from './components/EventIndex';
 import EventShow from './components/EventShow/';
 import SplashPage from './components/SplashPage';
+import EventCreate from './components/EventCreate';
 
 function App() {
 
@@ -16,6 +17,10 @@ function App() {
         </Route>
         <Route path='/signup'>
           <SignupFormPage />
+        </Route>
+        <Route path='/events/create'>
+          <Navigation />
+          <EventCreate />
         </Route>
         <Route path='/events/:eventId'>
           <Navigation />
