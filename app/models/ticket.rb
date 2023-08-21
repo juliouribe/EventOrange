@@ -10,9 +10,15 @@
 #  updated_at :datetime         not null
 #
 class Ticket < ApplicationRecord
-  validates :price, presence: true, default: 0
+  validates :price, presence: true
+
+  before_validation :ensure_price
 
   belongs_to :user
 
   belongs_to :event
+
+  def ensure_price
+    self.price ||= 0
+  end
 end
