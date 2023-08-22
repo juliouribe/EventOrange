@@ -1,45 +1,131 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./EventCreate.css";
+import { createEvent } from "../../store/events";
+import { Redirect } from "react-router-dom";
 
 export default function EventCreate() {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.currentUser)
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [body, setBody] = useState("");
   // TODO: Add datetime pickers.
   const [startDate, setStartDate] = useState("");
   const [startTime, setStartTime] = useState("");
+  const [startDateTime, setStartDateTime] = useState("");
   const [endDate, setEndDate] = useState("");
   const [endTime, setEndTime] = useState("");
+  const [endDateTime, setEndDateTime] = useState("");
   const [location, setLocation] = useState("");
+  const [address, setAddress] = useState("");
   const [image, setImage] = useState("");
   const [formErrors, setFormErrors] = useState([]);
 
+  useEffect(() => {
+    setStartDateTime(`${startDate}T${startTime}`);
+  }, [startDate, startTime])
+
+  useEffect(() => {
+    if (endDate && endTime) {
+      setEndDateTime(`${endDate}T${endTime}`);
+    } else {
+      setEndDateTime("");
+    }
+  }, [endDate, endTime])
+
+  // Redirect user to home page if they are not logged in.
+  if (!sessionUser) return <Redirect to='/' />;
+
+  const handleImage = (e) => {
+    setImage(e.currentTarget.files[0]);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (formErrors.length) return;
+    const eventData = new FormData();
+    eventData.append("event[title]", title);
+    eventData.append("event[body]", body);
+    eventData.append("event[startTime]", startDateTime);
+    eventData.append("event[endTime]", endDateTime);
+    eventData.append("event[location]", location);
+    eventData.append("event[address]", address);
+    eventData.append("event[capacity]", 100);
+    if (image) {
+      eventData.append("event[photo]", image);
+    }
+    // Only clear the fields if the discard button is pressed.
+    dispatch(createEvent(eventData))
+      .catch(async (res) => {
+        let data;
+        try {
+          data = await res.clone().json();
+        } catch {
+          data = await res.text();
+        }
+        if (data?.errors) {
+          setFormErrors([data.errors]);
+        } else if (data) {
+          setFormErrors([data]);
+        } else {
+          setFormErrors([res.statusText]);
+        }
+      });
+    // Clear the form fields.
+    handleReset();
+  };
+
+  const handleReset = (e) => {
+    setTitle("");
+    setBody("");
+    setStartDate("");
+    setStartTime("");
+    setEndDate("");
+    setEndTime("");
+    setLocation("");
+    setAddress("");
+    setImage("");
+  }
+
+  const validateDate = () => {
+    const errors = [];
+    if (endDate && startDate > endDate) {
+      errors.push("Start Date must be before the End date.");
+    } else if (startDate === endDate && startTime > endTime) {
+      errors.push("Start Time must be before the End time.");
+    }
+    return errors;
+  }
+
+
   // TODO: Link back to hosted events page
   return (
-    <>
+    <div>
       <div className="event-form-container">
-        <form className="event-form">
+        <form className="event-form" onSubmit={handleSubmit}>
           <div className="form-basic-info">
             <h1>Basic Info</h1>
             <p>Name your event and tell event-goes why they should come. Add details that highlight what makes it unique.</p>
             <input type="text" placeholder="Event Title" value={title} onChange={(e) => setTitle(e.target.value)} required />
-            <textarea placeholder="Event Description" value={description} onChange={(e) => setDescription(e.target.value)} required />
+            <textarea placeholder="Event Description" value={body} onChange={(e) => setBody(e.target.value)} required />
             <label hmtlfor="event-image">Event Image</label>
-            <input type="file" id="event-image" onChange={(e) => setImage(e.target.files[0])} />
-            {image && <img src={URL.createObjectURL(image)} alt="preview" />}
+            <input type="file" id="event-image" onChange={handleImage} />
+            {image &&
+              <div className="image-preview">
+                <button onClick={() => setImage(null)}>Remove</button>
+                <img src={URL.createObjectURL(image)} alt="preview" />
+              </div>}
 
             <label hmtlfor="host-options">Organizer</label>
-            <select id="host-options" defaultValue={`${sessionUser.firstName} ${sessionUser.lastName}`}>
-              <option value>{`${sessionUser.firstName} ${sessionUser.lastName}`}</option>
+            <select id="host-options" defaultValue={`${sessionUser?.firstName} ${sessionUser?.lastName}`}>
+              <option value>{`${sessionUser?.firstName} ${sessionUser?.lastName}`}</option>
             </select>
           </div>
           <div className="form-location">
             <h1>Location</h1>
             <p>Help people in the area discover your event and let attendees know where to show up.</p>
             <input type="text" placeholder="Venue Location" value={location} onChange={(e) => setLocation(e.target.value)} required />
-            <input type="text" placeholder="Street Address" />
+            <input type="text" placeholder="Street Address" value={address} onChange={(e) => setAddress(e.target.value)} required />
           </div>
           <div className="form-date-time">
             <h1>Date and Time</h1>
@@ -47,24 +133,43 @@ export default function EventCreate() {
             <div className="date-time-inputs">
               <div className="event-start">
                 <label hmtlfor="start-date">Start Date</label>
-                <input type="date" id="start-date" value={startDate} onChange={(e) => setStartDate(e.target.value)} required />
+                <input type="date" id="start-date" value={startDate} onChange={(e) => {
+                  setStartDate(e.target.value);
+                  setFormErrors([]);
+                  setFormErrors(validateDate());
+                }} required />
                 <label hmtlfor="start-time">Start Time</label>
-                <input type="time" id="start-time" value={startTime} onChange={(e) => setStartTime(e.target.value)} required />
+                <input type="time" id="start-time" value={startTime} onChange={(e) => {
+                  setStartTime(e.target.value);
+                  setFormErrors([]);
+                  setFormErrors(validateDate());
+                }} required />
               </div>
               <div className="event-end">
                 <label hmtlfor="end-date">End Date</label>
-                <input type="date" id="end-date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+                <input type="date" id="end-date" value={endDate} onChange={(e) => {
+                  setEndDate(e.target.value);
+                  setFormErrors([]);
+                  setFormErrors(validateDate());
+                }} />
                 <label hmtlfor="end-time">End Time</label>
-                <input type="time" id="end-time" value={endTime} onChange={(e) => setEndTime(e.target.value)} />
+                <input type="time" id="end-time" value={endTime} onChange={(e) => {
+                  setEndTime(e.target.value);
+                  setFormErrors([]);
+                  setFormErrors(validateDate());
+                }} />
               </div>
+            </div>
+            <div className="error-container">
+              {formErrors.map(error => <p className="form-error" key={error}>{error}</p>)}
             </div>
           </div>
           <div className="form-submit">
-            <button className="reset-button" type="submit">Discard</button>
+            <button className="reset-button" type="reset" onClick={handleReset}>Discard</button>
             <button type="submit">Create Event</button>
           </div>
         </form >
       </div >
-    </>
+    </div>
   )
 }

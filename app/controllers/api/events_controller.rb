@@ -1,3 +1,6 @@
+require 'open-uri';
+
+
 class Api::EventsController < ApplicationController
   before_action :require_logged_in, only: [:create, :update, :destroy]
 
@@ -14,10 +17,12 @@ class Api::EventsController < ApplicationController
   def create
     # Look up logged in user id when creating events.
     @event = Event.new(events_params)
-    @event.user_id = current_user.id
+    @event.host_id = current_user.id
+
     if @event.save
       render :show
     else
+      # If you remove .fullmessage you get a hash back.
       render json: @event.errors.full_messages, status: 422
     end
   end
@@ -39,6 +44,6 @@ class Api::EventsController < ApplicationController
 
   private
   def events_params
-    params.require(:event).permit(:title, :body, :location, :capacity, :start_time, :end_time)
+    params.require(:event).permit(:title, :body, :location, :address, :capacity, :start_time, :end_time, :photo)
   end
 end

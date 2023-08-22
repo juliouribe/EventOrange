@@ -46,10 +46,10 @@ export const fetchEvent = (eventId) => async dispatch => {
   dispatch(receiveEvent(event));
 }
 
-export const createEvent = (event) => async dispatch => {
+export const createEvent = (eventData) => async dispatch => {
   const res = await csrfFetch('/api/events', {
     method: 'POST',
-    body: JSON.stringify(event)
+    body: eventData
   })
   const newEvent = await res.json();
   dispatch(receiveEvent(newEvent));
@@ -58,7 +58,7 @@ export const createEvent = (event) => async dispatch => {
 export const editEvent = (event) => async dispatch => {
   const res = await csrfFetch(`/api/events/${event.id}`, {
     method: 'PATCH',
-    body: JSON.stringify(event)
+    body: event
   })
   const updatedEvent = await res.json();
   dispatch(updateEvent(updatedEvent));
