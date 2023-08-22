@@ -18,6 +18,7 @@ export default function EventCreate() {
   const [endDateTime, setEndDateTime] = useState("");
   const [location, setLocation] = useState("");
   const [address, setAddress] = useState("");
+  const [capacity, setCapacity] = useState("");
   const [image, setImage] = useState("");
   const [formErrors, setFormErrors] = useState([]);
 
@@ -50,7 +51,7 @@ export default function EventCreate() {
     eventData.append("event[endTime]", endDateTime);
     eventData.append("event[location]", location);
     eventData.append("event[address]", address);
-    eventData.append("event[capacity]", 100);
+    eventData.append("event[capacity]", capacity);
     if (image) {
       eventData.append("event[photo]", image);
     }
@@ -85,6 +86,7 @@ export default function EventCreate() {
     setLocation("");
     setAddress("");
     setImage("");
+    setCapacity("");
   }
 
   const validateDate = () => {
@@ -126,6 +128,7 @@ export default function EventCreate() {
             <p>Help people in the area discover your event and let attendees know where to show up.</p>
             <input type="text" placeholder="Venue Location" value={location} onChange={(e) => setLocation(e.target.value)} required />
             <input type="text" placeholder="Street Address" value={address} onChange={(e) => setAddress(e.target.value)} required />
+            <input type="text" placeholder="Capacity" value={capacity} onChange={(e) => setCapacity(e.target.value)} required />
           </div>
           <div className="form-date-time">
             <h1>Date and Time</h1>

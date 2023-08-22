@@ -70,9 +70,9 @@ const eventReducer = (state = {}, action) => {
     case RECEIVE_EVENTS:
       return { ...action.events }
     case RECEIVE_EVENT:
-      return { ...state, [action.event.id]: action.event }
+      return { ...action.event }
     case UPDATE_EVENT:
-      return { ...state, [action.event.id]: action.event }
+      return { ...state, ...action.event }
     case REMOVE_EVENT:
       const newState = { ...state }
       delete newState[action.eventId]

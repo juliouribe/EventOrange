@@ -1,0 +1,53 @@
+.host-container {
+  padding: 0px 24px 80px;
+  width: 100vw;
+  box-sizing: border-box;
+}
+
+.host-info {
+  display: flex;
+  padding-top: 48px;
+  padding-bottom: 24px;
+  align-items: center;
+}
+
+.host-avatar-container {
+  width: 122px;
+  height: 122px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-avatar {
+  font-size: 48px;
+  color: #6f7287;
+}
+
+.host-info h1 {
+  font-size: 32px;
+  color: #2c2929;
+  padding-left: 20px;
+}
+
+.host-header {
+  margin-bottom: 32px;
+  margin-left: 25vw;
+}
+
+.host-header h2 {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.hosted-events {
+  display: flex;
+  flex-direction: column;
+  margin-left: 25vw;
+  margin-right: 15vw;
+  width: 50vw;
+  box-sizing: border-box;
+}

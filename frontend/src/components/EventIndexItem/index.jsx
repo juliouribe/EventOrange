@@ -15,7 +15,7 @@ export default function EventIndexItem({ event, idx }) {
   return (
     <NavLink to={`/events/${event.id}`}>
       <div className="index-item">
-        <img className="event-banner" src={IMAGES[idx]} />
+        <img className="event-banner" src={IMAGES[idx % 6]} />
         <div className="item-text">
           <h3>{event.title}</h3>
           <h4 className="text-start">{formatDateTime(event.startTime)}</h4>

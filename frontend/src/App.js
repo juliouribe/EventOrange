@@ -6,6 +6,7 @@ import EventIndex from './components/EventIndex';
 import EventShow from './components/EventShow/';
 import SplashPage from './components/SplashPage';
 import EventCreate from './components/EventCreate';
+import UserHostedEvents from './components/UserHostedEvents';
 
 function App() {
 
@@ -25,6 +26,10 @@ function App() {
         <Route path='/events/:eventId'>
           <Navigation />
           <EventShow />
+        </Route>
+        <Route path='/user/hosted-events'>
+          <Navigation />
+          <UserHostedEvents />
         </Route>
         <Route exact path='/'>
           <Navigation />

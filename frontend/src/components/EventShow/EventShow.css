@@ -25,7 +25,7 @@
 .event-text-container {
   display: flex;
   justify-content: center;
-
+  padding-bottom: 80px;
 }
 
 .event-text {
@@ -65,6 +65,7 @@ p {
   font-size: 18px;
   font-weight: 500;
 }
+
 .event-left h4 {
   font-size: 14px;
   font-weight: 400;

@@ -31,7 +31,7 @@ export default function EventShow() {
       <div className="event-text-container">
         <div className="event-text">
           <div className="event-left">
-            <h3 className="event-date">{formatDateTimeDateOnly(event?.startTime)}</h3>
+            <h3>{formatDateTimeDateOnly(event?.startTime)}</h3>
             <h1>{event?.title}</h1>
             <h2>When and where</h2>
             <div className="event-ws">
