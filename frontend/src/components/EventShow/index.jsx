@@ -3,7 +3,7 @@ import "./EventShow.css"
 import { formatDateTimeDateOnly, formatDateTimeHoursOnly } from "../../utils/dateutils";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEvent, getEvent } from "../../store/events";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useParams } from "react-router-dom";
 import cats from "../../assets/event_images/cat_leash.jpeg"
 import disrupt from "../../assets/event_images/disrupt.jpg"
 import f1 from "../../assets/event_images/f1_watch_party.jpeg"
