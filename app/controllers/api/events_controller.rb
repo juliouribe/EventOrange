@@ -35,9 +35,13 @@ class Api::EventsController < ApplicationController
 
   def destroy
     # Events can only be deleted by the host and they must be logged in.
-    @event = Event.find_by(id: params[:id]).where(host_id: current_user.id)
-    @event.destroy
-    render json: event
+    @event = Event.find_by(id: params[:id])
+    if (@event.host_id != current_user.id)
+      render json: ["You are not the host of this event"], status: 422
+    else
+      @event.destroy
+      head :no_content
+    end
   end
 
   private

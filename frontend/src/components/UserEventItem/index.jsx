@@ -8,11 +8,19 @@ import lmp from "../../assets/event_images/lmp_party.jpeg"
 import mimosas from "../../assets/event_images/mimosas.jpeg"
 import paint from "../../assets/event_images/paint_sip.jpg"
 import { formatDateTime, getDateAbbreviation } from "../../utils/dateutils";
+import { useDispatch } from "react-redux";
+import { deleteEvent } from "../../store/events";
 
 const IMAGES = [cats, mimosas, paint, f1, lmp, disrupt]
 
 export default function UserEventItem({ event, idx }) {
+  const dispatch = useDispatch();
   const [month, date] = getDateAbbreviation(event.startTime);
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    dispatch(deleteEvent(event.id));
+  }
 
   return (
     <NavLink to={`/events/${event.id}`}>
@@ -30,7 +38,7 @@ export default function UserEventItem({ event, idx }) {
           </div>
           <div className="edit-delete">
             <NavLink to={`/events/edit/${event.id}`}><button >Edit</button></NavLink>
-            <NavLink to="/events/create"><button id="delete">Delete</button></NavLink>
+            <button id="delete" onClick={handleDelete}>Delete</button>
           </div>
         </div>
       </div>

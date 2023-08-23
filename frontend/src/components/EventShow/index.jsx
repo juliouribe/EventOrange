@@ -26,7 +26,7 @@ export default function EventShow() {
   return (
     <>
       <div className="event-image">
-        <img src={IMAGES[eventId - 1]} className="show-image" />
+        <img src={IMAGES[eventId % 6 - 1]} className="show-image" />
       </div>
       <div className="event-text-container">
         <div className="event-text">
