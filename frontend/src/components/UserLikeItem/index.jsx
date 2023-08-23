@@ -13,7 +13,7 @@ import LikeButton from "../LikeButton";
 
 const IMAGES = [cats, mimosas, paint, f1, lmp, disrupt]
 
-export default function UserEventItem({ event, idx }) {
+export default function UserEventItem({ event, idx, likeId }) {
 
   return (
     <NavLink to={`/events/${event.id}`}>
@@ -29,7 +29,7 @@ export default function UserEventItem({ event, idx }) {
           <img className="" src={IMAGES[idx % 6]} />
           <div className="share-like">
             <i className="fa-sharp fa-solid fa-arrow-up-from-bracket share-icon"></i>
-            <LikeButton eventId={event.id} defaultLike={true} />
+            <LikeButton eventId={event.id} defaultLike={true} likeId={likeId} />
           </div>
         </div>
       </div>

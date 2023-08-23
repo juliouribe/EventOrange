@@ -8,28 +8,12 @@ import { fetchTickets, getTickets } from "../../store/tickets";
 import { fetchLikes, getLikes } from "../../store/likes";
 
 export default function Navigation() {
-  const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.currentUser);
-  const ticketsObj = useSelector(getTickets());
-  const likesObj = useSelector(getLikes());
-  const tickets = Object.values(ticketsObj);
-  const likes = Object.values(likesObj);
-
-  useEffect(() => {
-    if (currentUser) {
-      dispatch(fetchTickets());
-      dispatch(fetchLikes());
-    }
-  }, [currentUser, dispatch]);
 
   let sessionLinks;
   if (currentUser) {
     sessionLinks = (
-      <Profile
-        email={currentUser.email}
-        ticketCount={tickets.length}
-        likesCount={likes.length}
-      />
+      <Profile email={currentUser.email} />
     )
   } else {
     sessionLinks = <>

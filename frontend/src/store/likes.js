@@ -62,7 +62,10 @@ const likeReducer = (state = {}, action) => {
     case RECEIVE_LIKES:
       return { ...action.likes }
     case RECEIVE_LIKE:
-      return { ...action.like }
+      return {
+        ...state,
+        [action.like.id]: action.like
+      }
     case REMOVE_LIKE:
       const newState = { ...state }
       delete newState[action.likeId]
