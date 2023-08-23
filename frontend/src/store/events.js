@@ -40,6 +40,24 @@ export const fetchEvents = () => async dispatch => {
   dispatch(receiveEvents(events));
 }
 
+export const fetchPurchasedEvents = () => async dispatch => {
+  const res = await csrfFetch(`/api/purchased_events`)
+  const events = await res.json();
+  dispatch(receiveEvents(events));
+}
+
+export const fetchLikedEvents = () => async dispatch => {
+  const res = await csrfFetch(`/api/liked_events`)
+  const events = await res.json();
+  dispatch(receiveEvents(events));
+}
+
+export const fetchHostedEvents = () => async dispatch => {
+  const res = await csrfFetch(`/api/hosted_events`)
+  const events = await res.json();
+  dispatch(receiveEvents(events));
+}
+
 export const fetchEvent = (eventId) => async dispatch => {
   const res = await csrfFetch(`/api/events/${eventId}`)
   const event = await res.json();

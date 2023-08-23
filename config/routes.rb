@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     resources :users, only: [:show, :create]
+    match '/purchased_events', to: '/api/users#purchased_events', via: [:get]
+    match '/liked_events', to: '/api/users#liked_events', via: [:get]
+    match '/hosted_events', to: '/api/users#hosted_events', via: [:get]
     resources :events, only: [:index, :show, :create, :update, :destroy]
     resources :tickets, only: [:index, :show, :create, :destroy]
     resources :likes, only: [:index, :show, :create, :destroy]
