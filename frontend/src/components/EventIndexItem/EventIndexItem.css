@@ -15,6 +15,10 @@
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
+.index-item:hover {
+  box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.1);
+}
+
 .index-item .event-banner {
   /* 2:1 width:height */
   min-width: 200px;

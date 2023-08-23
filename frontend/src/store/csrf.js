@@ -20,7 +20,9 @@ async function csrfFetch(url, options = {}) {
   // If we're using a non-GET check sessionStorage for token if not already part
   // of options object.
   if (options.method.toUpperCase() !== 'GET') {
-    options.headers['Content-Type'] = options.headers['Content-Type'] || 'application/json';
+    if (!(options.body instanceof FormData)) {
+      options.headers['Content-Type'] = 'application/json'
+    }
     options.headers['X-CSRF-Token'] = sessionStorage.getItem('X-CSRF-Token');
   }
 

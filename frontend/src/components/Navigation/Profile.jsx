@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as sessionActions from '../../store/session';
+import { NavLink } from "react-router-dom/cjs/react-router-dom";
 
 export default function ProfileDropdown({ email, ticketCount, likesCount }) {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
-  console.log(ticketCount);
-  console.log("tickets dropdown");
-  console.log(likesCount);
 
   const logout = (e) => {
     e.preventDefault();
@@ -23,15 +21,15 @@ export default function ProfileDropdown({ email, ticketCount, likesCount }) {
       <li className="avatar-container">
         <i className="fa-solid fa-user-circle avatar" />
         {email}
-        <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+        <i className="fa-solid fa-chevron-down dropdown-arrow"></i>
       </li>
       {isOpen && (
         <div className="dropdown-content">
           <li className="dropdown-underline">Browse Events</li>
           <li>View Profile</li>
+          <li><NavLink to="/user/hosted-events">Hosted Events</NavLink></li>
           <li>Tickets ({ticketCount})</li>
           <li className="dropdown-underline">Likes ({likesCount})</li>
-          <li>Hosted Events</li>
           <li onClick={logout}>Log Out</li>
         </div>
       )}

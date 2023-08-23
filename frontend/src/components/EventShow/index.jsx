@@ -3,7 +3,7 @@ import "./EventShow.css"
 import { formatDateTimeDateOnly, formatDateTimeHoursOnly } from "../../utils/dateutils";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEvent, getEvent } from "../../store/events";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useParams } from "react-router-dom";
 import cats from "../../assets/event_images/cat_leash.jpeg"
 import disrupt from "../../assets/event_images/disrupt.jpg"
 import f1 from "../../assets/event_images/f1_watch_party.jpeg"
@@ -18,10 +18,10 @@ export default function EventShow() {
   const dispatch = useDispatch();
   const { eventId } = useParams();
   const event = useSelector(getEvent(eventId));
-  console.log(eventId)
+
   useEffect(() => {
     dispatch(fetchEvent(eventId))
-  }, [eventId])
+  }, [dispatch, eventId])
 
   return (
     <>
@@ -31,7 +31,7 @@ export default function EventShow() {
       <div className="event-text-container">
         <div className="event-text">
           <div className="event-left">
-            <h3 className="event-date">{formatDateTimeDateOnly(event?.startTime)}</h3>
+            <h3>{formatDateTimeDateOnly(event?.startTime)}</h3>
             <h1>{event?.title}</h1>
             <h2>When and where</h2>
             <div className="event-ws">
@@ -41,7 +41,7 @@ export default function EventShow() {
               </div>
               <div className="event-where">
                 <h3><strong>Location</strong></h3>
-                <h4 className="event-location">{event?.location}</h4>
+                <h4 className="event-location"><strong>{event?.location}</strong> | {event?.address}</h4>
               </div>
             </div>
             <div className="event-info">

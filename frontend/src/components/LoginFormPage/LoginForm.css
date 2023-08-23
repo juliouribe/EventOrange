@@ -86,7 +86,7 @@ button:hover {
   margin-bottom: 5px;
 }
 
-.error-container p {
+.error-container>p {
   color: red;
   display: block;
 }
