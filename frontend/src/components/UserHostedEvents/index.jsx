@@ -13,6 +13,10 @@ export default function UserHostedEvents() {
   const events = useMemo(() => (
     Object.values(eventsObj).filter(event => event.hostId === currentUser.id)
   ));
+  events.sort((a, b) => {
+    return new Date(a.startTime) - new Date(b.startTime);
+  });
+
 
   useEffect(() => {
     dispatch(fetchEvents());
