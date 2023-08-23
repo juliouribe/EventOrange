@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPurchasedEvents, getEvents } from "../../store/events";
 import UserEventItem from "../UserEventItem";
@@ -9,14 +9,14 @@ export default function UserTickets() {
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.currentUser);
   const eventsObj = useSelector(getEvents());
-  const events = useMemo(() => Object.values(eventsObj));
+  const events = Object.values(eventsObj);
   events.sort((a, b) => {
     return new Date(a.startTime) - new Date(b.startTime);
   });
 
   useEffect(() => {
     dispatch(fetchPurchasedEvents());
-  }, []);
+  }, [dispatch]);
 
   if (!currentUser) return <Redirect to='/' />;
 

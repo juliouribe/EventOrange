@@ -8,14 +8,17 @@ import lmp from "../../assets/event_images/lmp_party.jpeg"
 import mimosas from "../../assets/event_images/mimosas.jpeg"
 import paint from "../../assets/event_images/paint_sip.jpg"
 import { formatDateTime } from "../../utils/dateUtils";
+import LikeButton from "../LikeButton";
 
 const IMAGES = [cats, mimosas, paint, f1, lmp, disrupt]
 
-export default function EventIndexItem({ event, idx }) {
+export default function EventIndexItem({ event, idx, eventLiked = false, likeId = null }) {
+
   return (
     <NavLink to={`/events/${event.id}`}>
       <div className="index-item">
         <img className="event-banner" src={IMAGES[idx % 6]} />
+        <LikeButton eventId={event.id} defaultLike={eventLiked} likeId={likeId} />
         <div className="item-text">
           <h3>{event.title}</h3>
           <h4 className="text-start">{formatDateTime(event.startTime)}</h4>

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import "./Navigation.css";
@@ -12,15 +12,15 @@ export default function Navigation() {
   const currentUser = useSelector(state => state.session.currentUser);
   const ticketsObj = useSelector(getTickets());
   const likesObj = useSelector(getLikes());
-  const tickets = useMemo(() => Object.values(ticketsObj));
-  const likes = useMemo(() => Object.values(likesObj));
+  const tickets = Object.values(ticketsObj);
+  const likes = Object.values(likesObj);
 
   useEffect(() => {
     if (currentUser) {
       dispatch(fetchTickets());
       dispatch(fetchLikes());
     }
-  }, [currentUser]);
+  }, [currentUser, dispatch]);
 
   let sessionLinks;
   if (currentUser) {
@@ -56,17 +56,21 @@ export default function Navigation() {
               <li>Create an event</li>
             </div>
           </NavLink>
-          <div className="nav-item">
-            <i className="fa-regular fa-heart icon"></i>
-            <li>Likes</li>
-          </div>
-          <div className="nav-item">
-            <i className="fa-solid fa-ticket icon"></i>
-            <li>Tickets</li>
-          </div>
+          <NavLink to="/user/liked-events">
+            <div className="nav-item">
+              <i className="fa-regular fa-heart icon"></i>
+              <li>Likes</li>
+            </div>
+          </NavLink>
+          <NavLink to="/user/purchased-events">
+            <div className="nav-item">
+              <i className="fa-solid fa-ticket icon"></i>
+              <li>Tickets</li>
+            </div>
+          </NavLink>
           {sessionLinks}
         </ul>
-      </div>
+      </div >
     </>
   )
 }

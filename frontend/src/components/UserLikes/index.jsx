@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import UserLikeItem from "../UserLikeItem";
 import { fetchLikedEvents, getEvents } from "../../store/events";
@@ -10,14 +10,14 @@ export default function UserLikes() {
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.currentUser);
   const eventsObj = useSelector(getEvents());
-  const events = useMemo(() => Object.values(eventsObj));
+  const events = Object.values(eventsObj);
   events.sort((a, b) => {
     return new Date(a.startTime) - new Date(b.startTime);
   });
 
   useEffect(() => {
     dispatch(fetchLikedEvents());
-  }, []);
+  }, [dispatch]);
 
   // Redirect user to home page if they are not logged in.
   if (!currentUser) return <Redirect to='/' />;

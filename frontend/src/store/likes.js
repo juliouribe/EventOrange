@@ -40,21 +40,20 @@ export const fetchLike = (likeId) => async dispatch => {
   dispatch(receiveLike(like));
 }
 
-export const createLike = (like) => async dispatch => {
+export const createLike = (eventId) => async dispatch => {
   const res = await csrfFetch('/api/likes', {
     method: 'POST',
-    body: JSON.stringify(like)
+    body: JSON.stringify(eventId)
   })
   const newLike = await res.json();
   dispatch(receiveLike(newLike));
 }
 
-export const deleteLike = (eventId) => async dispatch => {
+export const deleteLike = (eventId, likeId) => async dispatch => {
   const res = await csrfFetch(`/api/likes/${eventId}`, {
     method: 'DELETE'
   })
-  await res.json();
-  dispatch(removeLike(eventId));
+  dispatch(removeLike(likeId));
 }
 
 // Reducer

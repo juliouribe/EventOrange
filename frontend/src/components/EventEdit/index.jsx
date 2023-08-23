@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./EventEdit.css";
-import { createEvent, getEvent } from "../../store/events";
+import { getEvent } from "../../store/events";
 import { Redirect, useParams } from "react-router-dom";
 import { fetchEvent, editEvent } from "../../store/events";
 

@@ -7,22 +7,13 @@ import f1 from "../../assets/event_images/f1_watch_party.jpeg"
 import lmp from "../../assets/event_images/lmp_party.jpeg"
 import mimosas from "../../assets/event_images/mimosas.jpeg"
 import paint from "../../assets/event_images/paint_sip.jpg"
-import { getDateAbbreviation, getDateLikedEvents } from "../../utils/dateUtils";
+import { getDateLikedEvents } from "../../utils/dateUtils";
 import { getCity } from "../../utils/addressUtils";
-import { useDispatch } from "react-redux";
-import { deleteEvent } from "../../store/events";
 import LikeButton from "../LikeButton";
 
 const IMAGES = [cats, mimosas, paint, f1, lmp, disrupt]
 
 export default function UserEventItem({ event, idx }) {
-  const dispatch = useDispatch();
-  const [month, date] = getDateAbbreviation(event.startTime);
-
-  const handleDelete = async (e) => {
-    e.preventDefault();
-    dispatch(deleteEvent(event.id));
-  }
 
   return (
     <NavLink to={`/events/${event.id}`}>
