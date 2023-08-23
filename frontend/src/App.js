@@ -24,7 +24,7 @@ function App() {
           <Navigation />
           <EventCreate />
         </Route>
-        <Route path='/events/edit:eventId'>
+        <Route path='/events/edit/:eventId'>
           <Navigation />
           <EventEdit />
         </Route>

@@ -1,6 +1,3 @@
-require 'open-uri';
-
-
 class Api::EventsController < ApplicationController
   before_action :require_logged_in, only: [:create, :update, :destroy]
 
@@ -37,7 +34,8 @@ class Api::EventsController < ApplicationController
   end
 
   def destroy
-    @event = Event.find_by(id: params[:id])
+    # Events can only be deleted by the host and they must be logged in.
+    @event = Event.find_by(id: params[:id]).where(host_id: current_user.id)
     @event.destroy
     render json: event
   end

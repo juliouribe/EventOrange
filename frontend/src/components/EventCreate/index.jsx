@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./EventCreate.css";
 import { createEvent } from "../../store/events";
@@ -7,6 +7,7 @@ import { Redirect } from "react-router-dom";
 export default function EventCreate() {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.currentUser)
+  const imageInputRef = useRef();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   // TODO: Add datetime pickers.
@@ -40,6 +41,11 @@ export default function EventCreate() {
   const handleImage = (e) => {
     setImage(e.currentTarget.files[0]);
   };
+
+  const handleClearAttachment = () => {
+    imageInputRef.current.value = null;
+    setImage("");
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -111,10 +117,10 @@ export default function EventCreate() {
             <input type="text" placeholder="Event Title" value={title} onChange={(e) => setTitle(e.target.value)} required />
             <textarea placeholder="Event Description" value={body} onChange={(e) => setBody(e.target.value)} required />
             <label hmtlfor="event-image">Event Image</label>
-            <input type="file" id="event-image" onChange={handleImage} />
+            <input type="file" id="event-image" ref={imageInputRef} onChange={handleImage} />
             {image &&
               <div className="image-preview">
-                <button onClick={() => setImage(null)}>Remove</button>
+                <button onClick={handleClearAttachment}>Remove</button>
                 <img src={URL.createObjectURL(image)} alt="preview" />
               </div>}
 

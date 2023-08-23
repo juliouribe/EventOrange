@@ -1,23 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./EventEdit.css";
-import { createEvent } from "../../store/events";
+import { createEvent, getEvent } from "../../store/events";
 import { Redirect, useParams } from "react-router-dom";
-import { fetchEvent } from "../../store/events";
+import { fetchEvent, editEvent } from "../../store/events";
 
 export default function EventEdit() {
   const dispatch = useDispatch();
-  const sessionUser = useSelector(state => state.session.currentUser)
   const { eventId } = useParams();
+  const event = useSelector(getEvent(eventId));
+  const sessionUser = useSelector(state => state.session.currentUser);
+  const imageInputRef = useRef();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   // TODO: Add datetime pickers.
   const [startDate, setStartDate] = useState("");
   const [startTime, setStartTime] = useState("");
-  const [startDateTime, setStartDateTime] = useState("");
+  const [startDateTime, setStartDateTime] = useState(event?.startTime);
   const [endDate, setEndDate] = useState("");
   const [endTime, setEndTime] = useState("");
-  const [endDateTime, setEndDateTime] = useState("");
+  const [endDateTime, setEndDateTime] = useState(event?.endDate);
   const [location, setLocation] = useState("");
   const [address, setAddress] = useState("");
   const [capacity, setCapacity] = useState("");
@@ -25,7 +27,7 @@ export default function EventEdit() {
   const [formErrors, setFormErrors] = useState([]);
 
   useEffect(() => {
-    dispatch(fetchEvent())
+    dispatch(fetchEvent(eventId))
   }, [dispatch, eventId])
 
   useEffect(() => {
@@ -47,6 +49,11 @@ export default function EventEdit() {
     setImage(e.currentTarget.files[0]);
   };
 
+  const handleClearAttachment = () => {
+    imageInputRef.current.value = null;
+    setImage("");
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formErrors.length) return;
@@ -62,7 +69,7 @@ export default function EventEdit() {
       eventData.append("event[photo]", image);
     }
     // Only clear the fields if the discard button is pressed.
-    dispatch(createEvent(eventData))
+    dispatch(editEvent(eventId, eventData))
       .catch(async (res) => {
         let data;
         try {
@@ -78,8 +85,7 @@ export default function EventEdit() {
           setFormErrors([res.statusText]);
         }
       });
-    // Clear the form fields.
-    handleReset();
+    dispatch(fetchEvent(eventId))
   };
 
   const handleReset = (e) => {
@@ -114,16 +120,20 @@ export default function EventEdit() {
           <div className="form-basic-info">
             <h1>Basic Info</h1>
             <p>Name your event and tell event-goes why they should come. Add details that highlight what makes it unique.</p>
-            <input type="text" placeholder="Event Title" value={title} onChange={(e) => setTitle(e.target.value)} required />
-            <textarea placeholder="Event Description" value={body} onChange={(e) => setBody(e.target.value)} required />
+            <input type="text" placeholder="Event Title" defaultValue={event?.title} onChange={(e) => setTitle(e.target.value)} required />
+            <textarea placeholder="Event Description" defaultValue={event?.body} onChange={(e) => setBody(e.target.value)} required />
             <label hmtlfor="event-image">Event Image</label>
-            <input type="file" id="event-image" onChange={handleImage} />
+            <p id="current-image">Current Image</p>
+            {event?.photoUrl &&
+              <div className="image-preview">
+                <img src={event?.photoUrl} />
+              </div>}
+            <input type="file" id="event-image" ref={imageInputRef} onChange={handleImage} />
             {image &&
               <div className="image-preview">
-                <button onClick={() => setImage(null)}>Remove</button>
+                <button onClick={handleClearAttachment}>Remove</button>
                 <img src={URL.createObjectURL(image)} alt="preview" />
               </div>}
-
             <label hmtlfor="host-options">Organizer</label>
             <select id="host-options" defaultValue={`${sessionUser?.firstName} ${sessionUser?.lastName}`}>
               <option value>{`${sessionUser?.firstName} ${sessionUser?.lastName}`}</option>
@@ -132,9 +142,9 @@ export default function EventEdit() {
           <div className="form-location">
             <h1>Location</h1>
             <p>Help people in the area discover your event and let attendees know where to show up.</p>
-            <input type="text" placeholder="Venue Location" value={location} onChange={(e) => setLocation(e.target.value)} required />
-            <input type="text" placeholder="Street Address" value={address} onChange={(e) => setAddress(e.target.value)} required />
-            <input type="text" placeholder="Capacity" value={capacity} onChange={(e) => setCapacity(e.target.value)} required />
+            <input type="text" placeholder="Venue Location" defaultValue={event?.location} onChange={(e) => setLocation(e.target.value)} required />
+            <input type="text" placeholder="Street Address" defaultValue={event?.address} onChange={(e) => setAddress(e.target.value)} required />
+            <input type="text" placeholder="Capacity" value={event?.capacity} onChange={(e) => setCapacity(e.target.value)} required />
           </div>
           <div className="form-date-time">
             <h1>Date and Time</h1>
@@ -142,13 +152,13 @@ export default function EventEdit() {
             <div className="date-time-inputs">
               <div className="event-start">
                 <label hmtlfor="start-date">Start Date</label>
-                <input type="date" id="start-date" value={startDate} onChange={(e) => {
+                <input type="date" id="start-date" defaultValue={event?.startTime?.split("T")[0]} onChange={(e) => {
                   setStartDate(e.target.value);
                   setFormErrors([]);
                   setFormErrors(validateDate());
                 }} required />
                 <label hmtlfor="start-time">Start Time</label>
-                <input type="time" id="start-time" value={startTime} onChange={(e) => {
+                <input type="time" id="start-time" defaultValue={event?.startTime?.split("T")[1].split(".")[0]} onChange={(e) => {
                   setStartTime(e.target.value);
                   setFormErrors([]);
                   setFormErrors(validateDate());
@@ -156,13 +166,13 @@ export default function EventEdit() {
               </div>
               <div className="event-end">
                 <label hmtlfor="end-date">End Date</label>
-                <input type="date" id="end-date" value={endDate} onChange={(e) => {
+                <input type="date" id="end-date" defaultValue={event?.endTime?.split("T")[0]} onChange={(e) => {
                   setEndDate(e.target.value);
                   setFormErrors([]);
                   setFormErrors(validateDate());
                 }} />
                 <label hmtlfor="end-time">End Time</label>
-                <input type="time" id="end-time" value={endTime} onChange={(e) => {
+                <input type="time" id="end-time" defaultValue={event?.endTime?.split("T")[1].split(".")[0]} onChange={(e) => {
                   setEndTime(e.target.value);
                   setFormErrors([]);
                   setFormErrors(validateDate());
@@ -174,8 +184,8 @@ export default function EventEdit() {
             </div>
           </div>
           <div className="form-submit">
-            <button className="reset-button" type="reset" onClick={handleReset}>Discard</button>
-            <button type="submit">Create Event</button>
+            <button className="reset-button" type="reset" onClick={handleReset}>Reset</button>
+            <button type="submit">Update Event</button>
           </div>
         </form >
       </div >
