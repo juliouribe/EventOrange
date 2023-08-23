@@ -6,7 +6,7 @@ import { Redirect } from "react-router-dom";
 
 export default function EventCreate() {
   const dispatch = useDispatch();
-  const sessionUser = useSelector(state => state.session.currentUser)
+  const currentUser = useSelector(state => state.session.currentUser)
   const imageInputRef = useRef();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
@@ -36,7 +36,7 @@ export default function EventCreate() {
   }, [endDate, endTime])
 
   // Redirect user to home page if they are not logged in.
-  if (!sessionUser) return <Redirect to='/' />;
+  if (!currentUser) return <Redirect to='/' />;
 
   const handleImage = (e) => {
     setImage(e.currentTarget.files[0]);
@@ -125,8 +125,8 @@ export default function EventCreate() {
               </div>}
 
             <label hmtlfor="host-options">Organizer</label>
-            <select id="host-options" defaultValue={`${sessionUser?.firstName} ${sessionUser?.lastName}`}>
-              <option value>{`${sessionUser?.firstName} ${sessionUser?.lastName}`}</option>
+            <select id="host-options" defaultValue={`${currentUser?.firstName} ${currentUser?.lastName}`}>
+              <option value>{`${currentUser?.firstName} ${currentUser?.lastName}`}</option>
             </select>
           </div>
           <div className="form-location">

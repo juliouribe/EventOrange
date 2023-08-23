@@ -11,12 +11,9 @@ export default function EventIndex() {
   const eventsObj = useSelector(getEvents());
   const events = useMemo(() => Object.values(eventsObj));
 
-
   useEffect(() => {
     dispatch(fetchEvents());
   }, []);
-
-
 
   return (
     <>

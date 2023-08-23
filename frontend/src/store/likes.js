@@ -49,11 +49,12 @@ export const createLike = (like) => async dispatch => {
   dispatch(receiveLike(newLike));
 }
 
-export const deleteLike = (likeId) => async dispatch => {
-  const res = await csrfFetch(`/api/likes/${likeId}`, {
+export const deleteLike = (eventId) => async dispatch => {
+  const res = await csrfFetch(`/api/likes/${eventId}`, {
     method: 'DELETE'
   })
-  dispatch(removeLike(likeId));
+  await res.json();
+  dispatch(removeLike(eventId));
 }
 
 // Reducer

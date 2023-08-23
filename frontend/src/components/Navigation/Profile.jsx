@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as sessionActions from '../../store/session';
 import { NavLink } from "react-router-dom/cjs/react-router-dom";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function ProfileDropdown({ email, ticketCount, likesCount }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,6 +11,7 @@ export default function ProfileDropdown({ email, ticketCount, likesCount }) {
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
+    <Redirect to="/" />
   };
 
   return (

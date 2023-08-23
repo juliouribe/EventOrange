@@ -2,6 +2,7 @@ import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchHostedEvents, getEvents } from "../../store/events";
 import UserEventItem from "../UserEventItem";
+import { Redirect } from "react-router-dom";
 
 import "./UserHostedEvents.css";
 
@@ -14,9 +15,13 @@ export default function UserHostedEvents() {
     return new Date(a.startTime) - new Date(b.startTime);
   });
 
+
   useEffect(() => {
     dispatch(fetchHostedEvents());
   }, []);
+
+  // Redirect user to home page if they are not logged in.
+  if (!currentUser) return <Redirect to='/' />;
 
   return (
     <>
@@ -32,7 +37,7 @@ export default function UserHostedEvents() {
         </div>
         <div className="hosted-events">
           {events.map((event, idx) => {
-            return <UserEventItem key={event.id} event={event} idx={idx} owner={true}/>
+            return <UserEventItem key={event.id} event={event} idx={idx} owner={true} />
           })}
         </div>
       </div>

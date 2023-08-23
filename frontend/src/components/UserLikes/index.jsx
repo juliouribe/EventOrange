@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import UserLikeItem from "../UserLikeItem";
 import { fetchLikedEvents, getEvents } from "../../store/events";
 import "./UserLikes.css";
+import { Redirect } from "react-router-dom";
 
 
 export default function UserLikes() {
@@ -17,6 +18,9 @@ export default function UserLikes() {
   useEffect(() => {
     dispatch(fetchLikedEvents());
   }, []);
+
+  // Redirect user to home page if they are not logged in.
+  if (!currentUser) return <Redirect to='/' />;
 
   return (
     <>

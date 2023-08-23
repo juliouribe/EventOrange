@@ -7,10 +7,11 @@ import f1 from "../../assets/event_images/f1_watch_party.jpeg"
 import lmp from "../../assets/event_images/lmp_party.jpeg"
 import mimosas from "../../assets/event_images/mimosas.jpeg"
 import paint from "../../assets/event_images/paint_sip.jpg"
-import { formatDateTime, getDateAbbreviation, getDateLikedEvents } from "../../utils/dateUtils";
+import { getDateAbbreviation, getDateLikedEvents } from "../../utils/dateUtils";
 import { getCity } from "../../utils/addressUtils";
 import { useDispatch } from "react-redux";
 import { deleteEvent } from "../../store/events";
+import LikeButton from "../LikeButton";
 
 const IMAGES = [cats, mimosas, paint, f1, lmp, disrupt]
 
@@ -37,9 +38,7 @@ export default function UserEventItem({ event, idx }) {
           <img className="" src={IMAGES[idx % 6]} />
           <div className="share-like">
             <i className="fa-sharp fa-solid fa-arrow-up-from-bracket share-icon"></i>
-            <div className="like-icon-container">
-              <i className="fa-solid fa-heart like-icon"></i>
-            </div>
+            <LikeButton eventId={event.id} defaultLike={true} />
           </div>
         </div>
       </div>
