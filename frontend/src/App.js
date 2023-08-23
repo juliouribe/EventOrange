@@ -8,6 +8,8 @@ import SplashPage from './components/SplashPage';
 import EventCreate from './components/EventCreate';
 import EventEdit from './components/EventEdit';
 import UserHostedEvents from './components/UserHostedEvents';
+import UserLikes from './components/UserLikes';
+import UserTickets from './components/UserTickets';
 
 function App() {
 
@@ -35,6 +37,14 @@ function App() {
         <Route path='/user/hosted-events'>
           <Navigation />
           <UserHostedEvents />
+        </Route>
+        <Route path='/user/purchased-events'>
+          <Navigation />
+          <UserTickets />
+        </Route>
+        <Route path='/user/liked-events'>
+          <Navigation />
+          <UserLikes />
         </Route>
         <Route exact path='/'>
           <Navigation />

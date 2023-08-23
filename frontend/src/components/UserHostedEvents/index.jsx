@@ -1,7 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom/cjs/react-router-dom";
-import { fetchEvents, getEvents } from "../../store/events";
+import { fetchHostedEvents, getEvents } from "../../store/events";
 import UserEventItem from "../UserEventItem";
 
 import "./UserHostedEvents.css";
@@ -10,16 +9,13 @@ export default function UserHostedEvents() {
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.currentUser);
   const eventsObj = useSelector(getEvents());
-  const events = useMemo(() => (
-    Object.values(eventsObj).filter(event => event.hostId === currentUser.id)
-  ));
+  const events = useMemo(() => Object.values(eventsObj));
   events.sort((a, b) => {
     return new Date(a.startTime) - new Date(b.startTime);
   });
 
-
   useEffect(() => {
-    dispatch(fetchEvents());
+    dispatch(fetchHostedEvents());
   }, []);
 
   return (
@@ -36,7 +32,7 @@ export default function UserHostedEvents() {
         </div>
         <div className="hosted-events">
           {events.map((event, idx) => {
-            return <UserEventItem key={event.id} event={event} idx={idx} />
+            return <UserEventItem key={event.id} event={event} idx={idx} owner={true}/>
           })}
         </div>
       </div>

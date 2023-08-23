@@ -28,8 +28,8 @@ export default function ProfileDropdown({ email, ticketCount, likesCount }) {
           <li className="dropdown-underline">Browse Events</li>
           <li>View Profile</li>
           <li><NavLink to="/user/hosted-events">Hosted Events</NavLink></li>
-          <li>Tickets ({ticketCount})</li>
-          <li className="dropdown-underline">Likes ({likesCount})</li>
+          <li><NavLink to="/user/purchased-events">Tickets ({ticketCount})</NavLink></li>
+          <li className="dropdown-underline"><NavLink to="/user/liked-events">Likes ({likesCount})</NavLink></li>
           <li onClick={logout}>Log Out</li>
         </div>
       )}
