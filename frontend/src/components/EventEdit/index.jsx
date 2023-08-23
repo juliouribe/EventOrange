@@ -35,6 +35,20 @@ export default function EventEdit() {
   }, [startDate, startTime])
 
   useEffect(() => {
+    setTitle(event?.title);
+    setBody(event?.body);
+    setLocation(event?.location);
+    setAddress(event?.address);
+    setCapacity(event?.capacity);
+    setStartDate(event?.startTime?.split("T")[0]);
+    setStartTime(event?.startTime?.split("T")[1].split(".")[0]);
+    setStartDateTime(event?.startTime);
+    setEndDate(event?.endTime?.split("T")[0]);
+    setEndTime(event?.endTime?.split("T")[1].split(".")[0]);
+    setEndDateTime(event?.endTime);
+  }, [event])
+
+  useEffect(() => {
     if (endDate && endTime) {
       setEndDateTime(`${endDate}T${endTime}`);
     } else {
@@ -85,7 +99,9 @@ export default function EventEdit() {
           setFormErrors([res.statusText]);
         }
       });
-    dispatch(fetchEvent(eventId))
+    if (!formErrors.length) {
+      <Redirect to={'/user/hosted-events'} />
+    }
   };
 
   const handleReset = (e) => {
@@ -144,7 +160,7 @@ export default function EventEdit() {
             <p>Help people in the area discover your event and let attendees know where to show up.</p>
             <input type="text" placeholder="Venue Location" defaultValue={event?.location} onChange={(e) => setLocation(e.target.value)} required />
             <input type="text" placeholder="Street Address" defaultValue={event?.address} onChange={(e) => setAddress(e.target.value)} required />
-            <input type="text" placeholder="Capacity" value={event?.capacity} onChange={(e) => setCapacity(e.target.value)} required />
+            <input type="text" placeholder="Capacity" defaultValue={event?.capacity} onChange={(e) => setCapacity(e.target.value)} required />
           </div>
           <div className="form-date-time">
             <h1>Date and Time</h1>
