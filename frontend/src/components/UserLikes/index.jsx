@@ -1,7 +1,8 @@
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import UserEventItem from "../UserEventItem";
+import UserLikeItem from "../UserLikeItem";
 import { fetchLikedEvents, getEvents } from "../../store/events";
+import "./UserLikes.css";
 
 
 export default function UserLikes() {
@@ -19,19 +20,13 @@ export default function UserLikes() {
 
   return (
     <>
-      <div className="host-container">
-        <div className="host-info">
-          <div className="host-avatar-container">
-            <i className="fa-regular fa-user profile-avatar" />
-          </div>
-          <h1>{`${currentUser.firstName} ${currentUser.lastName}`}</h1>
+      <div className="like-container">
+        <div className="like-header">
+          <h1>Likes</h1>
         </div>
-        <div className="host-header">
-          <h2>Orders</h2>
-        </div>
-        <div className="hosted-events">
+        <div className="liked-events">
           {events.map((event, idx) => {
-            return <UserEventItem key={event.id} event={event} idx={idx} owner={false} />
+            return <UserLikeItem key={event.id} event={event} idx={idx} />
           })}
         </div>
       </div>

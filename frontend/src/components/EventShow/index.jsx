@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./EventShow.css"
-import { formatDateTimeDateOnly, formatDateTimeHoursOnly } from "../../utils/dateutils";
+import { formatDateTimeDateOnly, formatDateTimeHoursOnly } from "../../utils/dateUtils";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEvent, getEvent } from "../../store/events";
 import { useParams } from "react-router-dom";
