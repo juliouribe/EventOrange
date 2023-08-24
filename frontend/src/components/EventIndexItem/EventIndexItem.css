@@ -2,14 +2,16 @@
   /* 3:4 width:height */
   /* min-width: 188px; */
   /* max-width: 360px; */
-  min-width: 200px;
+  /* min-width: 240px;
   width: 24vw;
-  max-width: 350px;
+  max-width: 360px; */
+  width: 300px;
+  height: 400px;
 
-  min-height: 250px;
+  /* min-height: 320px;
   height: 32vw;
-  max-height: 360px;
-  flex-basis: 25%;
+  max-height: 480px; */
+  /* flex-basis: 25%; */
   background: #fff;
   border: 1px solid #ddd;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -22,13 +24,15 @@
 
 .index-item .event-banner {
   /* 2:1 width:height */
-  min-width: 200px;
+  /* min-width: 240px;
   width: 24vw;
-  max-width: 350px;
+  max-width: 360px; */
+  width: 300px;
+  height: 150px;
 
-  min-height: 100px;
+  /* min-height: 100px;
   height: 12vw;
-  max-height: 175px;
+  max-height: 175px; */
   object-fit: cover;
 }
 
@@ -71,6 +75,6 @@ h3 {
 
 .item-like-button {
   position: absolute;
-  top: 10vw;
-  left: 19vw;
+  top: 125px;
+  left: 240px;
 }

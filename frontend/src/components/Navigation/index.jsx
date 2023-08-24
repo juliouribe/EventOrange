@@ -1,11 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import "./Navigation.css";
 import logo from "../../assets/eventOrange.svg";
 import Profile from "./Profile";
-import { fetchTickets, getTickets } from "../../store/tickets";
-import { fetchLikes, getLikes } from "../../store/likes";
 
 export default function Navigation() {
   const currentUser = useSelector(state => state.session.currentUser);

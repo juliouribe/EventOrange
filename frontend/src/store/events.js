@@ -100,7 +100,10 @@ const eventReducer = (state = {}, action) => {
         [action.event.id]: action.event
       }
     case UPDATE_EVENT:
-      return { ...state, ...action.event }
+      return {
+        ...state,
+        [action.event.id]: action.event
+      }
     case REMOVE_EVENT:
       const newState = { ...state }
       delete newState[action.eventId]

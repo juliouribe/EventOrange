@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./EventShow.css"
-import { formatDateTimeDateOnly, formatDateTimeHoursOnly } from "../../utils/dateUtils";
+import { formatDateTimeDateOnly, formatDateTimeHoursOnly } from "../../utils/dateutils";
 import { useDispatch, useSelector } from "react-redux";
 import { getEvent, fetchEvent } from "../../store/events";
 import { useParams, NavLink } from "react-router-dom";
@@ -11,6 +11,8 @@ import f1 from "../../assets/event_images/f1_watch_party.jpeg"
 import lmp from "../../assets/event_images/lmp_party.jpeg"
 import mimosas from "../../assets/event_images/mimosas.jpeg"
 import paint from "../../assets/event_images/paint_sip.jpg"
+import LikeButton from "../LikeButton";
+import { getLikes } from "../../store/likes";
 
 const IMAGES = [cats, mimosas, paint, f1, lmp, disrupt]
 
@@ -21,13 +23,17 @@ export default function EventShow() {
   const [showCheckout, setShowCheckout] = useState(false);
   const ticketsObj = useSelector(state => state.entities.tickets);
   const tickets = Object.values(ticketsObj);
-  
+  const likes = Object.values(useSelector(getLikes()));
+
   // If a ticket populates with this eventId, then the user has already
   // purchased a ticket for this event. We won't render the checkout option but
   // instead the manage tickets button.
   const ticket = useMemo(() => {
     return tickets.find(ticket => ticket.eventId === event?.id)
   }, [tickets, event?.id])
+  const like = useMemo(() => {
+    return likes.find(like => like.eventId === event?.id)
+  }, [likes, event?.id])
 
   useEffect(() => {
     dispatch(fetchEvent(eventId));
@@ -36,7 +42,7 @@ export default function EventShow() {
   return (
     <>
       <div className="event-image">
-        <img src={IMAGES[eventId - 1 % 6]} className="show-image" />
+        <img src={IMAGES[(eventId - 1) % 6]} className="show-image" />
       </div>
       <div className="event-text-container">
         <div className="event-text">
@@ -60,6 +66,9 @@ export default function EventShow() {
             </div>
           </div>
           <div className="event-right">
+            <div className="heart-box">
+              <LikeButton eventId={eventId} defaultLike={!!like?.id} />
+            </div>
             <div className="right-box">
               {ticket?.eventId ?
                 <>
@@ -71,7 +80,7 @@ export default function EventShow() {
                   <h3 className="details">$0</h3>
                   <button className="tickets" onClick={() => setShowCheckout(true)}>Tickets</button>
                   {showCheckout && (
-                    <CheckoutForm event={event} closeModal={() => setShowCheckout(false)} image={IMAGES[eventId - 1 % 6]} />
+                    <CheckoutForm event={event} closeModal={() => setShowCheckout(false)} image={IMAGES[(eventId - 1) % 6]} />
                   )}
                 </>
               }

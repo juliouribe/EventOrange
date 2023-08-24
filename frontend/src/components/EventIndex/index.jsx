@@ -12,6 +12,9 @@ export default function EventIndex() {
   const eventsObj = useSelector(getEvents());
   const likes = Object.values(useSelector(getLikes()));
   const events = Object.values(eventsObj);
+  events.sort((a, b) => {
+    return new Date(a.startTime) - new Date(b.startTime);
+  });
 
   useEffect(() => {
     dispatch(fetchEvents());
@@ -19,6 +22,9 @@ export default function EventIndex() {
 
   return (
     <>
+      <div className="event-index-title">
+        <h1>Events in San Francisco</h1>
+      </div>
       <div className="event-index-container">
         {events.map((event, idx) => {
           const like = likes.find(like => like.eventId === event.id)

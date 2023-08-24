@@ -11,10 +11,8 @@ export default function LikeButton({ eventId, defaultLike = false, likeId = null
     e.preventDefault();
     if (liked) {
       dispatch(deleteLike(eventId, likeId));
-      console.log("Deleting like")
     } else {
       dispatch(createLike({ eventId: eventId }));
-      console.log("Creating like")
     }
     setLiked(!liked);
   }

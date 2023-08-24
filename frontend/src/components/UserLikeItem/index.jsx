@@ -7,7 +7,7 @@ import f1 from "../../assets/event_images/f1_watch_party.jpeg"
 import lmp from "../../assets/event_images/lmp_party.jpeg"
 import mimosas from "../../assets/event_images/mimosas.jpeg"
 import paint from "../../assets/event_images/paint_sip.jpg"
-import { getDateLikedEvents } from "../../utils/dateUtils";
+import { getDateLikedEvents } from "../../utils/dateutils";
 import { getCity } from "../../utils/addressUtils";
 import LikeButton from "../LikeButton";
 
