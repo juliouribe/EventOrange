@@ -71,7 +71,7 @@ export default function EventShow() {
                   <h3 className="details">$0</h3>
                   <button className="tickets" onClick={() => setShowCheckout(true)}>Tickets</button>
                   {showCheckout && (
-                    <CheckoutForm event={event} closeModal={() => setShowCheckout(false)} image={IMAGES[eventId - 1 % 6]} />
+                    <CheckoutForm event={event} closeModal={() => setShowCheckout(false)} image={IMAGES[(eventId - 1) % 6]} />
                   )}
                 </>
               }
