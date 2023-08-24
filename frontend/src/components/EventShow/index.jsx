@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./EventShow.css"
-import { formatDateTimeDateOnly, formatDateTimeHoursOnly } from "../../utils/dateUtils";
+import { formatDateTimeDateOnly, formatDateTimeHoursOnly } from "../../utils/dateutils";
 import { useDispatch, useSelector } from "react-redux";
 import { getEvent, fetchEvent } from "../../store/events";
 import { useParams, NavLink } from "react-router-dom";
@@ -21,7 +21,7 @@ export default function EventShow() {
   const [showCheckout, setShowCheckout] = useState(false);
   const ticketsObj = useSelector(state => state.entities.tickets);
   const tickets = Object.values(ticketsObj);
-  
+
   // If a ticket populates with this eventId, then the user has already
   // purchased a ticket for this event. We won't render the checkout option but
   // instead the manage tickets button.

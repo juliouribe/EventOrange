@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { formatDateTime, getMonthDayYear } from "../../utils/dateUtils";
+import { formatDateTime, getMonthDayYear } from "../../utils/dateutils";
 import "./CheckoutForm.css";
 import { useDispatch, useSelector } from "react-redux";
 import { createTicket } from "../../store/tickets";

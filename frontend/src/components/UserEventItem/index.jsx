@@ -7,7 +7,7 @@ import f1 from "../../assets/event_images/f1_watch_party.jpeg"
 import lmp from "../../assets/event_images/lmp_party.jpeg"
 import mimosas from "../../assets/event_images/mimosas.jpeg"
 import paint from "../../assets/event_images/paint_sip.jpg"
-import { formatDateTime, getDateAbbreviation } from "../../utils/dateUtils";
+import { formatDateTime, getDateAbbreviation } from "../../utils/dateutils";
 import { useDispatch } from "react-redux";
 import { deleteEvent } from "../../store/events";
 import { deleteTicket } from "../../store/tickets";
