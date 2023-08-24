@@ -10,6 +10,9 @@ export default function UserTickets() {
   const currentUser = useSelector(state => state.session.currentUser);
   const eventsObj = useSelector(getEvents());
   const events = Object.values(eventsObj);
+  const ticketsObj = useSelector(state => state.entities.tickets);
+  const tickets = Object.values(ticketsObj);
+
   events.sort((a, b) => {
     return new Date(a.startTime) - new Date(b.startTime);
   });
@@ -34,7 +37,8 @@ export default function UserTickets() {
         </div>
         <div className="hosted-events">
           {events.map((event, idx) => {
-            return <UserEventItem key={event.id} event={event} idx={idx} owner={false} />
+            const ticket = tickets.find(ticket => ticket.eventId === event.id)
+            return <UserEventItem key={event.id} event={event} idx={idx} owner={false} ticket={ticket} />
           })}
         </div>
       </div>

@@ -1,5 +1,6 @@
 class Api::TicketsController < ApplicationController
   before_action :require_logged_in, only: [:create, :destroy]
+  wrap_parameters include: Ticket.attribute_names
 
   def index
     # Index route is to show all tickets for a current user.
@@ -37,6 +38,6 @@ class Api::TicketsController < ApplicationController
 
   private
   def ticket_params
-    params.require(:ticket).permit(:price, :event_id)
+    params.require(:ticket).permit(:price, :event_id, :quantity)
   end
 end

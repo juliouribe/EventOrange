@@ -12,7 +12,7 @@ import LikeButton from "../LikeButton";
 
 const IMAGES = [cats, mimosas, paint, f1, lmp, disrupt]
 
-export default function EventIndexItem({ event, idx, eventLiked = false, likeId = null }) {
+export default function EventIndexItem({ event, idx, eventLiked = false, likeId = null, eventOwned = false }) {
 
   return (
     <NavLink to={`/events/${event.id}`}>

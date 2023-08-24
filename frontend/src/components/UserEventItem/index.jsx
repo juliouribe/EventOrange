@@ -10,16 +10,22 @@ import paint from "../../assets/event_images/paint_sip.jpg"
 import { formatDateTime, getDateAbbreviation } from "../../utils/dateUtils";
 import { useDispatch } from "react-redux";
 import { deleteEvent } from "../../store/events";
+import { deleteTicket } from "../../store/tickets";
 
 const IMAGES = [cats, mimosas, paint, f1, lmp, disrupt]
 
-export default function UserEventItem({ event, idx, owner }) {
+export default function UserEventItem({ event, idx, owner, ticket = {} }) {
   const dispatch = useDispatch();
   const [month, date] = getDateAbbreviation(event.startTime);
 
   const handleDelete = async (e) => {
     e.preventDefault();
     dispatch(deleteEvent(event.id));
+  }
+
+  const removeTickets = async (e) => {
+    e.preventDefault();
+    dispatch(deleteTicket(ticket.id));
   }
 
   return (
@@ -38,14 +44,19 @@ export default function UserEventItem({ event, idx, owner }) {
               {owner ? 'Event created on' : 'Order placed on'} {formatDateTime(event.createdAt)}
             </h4>
           </div>
-          {owner &&
+          {owner ?
             <div className="edit-delete">
               <NavLink to={`/events/edit/${event.id}`}><button >Edit</button></NavLink>
               <button id="delete" onClick={handleDelete}>Delete</button>
             </div>
+            :
+            <div className="edit-delete">
+              <button>{ticket?.quantity} Ticket(s)</button>
+              <button id="delete" onClick={removeTickets}>Remove</button>
+            </div>
           }
         </div>
       </div>
-    </NavLink>
+    </NavLink >
   )
 }
