@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./EventShow.css"
 import { formatDateTimeDateOnly, formatDateTimeHoursOnly } from "../../utils/dateUtils";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEvent, getEvent } from "../../store/events";
 import { useParams } from "react-router-dom";
+import CheckoutForm from "../CheckoutForm";
 import cats from "../../assets/event_images/cat_leash.jpeg"
 import disrupt from "../../assets/event_images/disrupt.jpg"
 import f1 from "../../assets/event_images/f1_watch_party.jpeg"
@@ -18,6 +19,7 @@ export default function EventShow() {
   const dispatch = useDispatch();
   const { eventId } = useParams();
   const event = useSelector(getEvent(eventId));
+  const [showCheckout, setShowCheckout] = useState(false);
 
   useEffect(() => {
     dispatch(fetchEvent(eventId))
@@ -52,7 +54,10 @@ export default function EventShow() {
           <div className="event-right">
             <div className="right-box">
               <h3 className="details">$0</h3>
-              <button className="tickets">Tickets</button>
+              <button className="tickets" onClick={() => setShowCheckout(true)}>Tickets</button>
+              {showCheckout && (
+                <CheckoutForm closeModal={() => setShowCheckout(false)} />
+              )}
             </div>
           </div>
         </div>
