@@ -22,6 +22,9 @@ export default function EventIndex() {
 
   return (
     <>
+      <div className="event-index-title">
+        <h1>Events in San Francisco</h1>
+      </div>
       <div className="event-index-container">
         {events.map((event, idx) => {
           const like = likes.find(like => like.eventId === event.id)

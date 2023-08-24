@@ -3,6 +3,14 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 20px;
-  gap: 30px;
+  align-items: center;
+  padding: 0px 40px;
+  gap: 40px;
+}
+
+.event-index-title h1 {
+  font-size: 30px;
+  font-weight: 700;
+  color: #2c2929;
+  padding: 40px;
 }
