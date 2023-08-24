@@ -6,7 +6,9 @@ import { createLike, deleteLike } from "../../store/likes";
 export default function LikeButton({ eventId, defaultLike = false, likeId = null }) {
   const dispatch = useDispatch();
   const [liked, setLiked] = useState(defaultLike);
-
+  console.log("inside likebutton");
+  console.log(defaultLike)
+  console.log(liked)
   const toggleLike = (e) => {
     e.preventDefault();
     if (liked) {
