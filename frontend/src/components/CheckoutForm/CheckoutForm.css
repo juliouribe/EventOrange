@@ -15,6 +15,10 @@
   transform: translate(-50%, -50%);
   background-color: white;
   padding: 2rem;
-  border-radius: 0.5rem;
+
   z-index: 11;
+  width: 72%;
+  max-width: 1080px;
+  height: 86%;
+  max-height: 720px;
 }

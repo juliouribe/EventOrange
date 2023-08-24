@@ -8,9 +8,12 @@
 #  event_id   :bigint           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  quantity   :integer          default(1), not null
 #
 class Ticket < ApplicationRecord
-  validates :price, presence: true
+  validates :price, :quanity, presence: true
+  validates :quantity, numericality: { greater_than: 0 }
+  validates_uniqueness_of :user_id, scope: :event_id
 
   before_validation :ensure_price
 
