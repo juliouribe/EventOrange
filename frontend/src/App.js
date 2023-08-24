@@ -10,6 +10,7 @@ import EventEdit from './components/EventEdit';
 import UserHostedEvents from './components/UserHostedEvents';
 import UserLikes from './components/UserLikes';
 import UserTickets from './components/UserTickets';
+import Footer from './components/Footer';
 
 function App() {
 
@@ -55,6 +56,7 @@ function App() {
           <Redirect to='/' />
         </Route>
       </Switch>
+      <Footer />
     </>
   );
 }
