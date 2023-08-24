@@ -161,8 +161,8 @@ lmp_party = Event.create!(
   location: "The Independent",
   address: "628 Divisadero St, San Francisco, CA 94117",
   capacity: 400,
-  start_time: "2023-09-25T18:00:00",
-  end_time: "2023-09-25T23:00:00",
+  start_time: "2023-09-15T18:00:00",
+  end_time: "2023-09-15T23:00:00",
 )
 lmp_party_image = URI.parse("https://event-orange-seeds.s3.us-west-1.amazonaws.com/lmp_party.webp").open
 lmp_party.photo.attach(
@@ -194,7 +194,7 @@ ocean_beach = Event.create!(
   location: "Ocean Beach",
   address: "1000 Great Hwy, San Francisco, CA 94121",
   capacity: 100,
-  start_time: "2023-09-21T09:00:00",
+  start_time: "2023-10-05T09:00:00",
 )
 ocean_beach_image = URI.parse("https://www.signupgenius.com/cms/socialMediaImages/beach-clean-up-tips-ideas-facebook-1200x630.png").open
 ocean_beach.photo.attach(
@@ -223,7 +223,7 @@ book_club = Event.create!(
   location: "Green Apple Books",
   address: "506 Clement St, San Francisco, CA 94118",
   capacity: 30,
-  start_time: "2023-09-21T19:00:00",
+  start_time: "2023-09-11T19:00:00",
 )
 book_club_image = URI.parse("https://cdn1.bookmanager.com/i/9911545/cover__800____300_px_.png").open
 book_club.photo.attach(
@@ -238,7 +238,7 @@ baker_beach = Event.create!(
   location: "Presidio Visitor Center",
   address: "210 Lincoln Blvd, San Francisco, CA 94129",
   capacity: 50,
-  start_time: "2023-09-21T10:00:00",
+  start_time: "2023-09-25T10:00:00",
 )
 baker_beach_image = URI.parse("https://www.sftourismtips.com/images/baker-beach-san-francisco-with-golden-gate-bridge.jpg").open
 baker_beach.photo.attach(
@@ -253,7 +253,7 @@ ceramics = Event.create!(
   location: "The Castro Theater",
   address: "429 Castro St, San Francisco, CA 94114",
   capacity: 20,
-  start_time: "2023-09-21T18:00:00",
+  start_time: "2023-09-27T18:00:00",
 )
 ceramics_image = URI.parse("https://media.vanityfair.com/photos/55a3cb87fff2c16856a6a255/16:9/w_1280,c_limit/ghost-patrick-swayze-pottery-scene.jpg").open
 ceramics.photo.attach(
@@ -268,7 +268,7 @@ alamo_square_movie = Event.create!(
   location: "Alamo Square",
   address: "Steiner St &, Hayes St, San Francisco, CA 94117",
   capacity: 100,
-  start_time: "2023-09-21T19:00:00",
+  start_time: "2023-09-29T19:00:00",
 )
 alamo_square_movie_image = URI.parse("https://cdn.funcheap.com/wp-content/uploads/2019/07/7.26.18_Sundown-Cinema-70-ZJD-180726-1.jpg").open
 alamo_square_movie.photo.attach(
@@ -283,7 +283,7 @@ alamo_square_movie.photo.attach(
   location: "The Castro Theater",
   address: "429 Castro St, San Francisco, CA 94114",
   capacity: 500,
-  start_time: "2023-09-21T19:00:00",
+  start_time: "2023-10-21T19:00:00",
 )
 space_odyssey_image = URI.parse("https://savethecat.com/wp-content/uploads/2018/10/1.jpg").open
 2001_space_odyssey.photo.attach(
@@ -298,8 +298,8 @@ blade_runner = Event.create!(
   location: "The Castro Theater",
   address: "429 Castro St, San Francisco, CA 94114",
   capacity: 500,
-  start_time: "2023-09-21T19:00:00",
-  end_time: "2023-09-21T22:00:00",
+  start_time: "2023-11-01T19:00:00",
+  end_time: "2023-11-01T22:00:00",
 )
 
 blade_runner_image = URI.parse("https://helios-i.mashable.com/imagery/articles/03fu62l03INV4Ec7oc5GJGm/hero-image.fill.size_1248x702.v1623366102.jpg").open
@@ -316,7 +316,7 @@ mulholland_drive = Event.create!(
   address: "429 Castro St, San Francisco, CA 94114",
   capacity: 500,
   start_time: "2023-09-21T19:00:00",
-  end_time: "2023-09-21T22:00:00",
+  end_time: "2023-12-21T22:00:00",
 )
 
 mulholland_drive_image = URI.parse("https://www.siff.net/images/CINEMA/2023/Dreams%20%26%20Nightmares%20-%20David%20Lynch/CIN_MulhollandDrive_1600x900-a_57516.jpeg").open
@@ -348,7 +348,7 @@ arctic_monkeys = Event.create!(
   location: "The Independent",
   address: "628 Divisadero St, San Francisco, CA 94117",
   capacity: 400,
-  start_time: "2023-09-21T19:00:00",
+  start_time: "2023-10-21T19:00:00",
 )
 
 arctic_monkeys_image = URI.parse("https://substreammagazine.com/wp-content/uploads/2022/08/Arctic-Monkeys-2022-1280x640.jpg").open
@@ -364,7 +364,7 @@ mac_demarco = Event.create!(
   location: "The Independent",
   address: "628 Divisadero St, San Francisco, CA 94117",
   capacity: 400,
-  start_time: "2023-09-21T19:00:00",
+  start_time: "2023-10-05T19:00:00",
 )
 
 mac_demarco_image = URI.parse("https://media.npr.org/assets/img/2017/04/24/max-demarco_wide-7519c5c528c74b4f294e62c2f8df51aa12b14c1e-s1100-c50.jpg").open
@@ -372,6 +372,50 @@ mac_demarco.photo.attach(
   io: mac_demarco_image,
   filename: "mac_demarco.jpg"
 )
+
+father_john = Event.create!(
+  title: "Father John Misty at the Independent",
+  body: "Joshua Michael Tillman, better known by his stage name Father John Misty, is an American singer-songwriter, musician, and record producer. He has also performed and released studio albums under the name J. Tillman. Maintaining a steady output of solo recordings since 2004, Tillman is a former member of indie rock bands Saxon Shore, Fleet Foxes, Jeffertitti's Nile, Pearly Gate Music, Siberian, Har Mar Superstar, Poor Moon, Low Hums, Jonathan Wilson, Bill Patton, The Lashes, Stately English, and has toured extensively with Pacific Northwest artists Damien Jurado, Jesse Sykes, and David Bazan.",
+  host_id: independent.id,
+  location: "The Independent",
+  address: "628 Divisadero St, San Francisco, CA 94117",
+  capacity: 400,
+  start_time: "2023-11-25T19:00:00",
+)
+
+father_john_image = URI.parse("https://s1.ticketm.net/dam/a/ecb/f64bba6e-5b1b-4bbd-b847-97e85cef1ecb_1655821_TABLET_LANDSCAPE_LARGE_16_9.jpg").open
+father_john.photo.attach(
+  io: father_john_image,
+  filename: "father_john.jpg"
+)
+
+orville_peck = Event.create!(
+  title: "Orville Peck at the Independent",
+  body: "Orville Peck is a Canadian country musician and singer-songwriter from Toronto, Ontario, who wears a fringed Lone Ranger mask. Peck's music has been described as a 'unique blend of country, punk, and goth'.",
+  host_id: independent.id,
+  location: "The Independent",
+  address: "628 Divisadero St, San Francisco, CA 94117",
+  capacity: 400,
+  start_time: "2023-12-11T19:00:00",
+)
+
+barbie = Event.create!(
+  title: "Barbie Singalong at the Castro Theater",
+  body: "Barbie is a fashion doll manufactured by the American toy company Mattel, Inc. and launched in March 1959. American businesswoman Ruth Handler is credited with the creation of the doll using a German doll called Bild Lilli as her inspiration.",
+  host_id: castro.id,
+  location: "The Castro Theater",
+  address: "429 Castro St, San Francisco, CA 94114",
+  capacity: 500,
+  start_time: "2023-09-21T19:00:00",
+  end_time: "2023-09-21T22:00:00",
+)
+barbie_image = URI.parse("https://static01.nyt.com/images/2023/07/20/multimedia/18barbie-review-ftwc/18barbie-review-ftwc-superJumbo.jpg").open
+barbie.photo.attach(
+  io: barbie_image,
+  filename: "barbie.jpg"
+)
+
+
 
 puts "Finished creating Events"
 

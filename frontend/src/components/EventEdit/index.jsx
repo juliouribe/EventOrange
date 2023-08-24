@@ -135,7 +135,6 @@ export default function EventEdit() {
     return errors;
   }
 
-
   // TODO: Link back to hosted events page
   return (
     <div>
