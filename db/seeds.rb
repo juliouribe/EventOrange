@@ -10,14 +10,14 @@ require "open-uri"
 
 # Destroy Tables
 User.destroy_all
-# Event.destroy_all
+Event.destroy_all
 Ticket.destroy_all
 Like.destroy_all
 puts "Table instances destroyed"
 
 # Reset pk sequence
 ActiveRecord::Base.connection.reset_pk_sequence!("users")
-# ActiveRecord::Base.connection.reset_pk_sequence!("events")
+ActiveRecord::Base.connection.reset_pk_sequence!("events")
 ActiveRecord::Base.connection.reset_pk_sequence!("tickets")
 ActiveRecord::Base.connection.reset_pk_sequence!("likes")
 
@@ -276,7 +276,7 @@ alamo_square_movie.photo.attach(
   filename: "alamo_square_movie.jpg"
 )
 
-2001_space_odyssey = Event.create!(
+space_odyssey = Event.create!(
   title: "2001: A Space Odyssey at the Castro Theater",
   body: "After uncovering a mysterious artifact buried beneath the Lunar surface, a spacecraft is sent to Jupiter to find its origins: a spacecraft manned by two men and the supercomputer HAL 9000. Stanley Kubrick's masterpiece traces an expedition to the moon, Jupiter and beyond, and imagines the future evolution of humanity.",
   host_id: castro.id,
@@ -286,7 +286,7 @@ alamo_square_movie.photo.attach(
   start_time: "2023-10-21T19:00:00",
 )
 space_odyssey_image = URI.parse("https://savethecat.com/wp-content/uploads/2018/10/1.jpg").open
-2001_space_odyssey.photo.attach(
+space_odyssey.photo.attach(
   io: space_odyssey_image,
   filename: "2001_space_odyssey.jpg"
 )
@@ -373,22 +373,6 @@ mac_demarco.photo.attach(
   filename: "mac_demarco.jpg"
 )
 
-father_john = Event.create!(
-  title: "Father John Misty at the Independent",
-  body: "Joshua Michael Tillman, better known by his stage name Father John Misty, is an American singer-songwriter, musician, and record producer. He has also performed and released studio albums under the name J. Tillman. Maintaining a steady output of solo recordings since 2004, Tillman is a former member of indie rock bands Saxon Shore, Fleet Foxes, Jeffertitti's Nile, Pearly Gate Music, Siberian, Har Mar Superstar, Poor Moon, Low Hums, Jonathan Wilson, Bill Patton, The Lashes, Stately English, and has toured extensively with Pacific Northwest artists Damien Jurado, Jesse Sykes, and David Bazan.",
-  host_id: independent.id,
-  location: "The Independent",
-  address: "628 Divisadero St, San Francisco, CA 94117",
-  capacity: 400,
-  start_time: "2023-11-25T19:00:00",
-)
-
-father_john_image = URI.parse("https://s1.ticketm.net/dam/a/ecb/f64bba6e-5b1b-4bbd-b847-97e85cef1ecb_1655821_TABLET_LANDSCAPE_LARGE_16_9.jpg").open
-father_john.photo.attach(
-  io: father_john_image,
-  filename: "father_john.jpg"
-)
-
 orville_peck = Event.create!(
   title: "Orville Peck at the Independent",
   body: "Orville Peck is a Canadian country musician and singer-songwriter from Toronto, Ontario, who wears a fringed Lone Ranger mask. Peck's music has been described as a 'unique blend of country, punk, and goth'.",
@@ -415,8 +399,6 @@ barbie.photo.attach(
   filename: "barbie.jpg"
 )
 
-
-
 puts "Finished creating Events"
 
 puts "Creating tickets and likes"
@@ -432,7 +414,7 @@ Like.create!(user_id: ike.id, event_id: 1)
 # Julio tickets and likes
 Ticket.create!(user_id: julio.id, event_id: 1, price: 0, quantity: 2)
 Ticket.create!(user_id: julio.id, event_id: 2, price: 0, quantity: 2)
-Ticket.create!(user_id: julio.id, event_id: 3, price: 20, quantity: 2
+Ticket.create!(user_id: julio.id, event_id: 3, price: 20, quantity: 2)
 Like.create!(user_id: julio.id, event_id: 4)
 Like.create!(user_id: julio.id, event_id: 5)
 
