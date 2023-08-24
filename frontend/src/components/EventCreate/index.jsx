@@ -2,10 +2,11 @@ import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./EventCreate.css";
 import { createEvent } from "../../store/events";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 
 export default function EventCreate() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const currentUser = useSelector(state => state.session.currentUser)
   const imageInputRef = useRef();
   const [title, setTitle] = useState("");
@@ -80,6 +81,9 @@ export default function EventCreate() {
       });
     // Clear the form fields.
     handleReset();
+    if (formErrors.length === 0) {
+      history.push('/user/hosted-events');
+    }
   };
 
   const handleReset = (e) => {

@@ -12,6 +12,9 @@ export default function EventIndex() {
   const eventsObj = useSelector(getEvents());
   const likes = Object.values(useSelector(getLikes()));
   const events = Object.values(eventsObj);
+  events.sort((a, b) => {
+    return new Date(a.startTime) - new Date(b.startTime);
+  });
 
   useEffect(() => {
     dispatch(fetchEvents());

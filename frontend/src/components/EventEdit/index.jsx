@@ -2,11 +2,12 @@ import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./EventEdit.css";
 import { getEvent } from "../../store/events";
-import { Redirect, useParams } from "react-router-dom";
+import { Redirect, useHistory, useParams } from "react-router-dom";
 import { fetchEvent, editEvent } from "../../store/events";
 
 export default function EventEdit() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { eventId } = useParams();
   const event = useSelector(getEvent(eventId));
   const currentUser = useSelector(state => state.session.currentUser);
@@ -102,8 +103,13 @@ export default function EventEdit() {
           setFormErrors([res.statusText]);
         }
       });
-    dispatch(fetchEvent(eventId))
-    if (!formErrors.length) return <Redirect to={'/user/hosted-events'} />
+    dispatch(fetchEvent(eventId));
+    if (formErrors.length === 0) {
+      console.log("hey this is form errors")
+      console.log(formErrors.length);
+      // <Redirect to={'/user/hosted-events'} />
+      history.push('/user/hosted-events');
+    }
   };
 
   const handleReset = (e) => {
