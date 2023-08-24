@@ -1,0 +1,77 @@
+.like-event-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  box-sizing: border-box;
+  width: 70vw;
+  max-width: 900px;
+  height: 190px;
+  border: 1px solid white;
+  margin-bottom: 10px;
+}
+
+.liked-events a {
+  width: 30vw;
+}
+
+.like-event-item:hover {
+  cursor: pointer;
+  border: 1px solid #ddd;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.like-event-item img {
+  width: 220px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 1px;
+}
+
+.like-event-left {
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  height: 190px;
+}
+
+.like-event-text h3 {
+  font-size: 20px;
+  font-weight: 500;
+  color: #2c2929;
+  margin-bottom: 20px;
+}
+
+.like-event-text h4 {
+  font-size: 14px;
+
+}
+
+.like-event-date {
+  color: #d1410c;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-weight: 500;
+}
+
+.like-event-location {
+  color: #6f7287;
+}
+
+.like-event-right {
+  display: flex;
+  flex-direction: column;
+  width: 220px;
+  height: 190px;
+}
+
+.share-like {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-top: 8px;
+}
+
+.share-icon {
+  font-size: 20px;
+  padding: 8px;
+}

@@ -40,6 +40,24 @@ export const fetchEvents = () => async dispatch => {
   dispatch(receiveEvents(events));
 }
 
+export const fetchPurchasedEvents = () => async dispatch => {
+  const res = await csrfFetch(`/api/purchased_events`)
+  const events = await res.json();
+  dispatch(receiveEvents(events));
+}
+
+export const fetchLikedEvents = () => async dispatch => {
+  const res = await csrfFetch(`/api/liked_events`)
+  const events = await res.json();
+  dispatch(receiveEvents(events));
+}
+
+export const fetchHostedEvents = () => async dispatch => {
+  const res = await csrfFetch(`/api/hosted_events`)
+  const events = await res.json();
+  dispatch(receiveEvents(events));
+}
+
 export const fetchEvent = (eventId) => async dispatch => {
   const res = await csrfFetch(`/api/events/${eventId}`)
   const event = await res.json();
@@ -65,7 +83,7 @@ export const editEvent = (eventId, eventData) => async dispatch => {
 }
 
 export const deleteEvent = (eventId) => async dispatch => {
-  const res = await csrfFetch(`/api/events/${eventId}`, {
+  await csrfFetch(`/api/events/${eventId}`, {
     method: 'DELETE'
   })
   dispatch(removeEvent(eventId));
@@ -77,7 +95,10 @@ const eventReducer = (state = {}, action) => {
     case RECEIVE_EVENTS:
       return { ...action.events }
     case RECEIVE_EVENT:
-      return { ...action.event }
+      return {
+        ...state,
+        [action.event.id]: action.event
+      }
     case UPDATE_EVENT:
       return { ...state, ...action.event }
     case REMOVE_EVENT:

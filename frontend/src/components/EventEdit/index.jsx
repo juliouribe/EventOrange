@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./EventEdit.css";
-import { createEvent, getEvent } from "../../store/events";
+import { getEvent } from "../../store/events";
 import { Redirect, useParams } from "react-router-dom";
 import { fetchEvent, editEvent } from "../../store/events";
 
@@ -9,7 +9,7 @@ export default function EventEdit() {
   const dispatch = useDispatch();
   const { eventId } = useParams();
   const event = useSelector(getEvent(eventId));
-  const sessionUser = useSelector(state => state.session.currentUser);
+  const currentUser = useSelector(state => state.session.currentUser);
   const imageInputRef = useRef();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
@@ -43,7 +43,7 @@ export default function EventEdit() {
   }, [endDate, endTime])
 
   // Redirect user to home page if they are not logged in.
-  if (!sessionUser) return <Redirect to='/' />;
+  if (!currentUser) return <Redirect to='/' />;
 
   const handleImage = (e) => {
     setImage(e.currentTarget.files[0]);
@@ -135,8 +135,8 @@ export default function EventEdit() {
                 <img src={URL.createObjectURL(image)} alt="preview" />
               </div>}
             <label hmtlfor="host-options">Organizer</label>
-            <select id="host-options" defaultValue={`${sessionUser?.firstName} ${sessionUser?.lastName}`}>
-              <option value>{`${sessionUser?.firstName} ${sessionUser?.lastName}`}</option>
+            <select id="host-options" defaultValue={`${currentUser?.firstName} ${currentUser?.lastName}`}>
+              <option value>{`${currentUser?.firstName} ${currentUser?.lastName}`}</option>
             </select>
           </div>
           <div className="form-location">

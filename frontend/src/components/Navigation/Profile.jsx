@@ -1,11 +1,20 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from '../../store/session';
 import { NavLink } from "react-router-dom/cjs/react-router-dom";
+import { getTickets, fetchTickets } from "../../store/tickets";
+import { getLikes, fetchLikes } from "../../store/likes";
 
-export default function ProfileDropdown({ email, ticketCount, likesCount }) {
-  const [isOpen, setIsOpen] = useState(false);
+export default function ProfileDropdown({ email }) {
   const dispatch = useDispatch();
+  const [isOpen, setIsOpen] = useState(false);
+  const tickets = useSelector(getTickets());
+  const likes = useSelector(getLikes());
+
+  useEffect(() => {
+    dispatch(fetchTickets());
+    dispatch(fetchLikes());
+  }, [dispatch]);
 
   const logout = (e) => {
     e.preventDefault();
@@ -28,8 +37,8 @@ export default function ProfileDropdown({ email, ticketCount, likesCount }) {
           <li className="dropdown-underline">Browse Events</li>
           <li>View Profile</li>
           <li><NavLink to="/user/hosted-events">Hosted Events</NavLink></li>
-          <li>Tickets ({ticketCount})</li>
-          <li className="dropdown-underline">Likes ({likesCount})</li>
+          <li><NavLink to="/user/purchased-events">Tickets ({Object.values(tickets).length})</NavLink></li>
+          <li className="dropdown-underline"><NavLink to="/user/liked-events">Likes ({Object.values(likes).length})</NavLink></li>
           <li onClick={logout}>Log Out</li>
         </div>
       )}

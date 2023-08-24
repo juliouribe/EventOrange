@@ -48,3 +48,24 @@ export function getDateAbbreviation(isoDateTime) {
 
   return [month, day];
 }
+
+export function getDateLikedEvents(isoDateTime) {
+  const date = new Date(isoDateTime);
+
+  const months = [
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"
+  ];
+
+  const dayOfWeek = date.toLocaleString('en-US', { weekday: 'long' });
+  const month = months[date.getUTCMonth()];
+  const day = date.getUTCDate();
+  let hours = date.getUTCHours();
+  const amPm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12 || 12;
+  let minutes = date.getUTCMinutes();
+  // Pad minutes if needed
+  minutes = minutes < 10 ? '0' + minutes : minutes;
+
+  return `${dayOfWeek}, ${month} ${day}, ${hours}:${minutes} ${amPm}`;
+}

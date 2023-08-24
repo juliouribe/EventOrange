@@ -1,4 +1,5 @@
 class Api::LikesController < ApplicationController
+  wrap_parameters include: Like.attribute_names
   before_action :require_logged_in, only: [:create, :destroy]
 
   def index
@@ -9,12 +10,13 @@ class Api::LikesController < ApplicationController
   end
 
   def show
-    @like = Like.find(params[:id])
+    @like = Like.find(user_id: current_user.id, event_id: params[:id])
     render :show
   end
 
   def create
-    @like = Like.new(like_params)
+    @like = Like.new
+    @like.event_id = params[:event_id]
     @like.user_id = current_user.id
     if @like.save
       render :show
@@ -24,7 +26,7 @@ class Api::LikesController < ApplicationController
   end
 
   def destroy
-    @like = current_user.likes.find_by(id: params[:id])
+    @like = current_user.likes.find_by(event_id: params[:id])
     if @like
       @like.destroy
       # Return an empty object with just headers.

@@ -7,13 +7,13 @@ import f1 from "../../assets/event_images/f1_watch_party.jpeg"
 import lmp from "../../assets/event_images/lmp_party.jpeg"
 import mimosas from "../../assets/event_images/mimosas.jpeg"
 import paint from "../../assets/event_images/paint_sip.jpg"
-import { formatDateTime, getDateAbbreviation } from "../../utils/dateutils";
+import { formatDateTime, getDateAbbreviation } from "../../utils/dateUtils";
 import { useDispatch } from "react-redux";
 import { deleteEvent } from "../../store/events";
 
 const IMAGES = [cats, mimosas, paint, f1, lmp, disrupt]
 
-export default function UserEventItem({ event, idx }) {
+export default function UserEventItem({ event, idx, owner }) {
   const dispatch = useDispatch();
   const [month, date] = getDateAbbreviation(event.startTime);
 
@@ -34,12 +34,16 @@ export default function UserEventItem({ event, idx }) {
           <div className="profile-event-text">
             <h3 className="profile-event-title">{event.title}</h3>
             <h4 className="profile-event-date">{formatDateTime(event.startTime)}</h4>
-            <h4 className="profile-event-date">Event created on {formatDateTime(event.createdAt)}</h4>
+            <h4 className="profile-event-date">
+              {owner ? 'Event created on' : 'Order placed on'} {formatDateTime(event.createdAt)}
+            </h4>
           </div>
-          <div className="edit-delete">
-            <NavLink to={`/events/edit/${event.id}`}><button >Edit</button></NavLink>
-            <button id="delete" onClick={handleDelete}>Delete</button>
-          </div>
+          {owner &&
+            <div className="edit-delete">
+              <NavLink to={`/events/edit/${event.id}`}><button >Edit</button></NavLink>
+              <button id="delete" onClick={handleDelete}>Delete</button>
+            </div>
+          }
         </div>
       </div>
     </NavLink>

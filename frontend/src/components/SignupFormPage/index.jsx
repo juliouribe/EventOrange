@@ -9,7 +9,7 @@ import { NavLink } from 'react-router-dom';
 
 export default function SignupFormPage() {
   const dispatch = useDispatch();
-  const sessionUser = useSelector(state => state.session.currentUser)
+  const currentUser = useSelector(state => state.session.currentUser)
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [surname, setSurname] = useState('');
@@ -17,7 +17,7 @@ export default function SignupFormPage() {
   const [formErrors, setFormErrors] = useState([]);
 
 
-  if (sessionUser) return <Redirect to='/' />;
+  if (currentUser) return <Redirect to='/' />;
 
   const handleSubmit = (e) => {
     e.preventDefault();

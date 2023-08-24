@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import "./Navigation.css";
@@ -8,28 +8,12 @@ import { fetchTickets, getTickets } from "../../store/tickets";
 import { fetchLikes, getLikes } from "../../store/likes";
 
 export default function Navigation() {
-  const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.currentUser);
-  const ticketsObj = useSelector(getTickets());
-  const likesObj = useSelector(getLikes());
-  const tickets = useMemo(() => Object.values(ticketsObj));
-  const likes = useMemo(() => Object.values(likesObj));
-
-  useEffect(() => {
-    if (currentUser) {
-      dispatch(fetchTickets());
-      dispatch(fetchLikes());
-    }
-  }, [currentUser]);
 
   let sessionLinks;
   if (currentUser) {
     sessionLinks = (
-      <Profile
-        email={currentUser.email}
-        ticketCount={tickets.length}
-        likesCount={likes.length}
-      />
+      <Profile email={currentUser.email} />
     )
   } else {
     sessionLinks = <>
@@ -56,17 +40,21 @@ export default function Navigation() {
               <li>Create an event</li>
             </div>
           </NavLink>
-          <div className="nav-item">
-            <i className="fa-regular fa-heart icon"></i>
-            <li>Likes</li>
-          </div>
-          <div className="nav-item">
-            <i className="fa-solid fa-ticket icon"></i>
-            <li>Tickets</li>
-          </div>
+          <NavLink to="/user/liked-events">
+            <div className="nav-item">
+              <i className="fa-regular fa-heart icon"></i>
+              <li>Likes</li>
+            </div>
+          </NavLink>
+          <NavLink to="/user/purchased-events">
+            <div className="nav-item">
+              <i className="fa-solid fa-ticket icon"></i>
+              <li>Tickets</li>
+            </div>
+          </NavLink>
           {sessionLinks}
         </ul>
-      </div>
+      </div >
     </>
   )
 }

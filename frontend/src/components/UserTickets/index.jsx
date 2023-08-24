@@ -1,12 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchHostedEvents, getEvents } from "../../store/events";
+import { fetchPurchasedEvents, getEvents } from "../../store/events";
 import UserEventItem from "../UserEventItem";
-import { Redirect } from "react-router-dom";
+import "./UserTickets.css";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
-import "./UserHostedEvents.css";
-
-export default function UserHostedEvents() {
+export default function UserTickets() {
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.currentUser);
   const eventsObj = useSelector(getEvents());
@@ -15,12 +14,10 @@ export default function UserHostedEvents() {
     return new Date(a.startTime) - new Date(b.startTime);
   });
 
-
   useEffect(() => {
-    dispatch(fetchHostedEvents());
+    dispatch(fetchPurchasedEvents());
   }, [dispatch]);
 
-  // Redirect user to home page if they are not logged in.
   if (!currentUser) return <Redirect to='/' />;
 
   return (
@@ -30,14 +27,14 @@ export default function UserHostedEvents() {
           <div className="host-avatar-container">
             <i className="fa-regular fa-user profile-avatar" />
           </div>
-          <h1>{`${currentUser.firstName} ${currentUser.lastName}`}</h1>
+          <h1>{`${currentUser?.firstName} ${currentUser?.lastName}`}</h1>
         </div>
         <div className="host-header">
-          <h2>Hosted Events</h2>
+          <h2>Orders</h2>
         </div>
         <div className="hosted-events">
           {events.map((event, idx) => {
-            return <UserEventItem key={event.id} event={event} idx={idx} owner={true} />
+            return <UserEventItem key={event.id} event={event} idx={idx} owner={false} />
           })}
         </div>
       </div>
