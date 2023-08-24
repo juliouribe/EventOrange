@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { formatDateTime, getMonthDayYear } from "../../utils/dateUtils";
 import "./CheckoutForm.css";
+import { useDispatch, useSelector } from "react-redux";
+import { createTicket } from "../../store/tickets";
 
 export default function CheckoutForm({ event, closeModal, image }) {
+  const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
+  const currentUser = useSelector(state => state.session.currentUser);
   const handleBackgroundClick = (e) => {
     e.stopPropagation();
     closeModal();
@@ -22,6 +26,15 @@ export default function CheckoutForm({ event, closeModal, image }) {
     } else {
       setQuantity(1);
     }
+  }
+
+  const buyTickets = (e) => {
+    e.stopPropagation();
+    const ticketData = {
+      event_id: event.id,
+      quantity: quantity,
+    }
+    dispatch(createTicket(ticketData));
   }
 
   return (
@@ -59,12 +72,12 @@ export default function CheckoutForm({ event, closeModal, image }) {
             </div>
           </div>
           <div className="checkout-details-end">
-            <p>Powered by EventOrange</p>
+            <p>Powered by <strong>EventOrange</strong></p>
             <p>English (US)</p>
           </div>
           <div className="checkout-footer">
             <h3 id="ticket-ad">🔥 Few tickets left</h3>
-            <button>Check out</button>
+            <button onClick={buyTickets}>Check out</button>
           </div>
         </div>
         <div className="checkout-right">

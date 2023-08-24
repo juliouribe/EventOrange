@@ -11,7 +11,7 @@
 #  quantity   :integer          default(1), not null
 #
 class Ticket < ApplicationRecord
-  validates :price, :quanity, presence: true
+  validates :price, :quantity, presence: true
   validates :quantity, numericality: { greater_than: 0 }
   validates_uniqueness_of :user_id, scope: :event_id
 

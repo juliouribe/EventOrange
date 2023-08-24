@@ -4,6 +4,7 @@ import "./EventIndex.css";
 import { fetchEvents, getEvents } from "../../store/events";
 import EventIndexItem from "../EventIndexItem";
 import { getLikes } from "../../store/likes";
+import { getTickets } from "../../store/tickets";
 
 
 export default function EventIndex() {

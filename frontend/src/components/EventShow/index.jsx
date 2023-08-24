@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "./EventShow.css"
 import { formatDateTimeDateOnly, formatDateTimeHoursOnly } from "../../utils/dateUtils";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchEvent, getEvent } from "../../store/events";
-import { useParams } from "react-router-dom";
+import { getEvent, fetchEvent } from "../../store/events";
+import { useParams, NavLink } from "react-router-dom";
 import CheckoutForm from "../CheckoutForm";
 import cats from "../../assets/event_images/cat_leash.jpeg"
 import disrupt from "../../assets/event_images/disrupt.jpg"
@@ -14,21 +14,29 @@ import paint from "../../assets/event_images/paint_sip.jpg"
 
 const IMAGES = [cats, mimosas, paint, f1, lmp, disrupt]
 
-
 export default function EventShow() {
   const dispatch = useDispatch();
   const { eventId } = useParams();
   const event = useSelector(getEvent(eventId));
-  const [showCheckout, setShowCheckout] = useState(true);
+  const [showCheckout, setShowCheckout] = useState(false);
+  const ticketsObj = useSelector(state => state.entities.tickets);
+  const tickets = Object.values(ticketsObj);
+  
+  // If a ticket populates with this eventId, then the user has already
+  // purchased a ticket for this event. We won't render the checkout option but
+  // instead the manage tickets button.
+  const ticket = useMemo(() => {
+    return tickets.find(ticket => ticket.eventId === event?.id)
+  }, [tickets, event?.id])
 
   useEffect(() => {
-    dispatch(fetchEvent(eventId))
+    dispatch(fetchEvent(eventId));
   }, [dispatch, eventId])
 
   return (
     <>
       <div className="event-image">
-        <img src={IMAGES[eventId % 6 - 1]} className="show-image" />
+        <img src={IMAGES[eventId - 1 % 6]} className="show-image" />
       </div>
       <div className="event-text-container">
         <div className="event-text">
@@ -53,15 +61,24 @@ export default function EventShow() {
           </div>
           <div className="event-right">
             <div className="right-box">
-              <h3 className="details">$0</h3>
-              <button className="tickets" onClick={() => setShowCheckout(true)}>Tickets</button>
-              {showCheckout && (
-                <CheckoutForm event={event} closeModal={() => setShowCheckout(false)} image={IMAGES[eventId % 6 - 1]}/>
-              )}
+              {ticket?.eventId ?
+                <>
+                  <h4>Tickets Owned</h4>
+                  <NavLink to="/user/purchased-events"><button>Manage Tickets</button></NavLink>
+                </>
+                :
+                <>
+                  <h3 className="details">$0</h3>
+                  <button className="tickets" onClick={() => setShowCheckout(true)}>Tickets</button>
+                  {showCheckout && (
+                    <CheckoutForm event={event} closeModal={() => setShowCheckout(false)} image={IMAGES[eventId - 1 % 6]} />
+                  )}
+                </>
+              }
             </div>
           </div>
         </div>
-      </div>
+      </div >
     </>
   )
 }
