@@ -8,7 +8,7 @@ import { getLikes, fetchLikes } from "../../store/likes";
 export default function ProfileDropdown({ email }) {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
-  // const tickets = useSelector(getTickets());
+  const tickets = useSelector(getTickets());
   const likes = useSelector(getLikes());
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export default function ProfileDropdown({ email }) {
           <li className="dropdown-underline">Browse Events</li>
           <li>View Profile</li>
           <li><NavLink to="/user/hosted-events">Hosted Events</NavLink></li>
-          {/* <li><NavLink to="/user/purchased-events">Tickets ({Object.values(tickets).length})</NavLink></li> */}
+          <li><NavLink to="/user/purchased-events">Tickets ({Object.values(tickets).length})</NavLink></li>
           <li className="dropdown-underline"><NavLink to="/user/liked-events">Likes ({Object.values(likes).length})</NavLink></li>
           <li onClick={logout}>Log Out</li>
         </div>
