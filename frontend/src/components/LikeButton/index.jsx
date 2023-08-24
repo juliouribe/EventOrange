@@ -1,14 +1,22 @@
 import React, { useState } from "react";
 import "./LikeButton.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createLike, deleteLike } from "../../store/likes";
+import { useHistory } from "react-router-dom";
+
 
 export default function LikeButton({ eventId, defaultLike = false, likeId = null }) {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const currentUser = useSelector(state => state.session.currentUser);
   const [liked, setLiked] = useState(defaultLike);
 
   const toggleLike = (e) => {
     e.preventDefault();
+    if (!currentUser) {
+      history.push("/login");
+      return;
+    }
     if (liked) {
       dispatch(deleteLike(eventId, likeId));
     } else {
