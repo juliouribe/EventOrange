@@ -19,7 +19,7 @@ export default function EventShow() {
   const dispatch = useDispatch();
   const { eventId } = useParams();
   const event = useSelector(getEvent(eventId));
-  const [showCheckout, setShowCheckout] = useState(false);
+  const [showCheckout, setShowCheckout] = useState(true);
 
   useEffect(() => {
     dispatch(fetchEvent(eventId))
@@ -56,7 +56,7 @@ export default function EventShow() {
               <h3 className="details">$0</h3>
               <button className="tickets" onClick={() => setShowCheckout(true)}>Tickets</button>
               {showCheckout && (
-                <CheckoutForm closeModal={() => setShowCheckout(false)} />
+                <CheckoutForm event={event} closeModal={() => setShowCheckout(false)} image={IMAGES[eventId % 6 - 1]}/>
               )}
             </div>
           </div>

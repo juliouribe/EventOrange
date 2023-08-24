@@ -69,3 +69,18 @@ export function getDateLikedEvents(isoDateTime) {
 
   return `${dayOfWeek}, ${month} ${day}, ${hours}:${minutes} ${amPm}`;
 }
+
+export function getMonthDayYear(isoDateTime) {
+  const date = new Date(isoDateTime);
+
+  const months = [
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"
+  ];
+
+  const month = months[date.getUTCMonth()];
+  const day = date.getUTCDate();
+  const year = date.getUTCFullYear();
+
+  return `${month} ${day}, ${year}`;
+}

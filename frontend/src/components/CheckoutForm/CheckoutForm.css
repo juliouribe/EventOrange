@@ -14,11 +14,175 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
-  padding: 2rem;
 
   z-index: 11;
-  width: 72%;
+  width: 72vw;
   max-width: 1080px;
-  height: 86%;
+  height: 86vh;
   max-height: 720px;
+
+  display: flex;
+}
+
+.checkout-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 48vw;
+  max-width: 720px;
+  height: 86vh;
+  max-height: 720px;
+}
+
+.checkout-right {
+  width: 24vw;
+  max-width: 360px;
+  height: 86vh;
+  max-height: 720px;
+}
+
+.checkout-right img {
+  width: 24vw;
+  max-width: 360px;
+  height: 12vw;
+  max-height: 720px;
+  object-fit: cover;
+}
+
+.checkout-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+  border-bottom: 1px solid #e6e6e6;
+  height: 9vh;
+}
+
+.checkout-title h2 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin-bottom: 15px;
+}
+
+.checkout-title h3 {
+  font-size: 1.0rem;
+  font-weight: 300;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin-bottom: 10px;
+}
+
+.checkout-info {
+  display: flex;
+  flex-direction: column;
+  width: 40vw;
+  max-width: 720px;
+  margin: 0px 3vw;
+  padding: 0px 1vw;
+  padding-top: 30px;
+}
+
+.checkout-info>label {
+  font-size: 14px;
+  font-weight: 300;
+  color: #6f7287;
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
+
+.checkout-info>input {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+}
+
+.checkout-tickets {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  margin: 16px 0px 0px;
+  padding: 16px 0px;
+  padding-bottom: 0px;
+}
+
+.checkout-ga {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  padding-top: 0px;
+  border-bottom: 1px solid lightgray;
+}
+
+.checkout-ga h3,
+.checkout-ga-details h3 {
+  font-size: 1.0rem;
+  font-weight: 500;
+  margin-bottom: 0px;
+}
+
+.checkout-quantity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkout-quantity button {
+  margin: 0px 5px;
+  padding: 1px 6px;
+  width: 32px;
+  height: 32px;
+}
+
+.checkout-quantity p {
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.checkout-ga-details {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-bottom: 1px solid lightgray;
+}
+
+.checkout-ga-details h4 {
+  padding: 10px 0px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6f7287;
+}
+
+.checkout-ga-details p {
+  padding: 10px 0px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #6f7287;
+}
+
+.checkout-footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-left: 30px;
+}
+
+.checkout-details-end {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 32px;
+  border-bottom: 1px solid lightgray;
+}
+
+.checkout-footer button {
+  margin: 20px;
+}
+
+#ticket-ad {
+  padding: 7px 12px;
+  background-color: #FEEDEA;
+  border-color: white;
+  border-radius: 5px;
 }
