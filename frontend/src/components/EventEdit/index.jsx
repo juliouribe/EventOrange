@@ -14,13 +14,10 @@ export default function EventEdit() {
   const imageInputRef = useRef();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  // TODO: Add datetime pickers.
   const [startDate, setStartDate] = useState("");
   const [startTime, setStartTime] = useState("");
-  const [startDateTime, setStartDateTime] = useState(event?.startTime);
   const [endDate, setEndDate] = useState("");
   const [endTime, setEndTime] = useState("");
-  const [endDateTime, setEndDateTime] = useState(event?.endDate);
   const [location, setLocation] = useState("");
   const [address, setAddress] = useState("");
   const [capacity, setCapacity] = useState("");
@@ -34,16 +31,9 @@ export default function EventEdit() {
 
   // Set datetime values from event data
   useEffect(() => {
-    setStartDateTime(`${startDate}T${startTime}`);
-  }, [startDate, startTime])
-  // Wait for both endtime values to be set before combining.
-  useEffect(() => {
-    if (endDate && endTime) {
-      setEndDateTime(`${endDate}T${endTime}`);
-    } else {
-      setEndDateTime("");
-    }
-  }, [endDate, endTime])
+    setFormErrors([]);
+    setFormErrors(validateDate());
+  }, [startDate, startTime, endDate, endTime])
 
   // Populate useState variables with event date fetched from backend.
   useEffect(() => {
@@ -54,10 +44,8 @@ export default function EventEdit() {
     setCapacity(event?.capacity);
     setStartDate(event?.startTime?.split("T")[0]);
     setStartTime(event?.startTime?.split("T")[1].split(".")[0]);
-    setStartDateTime(event?.startTime);
     setEndDate(event?.endTime?.split("T")[0]);
     setEndTime(event?.endTime?.split("T")[1].split(".")[0]);
-    setEndDateTime(event?.endTime);
   }, [event])
 
   // Redirect user to home page if they are not logged in.
@@ -75,6 +63,11 @@ export default function EventEdit() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formErrors.length) return;
+    const startDateTime = `${startDate}T${startTime}`;
+    let endDateTime = "";
+    if (endDate && endTime) {
+      endDateTime = `${endDate}T${endTime}`;
+    }
     const eventData = new FormData();
     eventData.append("event[title]", title);
     eventData.append("event[body]", body);
@@ -103,11 +96,7 @@ export default function EventEdit() {
           setFormErrors([res.statusText]);
         }
       });
-    dispatch(fetchEvent(eventId));
     if (formErrors.length === 0) {
-      console.log("hey this is form errors")
-      console.log(formErrors.length);
-      // <Redirect to={'/user/hosted-events'} />
       history.push('/user/hosted-events');
     }
   };
@@ -175,31 +164,15 @@ export default function EventEdit() {
             <div className="date-time-inputs">
               <div className="event-start">
                 <label hmtlfor="start-date">Start Date</label>
-                <input type="date" id="start-date" defaultValue={event?.startTime?.split("T")[0]} onChange={(e) => {
-                  setStartDate(e.target.value);
-                  setFormErrors([]);
-                  setFormErrors(validateDate());
-                }} required />
+                <input type="date" id="start-date" defaultValue={event?.startTime?.split("T")[0]} onChange={(e) => setStartDate(e.target.value)} required />
                 <label hmtlfor="start-time">Start Time</label>
-                <input type="time" id="start-time" defaultValue={event?.startTime?.split("T")[1].split(".")[0]} onChange={(e) => {
-                  setStartTime(e.target.value);
-                  setFormErrors([]);
-                  setFormErrors(validateDate());
-                }} required />
+                <input type="time" id="start-time" defaultValue={event?.startTime?.split("T")[1].split(".")[0]} onChange={(e) => setStartTime(e.target.value)} required />
               </div>
               <div className="event-end">
                 <label hmtlfor="end-date">End Date</label>
-                <input type="date" id="end-date" defaultValue={event?.endTime?.split("T")[0]} onChange={(e) => {
-                  setEndDate(e.target.value);
-                  setFormErrors([]);
-                  setFormErrors(validateDate());
-                }} />
+                <input type="date" id="end-date" defaultValue={event?.endTime?.split("T")[0]} onChange={(e) => setEndDate(e.target.value)} />
                 <label hmtlfor="end-time">End Time</label>
-                <input type="time" id="end-time" defaultValue={event?.endTime?.split("T")[1].split(".")[0]} onChange={(e) => {
-                  setEndTime(e.target.value);
-                  setFormErrors([]);
-                  setFormErrors(validateDate());
-                }} />
+                <input type="time" id="end-time" defaultValue={event?.endTime?.split("T")[1].split(".")[0]} onChange={(e) => setEndTime(e.target.value)} />
               </div>
             </div>
             <div className="error-container">
