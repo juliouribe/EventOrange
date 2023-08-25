@@ -5,7 +5,7 @@ class Api::LikesController < ApplicationController
   def index
     # Index route is used to show all likes for a current user.
     # There is no route for getting and showing all likes for all users and events.
-    @likes = Like.where(user_id: current_user.id)
+    current_user ? @likes = current_user.likes : @likes = []
     render :index
   end
 

@@ -18,8 +18,10 @@ export default function EventIndex() {
 
   useEffect(() => {
     dispatch(fetchEvents());
-    if (currentUser) dispatch(fetchLikes());
-  }, [dispatch, currentUser]);
+    if (currentUser) {
+      dispatch(fetchLikes());
+    };
+  }, [dispatch]);
 
   return (
     <>
