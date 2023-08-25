@@ -4,23 +4,28 @@ import * as sessionActions from '../../store/session';
 import { NavLink, useHistory } from "react-router-dom/cjs/react-router-dom";
 import { getTickets, fetchTickets } from "../../store/tickets";
 import { getLikes, fetchLikes } from "../../store/likes";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function ProfileDropdown({ email }) {
   const dispatch = useDispatch();
+  const currentUser = useSelector(state => state.session.currentUser);
   const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
   const tickets = useSelector(getTickets());
   const likes = useSelector(getLikes());
 
   useEffect(() => {
-    dispatch(fetchTickets());
-    dispatch(fetchLikes());
+    if (currentUser) {
+      dispatch(fetchTickets());
+      dispatch(fetchLikes());
+    }
   }, [dispatch]);
 
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
     history.push("/");
+    // <Redirect to="/" />
   };
 
   return (

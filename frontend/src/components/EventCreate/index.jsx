@@ -37,7 +37,7 @@ export default function EventCreate() {
   }, [endDate, endTime])
 
   // Redirect user to home page if they are not logged in.
-  if (!currentUser) return <Redirect to='/' />;
+  if (!currentUser) return <Redirect to='/login' />;
 
   const handleImage = (e) => {
     setImage(e.currentTarget.files[0]);

@@ -1,19 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "./UserLikeItem.css"
-import cats from "../../assets/event_images/cat_leash.jpeg"
-import disrupt from "../../assets/event_images/disrupt.jpg"
-import f1 from "../../assets/event_images/f1_watch_party.jpeg"
-import lmp from "../../assets/event_images/lmp_party.jpeg"
-import mimosas from "../../assets/event_images/mimosas.jpeg"
-import paint from "../../assets/event_images/paint_sip.jpg"
 import { getDateLikedEvents } from "../../utils/dateutils";
 import { getCity } from "../../utils/addressUtils";
 import LikeButton from "../LikeButton";
 
-const IMAGES = [cats, mimosas, paint, f1, lmp, disrupt]
-
-export default function UserEventItem({ event, idx, likeId }) {
+export default function UserEventItem({ event, likeId }) {
 
   return (
     <NavLink to={`/events/${event.id}`}>
@@ -26,7 +18,7 @@ export default function UserEventItem({ event, idx, likeId }) {
           </div>
         </div>
         <div className="like-event-right">
-          <img className="" src={IMAGES[idx % 6]} />
+          <img className="" src={event?.photoUrl} />
           <div className="share-like">
             <i className="fa-sharp fa-solid fa-arrow-up-from-bracket share-icon"></i>
             <LikeButton eventId={event.id} defaultLike={true} likeId={likeId} />

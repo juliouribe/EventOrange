@@ -373,16 +373,6 @@ mac_demarco.photo.attach(
   filename: "mac_demarco.jpg"
 )
 
-orville_peck = Event.create!(
-  title: "Orville Peck at the Independent",
-  body: "Orville Peck is a Canadian country musician and singer-songwriter from Toronto, Ontario, who wears a fringed Lone Ranger mask. Peck's music has been described as a 'unique blend of country, punk, and goth'.",
-  host_id: independent.id,
-  location: "The Independent",
-  address: "628 Divisadero St, San Francisco, CA 94117",
-  capacity: 400,
-  start_time: "2023-12-11T19:00:00",
-)
-
 barbie = Event.create!(
   title: "Barbie Singalong at the Castro Theater",
   body: "Barbie is a fashion doll manufactured by the American toy company Mattel, Inc. and launched in March 1959. American businesswoman Ruth Handler is credited with the creation of the doll using a German doll called Bild Lilli as her inspiration.",

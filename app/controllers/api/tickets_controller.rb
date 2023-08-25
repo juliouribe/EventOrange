@@ -5,8 +5,7 @@ class Api::TicketsController < ApplicationController
   def index
     # Index route is to show all tickets for a current user.
     # There is no route for getting and showing all tickets for all users and events.
-    @tickets = Ticket.where(user_id: current_user.id)
-    puts @tickets
+    current_user ? @tickets = current_user.tickets : @tickets = []
     render :index
   end
 

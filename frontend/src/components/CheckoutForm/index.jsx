@@ -3,11 +3,13 @@ import { formatDateTime, getMonthDayYear } from "../../utils/dateutils";
 import "./CheckoutForm.css";
 import { useDispatch, useSelector } from "react-redux";
 import { createTicket } from "../../store/tickets";
+import { useHistory } from "react-router-dom";
 
 export default function CheckoutForm({ event, closeModal, image }) {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
   const currentUser = useSelector(state => state.session.currentUser);
+  const history = useHistory();
   const handleBackgroundClick = (e) => {
     e.stopPropagation();
     closeModal();
@@ -30,6 +32,10 @@ export default function CheckoutForm({ event, closeModal, image }) {
 
   const buyTickets = (e) => {
     e.stopPropagation();
+    if (!currentUser) {
+      history.push("/login");
+      return;
+    }
     const ticketData = {
       event_id: event.id,
       quantity: quantity,
