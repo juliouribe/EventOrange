@@ -29,11 +29,11 @@ export default function EventIndex() {
         <h1>Events in San Francisco</h1>
       </div>
       <div className="event-index-container">
-        {events.map((event, idx) => {
+        {events.map((event) => {
           const like = likes.find(like => like.eventId === event.id)
           const eventLiked = (like === undefined ? false : true);
           return <EventIndexItem
-            key={event.id} event={event} idx={idx}
+            key={event.id} event={event}
             eventLiked={eventLiked}
             likeId={eventLiked ? like.id : null} />
         })}

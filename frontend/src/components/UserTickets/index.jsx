@@ -38,9 +38,9 @@ export default function UserTickets() {
           <h2>Orders</h2>
         </div>
         <div className="hosted-events">
-          {events.map((event, idx) => {
+          {events.map((event) => {
             const ticket = tickets.find(ticket => ticket.eventId === event.id)
-            return <UserEventItem key={event.id} event={event} idx={idx} owner={false} ticket={ticket} />
+            return <UserEventItem key={event.id} event={event} owner={false} ticket={ticket} />
           })}
         </div>
       </div>

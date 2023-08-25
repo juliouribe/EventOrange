@@ -1,20 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "./UserEventItem.css"
-import cats from "../../assets/event_images/cat_leash.jpeg"
-import disrupt from "../../assets/event_images/disrupt.jpg"
-import f1 from "../../assets/event_images/f1_watch_party.jpeg"
-import lmp from "../../assets/event_images/lmp_party.jpeg"
-import mimosas from "../../assets/event_images/mimosas.jpeg"
-import paint from "../../assets/event_images/paint_sip.jpg"
 import { formatDateTime, getDateAbbreviation } from "../../utils/dateutils";
 import { useDispatch } from "react-redux";
 import { deleteEvent } from "../../store/events";
 import { deleteTicket } from "../../store/tickets";
 
-const IMAGES = [cats, mimosas, paint, f1, lmp, disrupt]
-
-export default function UserEventItem({ event, idx, owner, ticket = {} }) {
+export default function UserEventItem({ event, owner, ticket = {} }) {
   const dispatch = useDispatch();
   const [month, date] = getDateAbbreviation(event.startTime);
 
@@ -35,7 +27,7 @@ export default function UserEventItem({ event, idx, owner, ticket = {} }) {
         <h3>{date}</h3>
       </div>
       <NavLink to={`/events/${event.id}`}>
-        <img className="" src={IMAGES[idx % 6]} />
+        <img className="" src={event?.photoUrl} />
       </NavLink >
       <div className="profile-event-right">
         <div className="profile-event-text">

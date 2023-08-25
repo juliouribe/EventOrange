@@ -5,16 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getEvent, fetchEvent } from "../../store/events";
 import { useParams, NavLink } from "react-router-dom";
 import CheckoutForm from "../CheckoutForm";
-import cats from "../../assets/event_images/cat_leash.jpeg"
-import disrupt from "../../assets/event_images/disrupt.jpg"
-import f1 from "../../assets/event_images/f1_watch_party.jpeg"
-import lmp from "../../assets/event_images/lmp_party.jpeg"
-import mimosas from "../../assets/event_images/mimosas.jpeg"
-import paint from "../../assets/event_images/paint_sip.jpg"
 import LikeButton from "../LikeButton";
 import { getLikes } from "../../store/likes";
-
-const IMAGES = [cats, mimosas, paint, f1, lmp, disrupt]
 
 export default function EventShow() {
   const dispatch = useDispatch();
@@ -42,7 +34,7 @@ export default function EventShow() {
   return (
     <>
       <div className="event-image">
-        <img src={IMAGES[(eventId - 1) % 6]} className="show-image" />
+        <img src={event?.photoUrl} className="show-image" />
       </div>
       <div className="event-text-container">
         <div className="event-text">
@@ -80,7 +72,7 @@ export default function EventShow() {
                   <h3 className="details">$0</h3>
                   <button className="tickets" onClick={() => setShowCheckout(true)}>Tickets</button>
                   {showCheckout && (
-                    <CheckoutForm event={event} closeModal={() => setShowCheckout(false)} image={IMAGES[(eventId - 1) % 6]} />
+                    <CheckoutForm event={event} closeModal={() => setShowCheckout(false)} image={event?.photoUrl} />
                   )}
                 </>
               }

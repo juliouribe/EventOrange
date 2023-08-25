@@ -36,8 +36,8 @@ export default function UserHostedEvents() {
           <h2>Hosted Events</h2>
         </div>
         <div className="hosted-events">
-          {events.map((event, idx) => {
-            return <UserEventItem key={event.id} event={event} idx={idx} owner={true} />
+          {events.map((event) => {
+            return <UserEventItem key={event.id} event={event} owner={true} />
           })}
         </div>
       </div>
