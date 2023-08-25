@@ -18,11 +18,13 @@ export default function UserLikes() {
   });
 
   useEffect(() => {
-    dispatch(fetchLikedEvents());
+    if (currentUser) {
+      dispatch(fetchLikedEvents());
+    }
   }, [dispatch]);
 
-  // Redirect user to home page if they are not logged in.
-  if (!currentUser) return <Redirect to='/' />;
+  // Redirect user to login page if they are not logged in.
+  if (!currentUser) return <Redirect to='/login' />;
 
   return (
     <>

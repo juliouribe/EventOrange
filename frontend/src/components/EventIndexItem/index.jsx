@@ -12,7 +12,7 @@ import LikeButton from "../LikeButton";
 
 const IMAGES = [cats, mimosas, paint, f1, lmp, disrupt]
 
-export default function EventIndexItem({ event, idx, eventLiked = false, likeId = null, eventOwned = false }) {
+export default function EventIndexItem({ event, idx, eventLiked = false, likeId = null }) {
 
   return (
     <div className="index-item">

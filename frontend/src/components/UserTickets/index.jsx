@@ -18,10 +18,12 @@ export default function UserTickets() {
   });
 
   useEffect(() => {
-    dispatch(fetchPurchasedEvents());
+    if (currentUser) {
+      dispatch(fetchPurchasedEvents());
+    }
   }, [dispatch]);
 
-  if (!currentUser) return <Redirect to='/' />;
+  if (!currentUser) return <Redirect to='/login' />;
 
   return (
     <>

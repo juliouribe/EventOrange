@@ -21,7 +21,7 @@ export default function UserHostedEvents() {
   }, [dispatch]);
 
   // Redirect user to home page if they are not logged in.
-  if (!currentUser) return <Redirect to='/' />;
+  if (!currentUser) return <Redirect to='/login' />;
 
   return (
     <>
