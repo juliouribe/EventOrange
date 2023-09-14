@@ -57,11 +57,11 @@ export default function SignupFormPage() {
         <div className='container-wrapper'>
           <div className='form-title'>
             <div className='title-left'>
-              <NavLink exact to='/'><img src={logo} /></NavLink>
+              <NavLink exact to='/' onClick={() => window.scrollTo(0, 0)}><img src={logo} /></NavLink>
               <h1>Create an account</h1>
             </div>
             <div className='title-right'>
-              <NavLink exact to='/login'>Log in</NavLink>
+              <NavLink exact to='/login' onClick={() => window.scrollTo(0, 0)}>Log in</NavLink>
             </div>
           </div>
           <form onSubmit={handleSubmit}>

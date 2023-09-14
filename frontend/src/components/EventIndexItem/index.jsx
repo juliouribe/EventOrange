@@ -9,7 +9,7 @@ export default function EventIndexItem({ event, eventLiked = false, likeId = nul
 
   return (
     <div className="index-item">
-      <NavLink to={`/events/${event.id}`}>
+      <NavLink to={`/events/${event.id}`} onClick={() => window.scrollTo(0, 0)}>
         <img className="event-banner" src={event?.photoUrl} />
       </NavLink>
       <div className="item-like-button">
