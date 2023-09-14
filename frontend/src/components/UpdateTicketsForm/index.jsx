@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { formatDateTime, getMonthDayYear } from "../../utils/dateutils";
-import "./CheckoutForm.css";
+import "./UpdateTicketsForm.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createTicket } from "../../store/tickets";
+import { updateTickets } from "../../store/tickets";
 import { useHistory } from "react-router-dom";
 
-export default function CheckoutForm({ event, closeModal, image }) {
+export default function UpdateTicketsForm({ event, closeModal, image, tickets }) {
   const dispatch = useDispatch();
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(tickets.quantity);
   const currentUser = useSelector(state => state.session.currentUser);
   const history = useHistory();
   const handleBackgroundClick = (e) => {
@@ -30,17 +30,18 @@ export default function CheckoutForm({ event, closeModal, image }) {
     }
   }
 
-  const buyTickets = (e) => {
+  const submitUpdateTickets = (e) => {
     e.stopPropagation();
     if (!currentUser) {
       history.push("/login");
       return;
     }
     const ticketData = {
-      event_id: event.id,
+      ...tickets,
       quantity: quantity,
     }
-    dispatch(createTicket(ticketData));
+    dispatch(updateTickets(ticketData));
+    closeModal();
   }
 
   return (
@@ -58,7 +59,7 @@ export default function CheckoutForm({ event, closeModal, image }) {
           <div className="checkout-info">
             {/* <label htmlFor="promo-code">Promo Code</label>
             <input type="text" name="promo-code" placeholder="Enter promo code" /> */}
-            <h1>Tickets</h1>
+            <h1>Update Tickets</h1>
             <div className="checkout-tickets">
               <div className="checkout-ga">
                 <h3>General Admission - FREE!</h3>
@@ -83,7 +84,7 @@ export default function CheckoutForm({ event, closeModal, image }) {
           </div>
           <div className="checkout-footer">
             <h3 id="ticket-ad">🔥 Few tickets left</h3>
-            <button onClick={buyTickets}>Check out</button>
+            <button onClick={submitUpdateTickets}>Update Tickets</button>
           </div>
         </div>
         <div className="checkout-right">

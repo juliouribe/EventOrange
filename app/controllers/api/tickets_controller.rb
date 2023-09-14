@@ -24,6 +24,19 @@ class Api::TicketsController < ApplicationController
     end
   end
 
+  def update
+    @ticket = current_user.tickets.find_by(id: params[:id])
+    if @ticket
+      if @ticket.update(ticket_params)
+        render :show
+      else
+        render json: @ticket.errors.full_messages, status: 422
+      end
+    else
+      render json: { errors: 'Ticket not found' }, status: 404
+    end
+  end
+
   def destroy
     @ticket = current_user.tickets.find_by(id: params[:id])
     if @ticket

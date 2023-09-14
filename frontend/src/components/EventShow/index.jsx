@@ -65,7 +65,7 @@ export default function EventShow() {
               {ticket?.eventId ?
                 <>
                   <h4>Tickets Owned</h4>
-                  <NavLink to="/user/purchased-events"><button>Manage Tickets</button></NavLink>
+                  <NavLink to="/user/purchased-events" onClick={() => window.scrollTo(0, 0)}><button>Manage Tickets</button></NavLink>
                 </>
                 :
                 <>

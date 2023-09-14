@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./UserEventItem.css"
 import { formatDateTime, getDateAbbreviation } from "../../utils/dateutils";
 import { useDispatch } from "react-redux";
 import { deleteEvent } from "../../store/events";
 import { deleteTicket } from "../../store/tickets";
+import UpdateTicketForm from "../UpdateTicketsForm";
 
 export default function UserEventItem({ event, owner, ticket = {} }) {
   const dispatch = useDispatch();
   const [month, date] = getDateAbbreviation(event.startTime);
+  const [showUpdateTicket, setUpdateTicket] = useState(false);
 
   const handleDelete = async (e) => {
     e.preventDefault();
@@ -26,7 +28,7 @@ export default function UserEventItem({ event, owner, ticket = {} }) {
         <h4>{month}</h4>
         <h3>{date}</h3>
       </div>
-      <NavLink to={`/events/${event.id}`}>
+      <NavLink to={`/events/${event.id}`} onClick={() => window.scrollTo(0, 0)}>
         <img className="" src={event?.photoUrl} />
       </NavLink >
       <div className="profile-event-right">
@@ -39,12 +41,15 @@ export default function UserEventItem({ event, owner, ticket = {} }) {
         </div>
         {owner ?
           <div className="edit-delete">
-            <NavLink to={`/events/edit/${event.id}`}><button >Edit</button></NavLink>
+            <NavLink to={`/events/edit/${event.id}`} onClick={() => window.scrollTo(0, 0)}><button >Edit</button></NavLink>
             <button id="delete" onClick={handleDelete}>Delete</button>
           </div>
           :
           <div className="edit-delete">
-            <button>{ticket?.quantity} Ticket(s)</button>
+            <button onClick={() => setUpdateTicket(true)}>{ticket?.quantity} Ticket(s)</button>
+            {showUpdateTicket && (
+              <UpdateTicketForm event={event} closeModal={() => setUpdateTicket(false)} image={event?.photoUrl} tickets={ticket} />
+            )}
             <button id="delete" onClick={removeTickets}>Remove</button>
           </div>
         }

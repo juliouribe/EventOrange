@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     match '/liked_events', to: '/api/users#liked_events', via: [:get]
     match '/hosted_events', to: '/api/users#hosted_events', via: [:get]
     resources :events, only: [:index, :show, :create, :update, :destroy]
-    resources :tickets, only: [:index, :show, :create, :destroy]
+    resources :tickets, only: [:index, :show, :create, :update, :destroy]
     resources :likes, only: [:index, :show, :create, :destroy]
     resource :session, only: [:show, :create, :destroy]
   end

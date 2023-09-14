@@ -11,7 +11,6 @@ export default function EventCreate() {
   const imageInputRef = useRef();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  // TODO: Add datetime pickers.
   const [startDate, setStartDate] = useState("");
   const [startTime, setStartTime] = useState("");
   const [startDateTime, setStartDateTime] = useState("");
@@ -110,7 +109,7 @@ export default function EventCreate() {
   }
 
 
-  // TODO: Link back to hosted events page
+
   return (
     <div>
       <div className="event-form-container">
