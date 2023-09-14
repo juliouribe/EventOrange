@@ -87,7 +87,7 @@ export default function CheckoutForm({ event, closeModal, image }) {
           </div>
         </div>
         <div className="checkout-right">
-          <img src={image} />
+          <img src={image} className="checkout-event-image" />
         </div>
       </div>
     </div>

@@ -32,6 +32,7 @@
   max-width: 720px;
   height: 86vh;
   max-height: 720px;
+  border-right: 1px solid #e6e6e6;
 }
 
 .checkout-right {
@@ -41,12 +42,13 @@
   max-height: 720px;
 }
 
-.checkout-right img {
+.checkout-right .checkout-event-image {
   width: 24vw;
   max-width: 360px;
   height: 12vw;
   max-height: 720px;
   object-fit: cover;
+  border-radius: 0;
 }
 
 .checkout-title {
