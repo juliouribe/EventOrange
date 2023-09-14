@@ -39,8 +39,7 @@ export default function ProfileDropdown({ email }) {
       </li>
       {isOpen && (
         <div className="dropdown-content">
-          <li className="dropdown-underline">Browse Events</li>
-          <li>View Profile</li>
+          <li className="dropdown-underline"><NavLink exact to="/" onClick={() => window.scrollTo(0, 0)}>Browse Events</NavLink></li>
           <li><NavLink to="/user/hosted-events" onClick={() => window.scrollTo(0, 0)}>Hosted Events</NavLink></li>
           <li><NavLink to="/user/purchased-events" onClick={() => window.scrollTo(0, 0)}>Tickets ({Object.values(tickets).length})</NavLink></li>
           <li className="dropdown-underline" onClick={() => window.scrollTo(0, 0)}><NavLink to="/user/liked-events">Likes ({Object.values(likes).length})</NavLink></li>

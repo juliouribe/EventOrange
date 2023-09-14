@@ -1,6 +1,7 @@
 import React from "react";
 import "./Footer.css";
 import logo from "../../assets/eventOrange.svg";
+import { NavLink } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -34,7 +35,7 @@ export default function Footer() {
           <p>Postman</p>
         </div>
       </div>
-      <img src={logo}></img>
+      <NavLink exact to="/" onClick={() => window.scrollTo(0, 0)}><img src={logo} /></NavLink>
       <h2>© 2023 EventOrange, Inc. All rights reserved.</h2>
     </div>
   )
