@@ -7,43 +7,31 @@ export default function Footer() {
     <div className="footer-container">
       <div className="footer-content">
         <div className="footer-one">
-          <h3>Use EventOrange</h3>
-          <p>Create Events</p>
-          <p>Pricing</p>
-          <p>Event Marketing Platform</p>
-          <p>EventOrange Mobile Ticket App</p>
-          <p>EventOrange Check-In App</p>
-          <p>EventOrange App Marketplace</p>
-          <p>Event Registration Software</p>
-          <p>Content Standards</p>
-          <p>FAQs</p>
-          <p>Sitemap</p>
+          <h3>About Me</h3>
+          <p>Julio Uribe</p>
+          <p><a href="https://www.linkedin.com/in/julio-uribe-a15736b5/">LinkedIn</a></p>
+          <p><a href="https://github.com/juliouribe">Github</a></p>
         </div>
         <div className="footer-two">
-          <h3>Plan Events</h3>
-          <p>Sell Tickets Online</p>
-          <p>Event Planning</p>
-          <p>Sell Concert Tickets Online</p>
-          <p>Event Payment System</p>
-          <p>Solutions for Professional Services</p>
-          <p>Event Management Software</p>
-          <p>Halloween Party Planning</p>
-          <p>Virtual Events Platform</p>
-          <p>QR Code for Event Check-In</p>
-          <p>Post your event online</p>
+          <h3>Frontend</h3>
+          <p>JavaScript</p>
+          <p>React</p>
+          <p>React-Redux</p>
+          <p>HTML</p>
+          <p>CSS</p>
         </div>
         <div className="footer-three">
-          <h3>Find Events</h3>
-          <p>Browse San Francisco Events</p>
-          <p>Get the EventOrange App</p>
+          <h3>Backend</h3>
+          <p>Ruby</p>
+          <p>Ruby on Rails</p>
+          <p>PostgreSQL</p>
         </div>
         <div className="footer-four">
-          <h3>Connect With Us</h3>
-          <p>Contact Support</p>
-          <p>Twitter</p>
-          <p>Facebook</p>
-          <p>LinkedIn</p>
-          <p>Instagram</p>
+          <h3>Other Technologies</h3>
+          <p>AWS</p>
+          <p>Heroku</p>
+          <p>Git</p>
+          <p>Postman</p>
         </div>
       </div>
       <img src={logo}></img>
