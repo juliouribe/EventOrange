@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./UserEventItem.css"
 import { formatDateTime, getDateAbbreviation } from "../../utils/dateutils";
 import { useDispatch } from "react-redux";
 import { deleteEvent } from "../../store/events";
 import { deleteTicket } from "../../store/tickets";
+import UpdateTicketForm from "../UpdateTicketsForm";
 
 export default function UserEventItem({ event, owner, ticket = {} }) {
   const dispatch = useDispatch();
   const [month, date] = getDateAbbreviation(event.startTime);
+  const [showUpdateTicket, setUpdateTicket] = useState(false);
 
   const handleDelete = async (e) => {
     e.preventDefault();
@@ -44,7 +46,10 @@ export default function UserEventItem({ event, owner, ticket = {} }) {
           </div>
           :
           <div className="edit-delete">
-            <button>{ticket?.quantity} Ticket(s)</button>
+            <button onClick={() => setUpdateTicket(true)}>{ticket?.quantity} Ticket(s)</button>
+            {showUpdateTicket && (
+              <UpdateTicketForm event={event} closeModal={() => setUpdateTicket(false)} image={event?.photoUrl} tickets={ticket?.quantity} />
+            )}
             <button id="delete" onClick={removeTickets}>Remove</button>
           </div>
         }
