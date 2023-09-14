@@ -48,7 +48,7 @@ export default function UserEventItem({ event, owner, ticket = {} }) {
           <div className="edit-delete">
             <button onClick={() => setUpdateTicket(true)}>{ticket?.quantity} Ticket(s)</button>
             {showUpdateTicket && (
-              <UpdateTicketForm event={event} closeModal={() => setUpdateTicket(false)} image={event?.photoUrl} tickets={ticket?.quantity} />
+              <UpdateTicketForm event={event} closeModal={() => setUpdateTicket(false)} image={event?.photoUrl} tickets={ticket} />
             )}
             <button id="delete" onClick={removeTickets}>Remove</button>
           </div>

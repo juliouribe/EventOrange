@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 
 export default function UpdateTicketsForm({ event, closeModal, image, tickets }) {
   const dispatch = useDispatch();
-  const [quantity, setQuantity] = useState(tickets);
+  const [quantity, setQuantity] = useState(tickets.quantity);
   const currentUser = useSelector(state => state.session.currentUser);
   const history = useHistory();
   const handleBackgroundClick = (e) => {
@@ -30,17 +30,18 @@ export default function UpdateTicketsForm({ event, closeModal, image, tickets })
     }
   }
 
-  const buyTickets = (e) => {
+  const submitUpdateTickets = (e) => {
     e.stopPropagation();
     if (!currentUser) {
       history.push("/login");
       return;
     }
     const ticketData = {
-      event_id: event.id,
+      ...tickets,
       quantity: quantity,
     }
     dispatch(updateTickets(ticketData));
+    closeModal();
   }
 
   return (
@@ -62,12 +63,12 @@ export default function UpdateTicketsForm({ event, closeModal, image, tickets })
             <div className="checkout-tickets">
               <div className="checkout-ga">
                 <h3>General Admission - FREE!</h3>
-                <div class="checkout-quantity">
-                  <button type="button" class="minus-button" onClick={decrementQuantity}>-</button>
+                <div className="checkout-quantity">
+                  <button type="button" className="minus-button" onClick={decrementQuantity}>-</button>
                   <div className="quantity-count">
                     <p>{quantity}</p>
                   </div>
-                  <button type="button" class="plus-button" onClick={incrementQuantity}>+</button>
+                  <button type="button" className="plus-button" onClick={incrementQuantity}>+</button>
                 </div>
               </div>
               <div className="checkout-ga-details">
@@ -83,7 +84,7 @@ export default function UpdateTicketsForm({ event, closeModal, image, tickets })
           </div>
           <div className="checkout-footer">
             <h3 id="ticket-ad">🔥 Few tickets left</h3>
-            <button onClick={buyTickets}>Update Tickets</button>
+            <button onClick={submitUpdateTickets}>Update Tickets</button>
           </div>
         </div>
         <div className="checkout-right">

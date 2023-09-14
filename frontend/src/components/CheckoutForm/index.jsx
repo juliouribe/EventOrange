@@ -62,12 +62,12 @@ export default function CheckoutForm({ event, closeModal, image }) {
             <div className="checkout-tickets">
               <div className="checkout-ga">
                 <h3>General Admission - FREE!</h3>
-                <div class="checkout-quantity">
-                  <button type="button" class="minus-button" onClick={decrementQuantity}>-</button>
+                <div className="checkout-quantity">
+                  <button type="button" className="minus-button" onClick={decrementQuantity}>-</button>
                   <div className="quantity-count">
                     <p>{quantity}</p>
                   </div>
-                  <button type="button" class="plus-button" onClick={incrementQuantity}>+</button>
+                  <button type="button" className="plus-button" onClick={incrementQuantity}>+</button>
                 </div>
               </div>
               <div className="checkout-ga-details">
