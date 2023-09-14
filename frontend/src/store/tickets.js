@@ -2,7 +2,6 @@ import csrfFetch from "./csrf";
 
 export const RECEIVE_TICKETS = 'tickets/RECEIVE_TICKETS';
 export const RECEIVE_TICKET = 'tickets/RECEIVE_TICKET';
-
 export const REMOVE_TICKET = 'tickets/REMOVE_TICKET';
 
 // Actions
@@ -48,6 +47,15 @@ export const createTicket = (ticketData) => async dispatch => {
   })
   const newTicket = await res.json();
   dispatch(receiveTicket(newTicket));
+}
+
+export const updateTickets = (ticketData) => async dispatch => {
+  const res = await csrfFetch(`/api/tickets/${ticketData.id}`, {
+    method: 'PUT',
+    body: JSON.stringify(ticketData)
+  })
+  const updatedTicket = await res.json();
+  dispatch(receiveTicket(updatedTicket));
 }
 
 export const deleteTicket = (ticketId) => async dispatch => {

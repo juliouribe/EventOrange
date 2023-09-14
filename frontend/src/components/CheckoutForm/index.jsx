@@ -56,8 +56,8 @@ export default function CheckoutForm({ event, closeModal, image }) {
             <h3>{formatDateTime(event?.startTime)}</h3>
           </div>
           <div className="checkout-info">
-            <label htmlFor="promo-code">Promo Code</label>
-            <input type="text" name="promo-code" placeholder="Enter promo code" />
+            {/* <label htmlFor="promo-code">Promo Code</label>
+            <input type="text" name="promo-code" placeholder="Enter promo code" /> */}
             <h1>Tickets</h1>
             <div className="checkout-tickets">
               <div className="checkout-ga">
