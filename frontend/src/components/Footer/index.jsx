@@ -10,8 +10,8 @@ export default function Footer() {
         <div className="footer-one">
           <h3>About Me</h3>
           <p>Julio Uribe</p>
-          <p><a href="https://www.linkedin.com/in/julio-uribe-a15736b5/">LinkedIn</a></p>
-          <p><a href="https://github.com/juliouribe">Github</a></p>
+          <p><a href="https://www.linkedin.com/in/julio-uribe-a15736b5/" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+          <p><a href="https://github.com/juliouribe" target="_blank" rel="noopener noreferrer">Github</a></p>
         </div>
         <div className="footer-two">
           <h3>Frontend</h3>
